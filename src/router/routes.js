@@ -1,12 +1,14 @@
+import HomeComponent from '../components/home/homeComponent';
+
 const routes = [
   {
     path: '/',
-    component: <div> Home </div>,
+    component: HomeComponent,
     exact: true,
     meta: { authorizedRoles: [] },
-    name: "home",
+    name: 'home',
     key: 'home',
-    isProtectedRoute: true,
+    isProtectedRoute: true
   },
   {
     path: '/products-listing',
@@ -14,7 +16,7 @@ const routes = [
     meta: { authorizedRoles: [] },
     name: 'product-listing',
     key: 'product',
-    isProtectedRoute: true,
+    isProtectedRoute: true
   },
   {
     path: '/cart',
@@ -22,7 +24,7 @@ const routes = [
     meta: { authorizedRoles: [] },
     name: 'product-listing',
     key: 'cart',
-    isProtectedRoute: true,
+    isProtectedRoute: true
   },
   {
     path: '/signin',
@@ -30,7 +32,7 @@ const routes = [
     meta: { authorizedRoles: [] },
     name: 'signin',
     key: 'signin',
-    isProtectedRoute: false,
+    isProtectedRoute: false
   },
   {
     path: '/signup',
@@ -38,8 +40,8 @@ const routes = [
     meta: { authorizedRoles: [] },
     name: 'signup',
     key: 'signup',
-    isProtectedRoute: false,
-  },
+    isProtectedRoute: false
+  }
 ];
 
 export default routes;
