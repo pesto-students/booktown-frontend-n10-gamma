@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FooterContainer, FooterCards, FooterSocial } from './styledComponents';
+import FeatherIcon from 'feather-icons-react';
 
-function Footer(props) {
+function Footer({ title = '' }) {
   return (
     <FooterContainer>
       <FooterCards>
@@ -22,7 +23,27 @@ function Footer(props) {
         <p className="footer-card-text">Sell Books</p>
         <p className="footer-card-text">Buy old & new books</p>
       </FooterCards>
-      <FooterSocial>| Copywrite@2021</FooterSocial>
+      <FooterCards height={'100px'} width={'100%'}>
+        <FooterSocial>
+          <FeatherIcon
+            className="footer-social-icon"
+            icon="facebook"
+            size="20"
+          />
+          <FeatherIcon
+            className="footer-social-icon"
+            icon="instagram"
+            size="20"
+          />
+          <FeatherIcon
+            className="footer-social-icon"
+            icon="twitter"
+            size="20"
+          />
+          {` | `}
+          <span className="footer-copywrite">Copywrite@2021</span>
+        </FooterSocial>
+      </FooterCards>
     </FooterContainer>
   );
 }
