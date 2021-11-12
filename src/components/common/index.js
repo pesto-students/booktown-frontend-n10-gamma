@@ -1,3 +1,4 @@
 import Footer from './footer';
-
-export { Footer };
+import Header from './header';
+import SearchBar from './search';
+export { Footer, Header, SearchBar };
