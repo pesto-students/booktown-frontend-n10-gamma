@@ -1,4 +1,5 @@
 import HomeComponent from '../components/home/homeComponent';
+import SignIn from '../components/auth/signin/signinComponent';
 
 const routes = [
   {
@@ -28,7 +29,7 @@ const routes = [
   },
   {
     path: '/signin',
-    component: <div> login </div>,
+    component: SignIn,
     meta: { authorizedRoles: [] },
     name: 'signin',
     key: 'signin',
