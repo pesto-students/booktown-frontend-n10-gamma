@@ -7,13 +7,17 @@ import Store from './config/redux/store';
 import TheBookTownApplication from './router';
 import { ThemeProvider } from 'styled-components';
 import theme from './config/appTheme';
+import ErrorContextProvider from './contextProviders/ErrorContextProvider';
 
+import './config/firebase/firebaseconfig';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={Store}>
       <Router>
         <ThemeProvider theme={theme}>
-          <TheBookTownApplication />
+          <ErrorContextProvider>
+            <TheBookTownApplication />
+          </ErrorContextProvider>
         </ThemeProvider>
       </Router>
     </Provider>

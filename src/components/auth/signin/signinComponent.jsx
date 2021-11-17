@@ -7,7 +7,7 @@ import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom';
 
 const SignIn = (props) => {
-  const { handleStateChange, componentState } = useSigninContainer();
+  const { handleStateChange, componentState, handleSignin } = useSigninContainer();
   return (
     <SignInContainer>
       <SignInFormContainer>
@@ -15,28 +15,31 @@ const SignIn = (props) => {
         <form className="login-form">
           <div className="login-inputs">
             <Input
+              style={{border:'1px solid'}}
               type="text"
               label="Email"
               placeholder="Enter Email"
               error=""
               name="email"
-              onChange={(e) => handleStateChange('email', e.target.value)}
+              onChange={(e) => handleStateChange(e.target.name, e.target.value)}
               value={componentState?.email}
             />
           </div>
           <div className="login-inputs">
             <Input
+              style={{border:'1px solid'}}
               type="password"
               label="Password"
               placeholder="Enter password"
               error=""
               name="password"
-              onChange={(e) => handleStateChange('password', e.target.value)}
+              onChange={(e) => handleStateChange(e.target.name, e.target.value)}
               value={componentState?.password}
             />
           </div>
-          <Button style={{ width: '100%', margin: '10px 0' }} text="Login" />
+          <Button onClick={(e)=>{handleSignin('self', e)}} style={{ width: '100%', margin: '10px 0' }} text="Login" />
           <Button
+            onClick={(e)=>{handleSignin('google', e)}}
             style={{ width: '100%', margin: '10px 0' }}
             text="Google Login"
           />

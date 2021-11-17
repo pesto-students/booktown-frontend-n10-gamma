@@ -6,7 +6,7 @@ export const SignInContainer = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: tomato;
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 export const SignInFormContainer = styled.div`
@@ -14,10 +14,9 @@ export const SignInFormContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40vw;
-  height: 40vh;
+  width: 320px;
   text-align: center;
-  color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.primary};
   .login-social-container {
     display: flex;
     justify-content: space-around;

@@ -19,4 +19,7 @@ export const InputContainer = styled.div`
     margin: 5px 0;
     background-color: ${(props) => props.theme.colors.secondary};
   }
+  .signup-input {
+    margin: 0 2px;
+  }
 `;
