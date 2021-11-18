@@ -1,6 +1,7 @@
 const items = [
   {
     title: 'LIFE LOVE BOOKS',
+    description: "Love your life , it has to offer a lot more than you expect",
     stock: 'In Stock',
     image: './images/img1.jpg',
     price: '450',
@@ -8,6 +9,7 @@ const items = [
   },
   {
     title: 'THINK STRAIGHT ',
+    description: "Think Straight and achieve whatever you want to",
     stock: 'In Stock',
     image: './images/img2.jpg',
     price: '500',

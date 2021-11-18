@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format';
 import { Item, ItemActions, ItemImage, ItemInfo } from './styledComponents';
 
 const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
-  const { title, stock, price, quantity, image } = item;
+  const { title, stock, price, quantity, image, description} = item;
 
   return (
     <Item>
@@ -15,12 +15,13 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
       <ItemInfo>
         <div className="infoTitle">
           <h2>{title}</h2>
+          <p>{description}</p>
         </div>
-        <div className="infoStock">{stock}</div>
+       
 
         <ItemActions>
           <div className="itemQuantity">
-            <select
+            <select className = "Select"
               value={quantity}
               onChange={(event) => changeItemQuantity(event, index)}>
               <option value="1">Qty: 1</option>
@@ -35,9 +36,9 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
             </select>
           </div>
           <div className="itemActionsDivider">|</div>
-          <div className="itemDelete" onClick={deleteItem.bind(this, index)}>
-            Delete
-          </div>
+          <i className = "fa-solid fa-trash itemDelete" onClick={deleteItem.bind(this, index)}>
+         
+          </i>
         </ItemActions>
       </ItemInfo>
       <div className="Price">

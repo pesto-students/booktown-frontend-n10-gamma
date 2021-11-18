@@ -68,7 +68,9 @@ const theme = {
       fontWeight: '400'
     }
   },
-  size: {}
-};
+  size: {},
+  up: breakpoint => `@media (min-width: ${breakpoint}`,
+  down: breakpoint => `@media (max-width: ${breakpoint}`
+}
 
 export default theme;

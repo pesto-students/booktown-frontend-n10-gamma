@@ -5,7 +5,7 @@ export const FooterContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.secondary};

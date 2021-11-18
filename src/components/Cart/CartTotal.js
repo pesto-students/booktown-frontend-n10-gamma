@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NumberFormat from 'react-number-format';
+import { ItemTotal } from './styledComponents';
 
 const CartTotal = ({ items }) => {
   const getTotalPrice = () => {
@@ -18,10 +19,10 @@ const CartTotal = ({ items }) => {
   };
 
   return (
-    <div className="CartTotal">
+    <ItemTotal>
       <h3>
         Subtotal({getTotalTtems()} items):
-        <span className="cartTotal-price">
+        <span className="itemTotal-price">
           <NumberFormat
             value={getTotalPrice()}
             displayType={'text'}
@@ -32,7 +33,7 @@ const CartTotal = ({ items }) => {
         </span>
       </h3>
       <button>Proceed to checkout</button>
-    </div>
+    </ItemTotal>
   );
 };
 
