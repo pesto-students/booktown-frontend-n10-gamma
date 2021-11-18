@@ -1,23 +1,31 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Store from './config/redux/store';
-import TheBookTownApplication from './router';
 import { ThemeProvider } from 'styled-components';
 import theme from './config/appTheme';
-import ErrorContextProvider from './contextProviders/ErrorContextProvider';
-
 import './config/firebase/firebaseconfig';
+import Store from './config/redux/store';
+import ErrorContextProvider from './contextProviders/ErrorContextProvider';
+import './index.css';
+import TheBookTownApplication from './router';
+
+const client = new ApolloClient({
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  cache: new InMemoryCache()
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={Store}>
       <Router>
         <ThemeProvider theme={theme}>
-          <ErrorContextProvider>
-            <TheBookTownApplication />
-          </ErrorContextProvider>
+          <ApolloProvider client={client}>
+            <ErrorContextProvider>
+              <TheBookTownApplication />
+            </ErrorContextProvider>
+          </ApolloProvider>
         </ThemeProvider>
       </Router>
     </Provider>
