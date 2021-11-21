@@ -4,34 +4,43 @@ import {
   HeaderContainer,
   HeaderTitle,
   HeaderCard,
-  HeaderProfile
+  HeaderProfile,
+  HeaderRight,
+  HamburgerContainer
 } from './styledComponents';
 
 import FeatherIcon from 'feather-icons-react';
 import SearchBar from '../search';
+
+const getHeaderRight = ({ profileName }) => (
+  <HeaderRight>
+    <span className="header-right-content">Home</span>
+    <span className="header-right-content">About</span>
+    <FeatherIcon
+      className="search-icon header-right-content"
+      icon="shopping-cart"
+      size="20"
+    />
+    <HeaderProfile>
+      <span className="header-right-content">{profileName}</span>
+    </HeaderProfile>
+  </HeaderRight>
+);
+
 function Header({ title = 'The BookTown', profileName = 'TP' }) {
   return (
-    <HeaderContainer>
+    <HeaderContainer className="header-group-1">
+      <HamburgerContainer>
+        login
+        {getHeaderRight({ profileName })}
+      </HamburgerContainer>
       <HeaderCard>
         <HeaderTitle>{title}</HeaderTitle>
       </HeaderCard>
-      <HeaderCard width={'35%'}>
+      <HeaderCard className="header-group-1" width={'35%'}>
         <SearchBar />
       </HeaderCard>
-      <HeaderCard>
-        <span>Home</span>
-      </HeaderCard>
-      <HeaderCard>
-        <span>About</span>
-      </HeaderCard>
-      <HeaderCard>
-        <FeatherIcon className="search-icon" icon="cart" size="20" />
-      </HeaderCard>
-      <HeaderCard>
-        <HeaderProfile>
-          <span>{profileName}</span>
-        </HeaderProfile>
-      </HeaderCard>
+      {getHeaderRight({ profileName })}{' '}
     </HeaderContainer>
   );
 }

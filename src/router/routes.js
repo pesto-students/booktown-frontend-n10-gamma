@@ -1,6 +1,9 @@
 import Cart from '../components/Cart';
 import HomeComponent from '../components/home/homeComponent';
-import ProductListingPage from '../components/ProductListingPage/Index';
+import ProductListingPage from '../components/ProductListingPage';
+
+import SignIn from '../components/auth/signin/signinComponent';
+import SignUp from '../components/auth/signup/signupComponent';
 
 const routes = [
   {
@@ -30,7 +33,7 @@ const routes = [
   },
   {
     path: '/signin',
-    component: <div> login </div>,
+    component: SignIn,
     meta: { authorizedRoles: [] },
     name: 'signin',
     key: 'signin',
@@ -38,7 +41,7 @@ const routes = [
   },
   {
     path: '/signup',
-    component: <div> sign up </div>,
+    component: SignUp,
     meta: { authorizedRoles: [] },
     name: 'signup',
     key: 'signup',

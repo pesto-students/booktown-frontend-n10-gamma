@@ -22,6 +22,7 @@ function Footer({ title = '' }) {
         <span className="footer-card-title">Use our features</span>
         <p className="footer-card-text">Sell Books</p>
         <p className="footer-card-text">Buy old & new books</p>
+        <p className="footer-card-text">Checkout cart</p>
       </FooterCards>
       <FooterCards height={'100px'} width={'100%'}>
         <FooterSocial>
