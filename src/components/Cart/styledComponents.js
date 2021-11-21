@@ -5,9 +5,9 @@ const CartMain = styled.div`
   flex-direction: column;
   padding: 14px 18px 0 18px;
   align-items: flex-start;
-  @media(min-width: 992px){
-    	flex-direction: row;
- }
+  @media (min-width: 992px) {
+    flex-direction: row;
+  }
 `;
 
 const Item = styled.div`
@@ -16,8 +16,8 @@ const Item = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
   flex-direction: column;
-  @media(min-width: 992px){
-    	flex-direction: row;
+  @media (min-width: 992px) {
+    flex-direction: row;
   }
 
   .Price {
@@ -26,11 +26,10 @@ const Item = styled.div`
     margin-left: 16px;
     padding-top: 10px;
     padding-top: 10px;
-    @media(min-width: 992px){
-    padding-top: 0px;
-		padding-top: 0px;
-  }
-    	
+    @media (min-width: 992px) {
+      padding-top: 0px;
+      padding-top: 0px;
+    }
   }
 `;
 
@@ -46,10 +45,9 @@ const ItemInfo = styled.div`
     margin-left: 16px;
   }
 
-   @media(min-width: 992px){
-     	flex-grow: 1;
-   }
-
+  @media (min-width: 992px) {
+    flex-grow: 1;
+  }
 `;
 
 const ItemActions = styled.div`
@@ -103,8 +101,8 @@ const Items = styled.div`
   min-width: 80vw;
   max-width: 80vw;
 
-  @media(min-width: 992px){
-  min-width: auto;
+  @media (min-width: 992px) {
+    min-width: auto;
   }
 `;
 
@@ -115,8 +113,8 @@ const ItemTotal = styled.div`
   min-width: 80vw;
   margin-right: 18px;
   max-width: 80vw;
-  
-  @media(min-width: 992px){
+
+  @media (min-width: 992px) {
     background-color: white;
     flex: 0.3;
     padding: 20px;
@@ -124,42 +122,66 @@ const ItemTotal = styled.div`
     margin-top: 0;
   }
 
-  h3{
-    @media(min-width: 992px){
-    margin-left: 0;
+  h3 {
+    @media (min-width: 992px) {
+      margin-left: 0;
     }
   }
 
   .itemTotal-price {
-    @media(min-width: 992px){
+    @media (min-width: 992px) {
       margin-left: 8px;
     }
   }
 
   button {
-  background-color: black;
-  transition: all 0.4s ease;
-  border-radius: 35px;
-  color:white;
-  font-size: 16px;
-  width: 280px;
-  border: 2px solid black;
-  padding: 4px 8px;
-  cursor: pointer;
-  margin-left: 16px;
-  text-align: left;
-  &: hover {
-  background-color: white;
-  color:black;
-  }
-    @media(min-width: 992px){
-    margin-left: 0;
-    text-align: center;
-    width: 300px;
+    background-color: black;
+    transition: all 0.4s ease;
+    border-radius: 35px;
+    color: white;
+    font-size: 16px;
+    width: 280px;
+    border: 2px solid black;
+    padding: 4px 8px;
+    cursor: pointer;
+    margin-left: 16px;
+    text-align: left;
+    &: hover {
+      background-color: white;
+      color: black;
+    }
+    @media (min-width: 992px) {
+      margin-left: 0;
+      text-align: center;
+      width: 300px;
     }
   }
+`;
+
+const Address = styled.div`
+
+Modal{
+  Modal.Footer {
+.closeButton{
+  border-radius = 35px;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+}
+  }
+}
 
 
-`
+`;
 
-export { CartMain, Item, ItemInfo, ItemActions, ItemImage, Items,ItemTotal };
+export {
+  CartMain,
+  Item,
+  ItemInfo,
+  ItemActions,
+  ItemImage,
+  Items,
+  ItemTotal,
+  Address
+};
