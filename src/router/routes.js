@@ -1,5 +1,6 @@
 import HomeComponent from '../components/home/homeComponent';
-
+import SignIn from '../components/auth/signin/signinComponent';
+import SignUp from '../components/auth/signup/signupComponent';
 const routes = [
   {
     path: '/',
@@ -28,7 +29,7 @@ const routes = [
   },
   {
     path: '/signin',
-    component: <div> login </div>,
+    component: SignIn,
     meta: { authorizedRoles: [] },
     name: 'signin',
     key: 'signin',
@@ -36,7 +37,7 @@ const routes = [
   },
   {
     path: '/signup',
-    component: <div> sign up </div>,
+    component: SignUp,
     meta: { authorizedRoles: [] },
     name: 'signup',
     key: 'signup',

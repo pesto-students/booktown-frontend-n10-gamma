@@ -68,7 +68,22 @@ const theme = {
       fontWeight: '400'
     }
   },
-  size: {}
+  size: {
+    radius: '16px',
+    xsm: '5px',
+    sm: '12px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px'
+  },
+  breakpoints: {
+    mobile: '480px',
+    ipad: '768px',
+    tablet: '1024px',
+    desktop: '1280px',
+    desktopL: '1440px',
+    desktopXL: '1680px'
+  }
 };
 
 export default theme;
