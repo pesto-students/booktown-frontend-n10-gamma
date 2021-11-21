@@ -6,24 +6,24 @@ export const FooterContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  box-sizing: border-box;
   height: 100vh;
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.secondary};
   & {
-    @media (max-width: ${600}px) {
+    @media (max-width: ${(props) => props.theme.breakpoints.ipad}) {
       flex-direction: column;
       height: auto;
     }
   }
 `;
 export const FooterCards = styled.div`
-  ${(props) => ({
-    height: props.height ? props.height : '400px',
-    width: props.width ? props.width : '300px'
-  })}
-  color: ${(props) => props.theme.colors.secondary};
   text-align: center;
+  ${(props) => ({
+    height: props.height ? props.height : 'auto',
+    width: props.width ? props.width : '300px',
+    color: props.theme.colors.secondary
+  })};
+
   .footer-card-title {
     ${(props) => ({ ...props.theme.fonts.h4 })};
   }
@@ -33,7 +33,6 @@ export const FooterCards = styled.div`
     cursor: pointer;
     &:hover {
       opacity: 1;
-      text-decoration: underline;
       transition: width 0.5s ease-in-out;
     }
   }
