@@ -68,7 +68,7 @@ const theme = {
       fontWeight: '400'
     }
   },
-  size: {
+ size: {
     radius: '16px',
     xsm: '5px',
     sm: '12px',
@@ -84,6 +84,9 @@ const theme = {
     desktopL: '1440px',
     desktopXL: '1680px'
   }
-};
+ 
+}
+  
+
 
 export default theme;

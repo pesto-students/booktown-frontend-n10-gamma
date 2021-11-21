@@ -8,8 +8,9 @@ import {
   HeaderRight,
   HamburgerContainer
 } from './styledComponents';
-import { SearchBar } from '..';
+
 import FeatherIcon from 'feather-icons-react';
+import SearchBar from '../search';
 
 const getHeaderRight = ({ profileName }) => (
   <HeaderRight>

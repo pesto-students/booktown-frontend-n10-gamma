@@ -6,7 +6,6 @@ export const FooterContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  box-sizing: border-box;
   height: 100vh;
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.secondary};
