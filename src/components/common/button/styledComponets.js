@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const MyButton = styled.button`
-  ${(props) => ({ ...props })}
   text-align: center;
   ${(props) => ({
     background: props.theme.colors.secondary,
