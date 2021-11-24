@@ -6,11 +6,7 @@ const TheBookTownApplication = () => (
   <Switch>
     {routes.map((route) =>
       route.isProtectedRoute ? (
-        <ProtectiveRouter
-          path={route.path}
-          component={route.component}
-          route={route}
-        />
+        <ProtectiveRouter {...route} />
       ) : (
         <Route
           path={route.path}

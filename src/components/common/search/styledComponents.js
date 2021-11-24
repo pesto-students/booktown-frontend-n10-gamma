@@ -17,7 +17,7 @@ export const SearchInputContainer = styled.div`
     border: none;
     border-radius: 5px;
     padding: 5px 0;
-    padding-left: 25px;
+    padding-left: 30px;
     font-size: 1.2rem;
     outline: none;
   }

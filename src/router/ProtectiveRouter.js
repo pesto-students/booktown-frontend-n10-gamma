@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-const ProtectiveRouter = ({ path, component, ...rest }) => (
+const ProtectiveRouter = (props) => (
   // do protective routing checks here
-  <Route path={path} {...rest} component={component} />
+  <Route path={props.path} component={props.component} {...props} />
 );
 ProtectiveRouter.propTypes = {};
 export default ProtectiveRouter;

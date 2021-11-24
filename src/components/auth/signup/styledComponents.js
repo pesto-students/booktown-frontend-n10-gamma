@@ -12,6 +12,7 @@ export const SignUpContainer = styled.div`
     flex-direction: column;
     width: 320px;
     padding: 10px;
+    box-sizing: border-box;
   }
 `;
 
@@ -19,6 +20,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
 `;
 
 export const SignupComponentTitle = styled.h2`

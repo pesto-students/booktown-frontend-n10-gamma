@@ -1,49 +1,46 @@
+import FeatherIcon from 'feather-icons-react';
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import SearchBar from '../search';
 import {
-  HeaderContainer,
-  HeaderTitle,
   HeaderCard,
+  HeaderContainer,
   HeaderProfile,
   HeaderRight,
-  HamburgerContainer
+  HeaderTitle
 } from './styledComponents';
+import { ABOUT, HOME } from '../../../router/types';
 
-import FeatherIcon from 'feather-icons-react';
-import SearchBar from '../search';
-
-const getHeaderRight = ({ profileName }) => (
-  <HeaderRight>
-    <span className="header-right-content">Home</span>
-    <span className="header-right-content">About</span>
-    <FeatherIcon
-      className="search-icon header-right-content"
-      icon="shopping-cart"
-      size="20"
-    />
-    <HeaderProfile>
-      <span className="header-right-content">{profileName}</span>
-    </HeaderProfile>
-  </HeaderRight>
-);
-
-function Header({ title = 'The BookTown', profileName = 'TP' }) {
+const Header = ({ title = 'The BookTown', profileName = 'TP' }) => {
   return (
     <HeaderContainer className="header-group-1">
-      <HamburgerContainer>
-        login
-        {getHeaderRight({ profileName })}
-      </HamburgerContainer>
       <HeaderCard>
-        <HeaderTitle>{title}</HeaderTitle>
+        <Link className="link" to={HOME}>
+          <HeaderTitle>{title}</HeaderTitle>
+        </Link>
       </HeaderCard>
       <HeaderCard className="header-group-1" width={'35%'}>
         <SearchBar />
       </HeaderCard>
-      {getHeaderRight({ profileName })}{' '}
+      <HeaderRight>
+        <Link className="link" to={HOME}>
+          <span className="header-right-content">Home</span>
+        </Link>
+        <Link className="link" to={ABOUT}>
+          <span className="header-right-content">About</span>
+        </Link>
+        <FeatherIcon
+          className="search-icon header-right-content"
+          icon="shopping-cart"
+          size="20"
+        />
+        <HeaderProfile>
+          <span className="header-right-content">{profileName}</span>
+        </HeaderProfile>
+      </HeaderRight>
     </HeaderContainer>
   );
-}
+};
 
 Header.propTypes = {};
 export default Header;
