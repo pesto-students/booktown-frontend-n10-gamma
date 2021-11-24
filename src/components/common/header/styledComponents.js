@@ -27,38 +27,28 @@ export const HeaderCard = styled.div`
   ${(props) => ({
     width: props.width ? props.width : 'auto'
   })};
+  .link {
+    color: ${(props) => props.theme.colors.secondary};
+    text-decoration: none;
+  }
 `;
 
 export const HeaderRight = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
   width: 40%;
   .header-right-content {
+    margin: 0 20px;
     opacity: 0.6;
     cursor: pointer;
     &:hover {
       opacity: 1;
     }
   }
-  & {
-    @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
-      justify-content: flex-end;
-      .header-right-content {
-        margin: 0 15px;
-      }
-    }
-    @media (max-width: ${(props) => props.theme.breakpoints.ipad}) {
-      justify-content: flex-end;
-      .header-right-content {
-        margin: 0 5px;
-      }
-    }
-    @media (max-width: ${650}px) {
-      .header-right-content {
-        display: none;
-      }
-    }
+  .link {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 
@@ -67,6 +57,7 @@ export const HeaderTitle = styled.div`
   margin: 0;
   padding: 0;
 `;
+
 export const HeaderProfile = styled.div`
   height: 70px;
   width: 70px;

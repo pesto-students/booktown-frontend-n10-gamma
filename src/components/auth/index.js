@@ -1,4 +1,4 @@
-import SignIn from './signup/signupComponent';
-import SignUp from './signin/signinComponent';
+import SignUp from './signup/signupComponent';
+import SignIn from './signin/signinComponent';
 
 export { SignIn, SignUp };
