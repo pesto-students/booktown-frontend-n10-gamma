@@ -1,9 +1,7 @@
 import Cart from '../components/Cart';
-import HomeComponent from '../components/home/homeComponent';
+import HomeComponent from '../components/home';
 import ProductListingPage from '../components/ProductListingPage';
-
-import SignIn from '../components/auth/signin/signinComponent';
-import SignUp from '../components/auth/signup/signupComponent';
+import { SignIn, SignUp } from '../components/auth';
 
 const routes = [
   {

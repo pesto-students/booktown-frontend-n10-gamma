@@ -24,7 +24,7 @@ export const SearchInputContainer = styled.div`
   .search-icon {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 5px;
     transform: translateY(-50%);
   }
 `;
