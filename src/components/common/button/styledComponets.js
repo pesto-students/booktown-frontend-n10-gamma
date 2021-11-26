@@ -11,7 +11,7 @@ export const MyButton = styled.button`
   border: none;
   padding: ${(props) => props.theme.size.sm};
   box-sizing: border-box;
-  cursor: pointer;
+
   .styled-icon {
     ${(props) =>
       props.icon
@@ -31,5 +31,6 @@ export const MyButton = styled.button`
     border: 1px solid ${(props) => props.theme.colors.secondary};
     color: ${(props) => props.theme.colors.secondary};
     transition: 0.3s all linear;
+    cursor: pointer;
   }
 `;

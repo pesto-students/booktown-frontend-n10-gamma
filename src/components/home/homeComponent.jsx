@@ -6,10 +6,10 @@ import bookTownImg from '../../assets/book-img-1.png';
 import {Button} from '../common';
 function HomeComponent(props) {
     return (
-        <div>
+        <>
             <Header/>
                 <HomeContainer>
-                    <img src={bookTownImg}/>
+                    {/* <img src={bookTownImg}/> */}
                     <HomeBannerOverlapper>
                        <div className='banner-overlapper-title'>
                             <span>BookTown</span>
@@ -27,8 +27,8 @@ function HomeComponent(props) {
                     </HomeBannerOverlapper>
                 </HomeContainer>
             <Footer/>
-        </div>
-    );
+        </>
+    );  
 }
 
 HomeComponent.propTypes = {

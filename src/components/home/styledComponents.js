@@ -5,7 +5,7 @@ export const HomeContainer = styled.div`
   z-index: -1;
   display: flex;
   position: relative;
-  img {
+  background-image: img {
     object-fit: fill;
     height: 100%;
     width: 99vw;

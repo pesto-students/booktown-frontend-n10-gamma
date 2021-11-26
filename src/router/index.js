@@ -9,7 +9,7 @@ const TheBookTownApplication = () => (
         <ProtectiveRouter
           path={route.path}
           component={route.component}
-          route={route}
+          {...route}
         />
       ) : (
         <Route
