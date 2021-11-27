@@ -17,14 +17,14 @@ export const SearchInputContainer = styled.div`
     border: none;
     border-radius: 5px;
     padding: 5px 0;
-    padding-left: 25px;
+    padding-left: 30px;
     font-size: 1.2rem;
     outline: none;
   }
   .search-icon {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 5px;
     transform: translateY(-50%);
   }
 `;

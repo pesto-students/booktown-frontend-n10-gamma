@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const MyButton = styled.button`
-  ${(props) => ({ ...props })}
   text-align: center;
   ${(props) => ({
     background: props.theme.colors.secondary,
@@ -21,6 +20,7 @@ export const MyButton = styled.button`
           }
         : {}}
   }
+
   &:disabled {
     background-color: rgba(200, 200, 200, 0.5);
     cursor: not-allowed;
@@ -28,7 +28,6 @@ export const MyButton = styled.button`
   }
   &:hover {
     background-color: ${(props) => props.theme.colors.primary};
-    border: 1px solid ${(props) => props.theme.colors.secondary};
     color: ${(props) => props.theme.colors.secondary};
     transition: 0.3s all linear;
     cursor: pointer;

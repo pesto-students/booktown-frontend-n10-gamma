@@ -1,5 +1,7 @@
-import React from 'react';
+import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
 import book_card from '../../DummyData/bookData';
+import { GET_BOOKS } from '../../Graphql/Queries/ProductListing';
 
 import {
   Button,
@@ -11,17 +13,30 @@ import {
 } from './styledComponents';
 
 const Body = () => {
-  const listItems = book_card.map((item) => (
-    <Card key={item.id}>
+  const [books, setBooks] = useState([]);
+
+  const getBooks = useQuery(GET_BOOKS);
+
+  useEffect(() => {
+    const { loading, data, error } = getBooks;
+    if (error) console.log(JSON.stringify(error, null, 2));
+    else if (!loading && data) {
+      console.log(data.books);
+      setBooks(data.books);
+    }
+  }, [getBooks]);
+
+  const listItems = books.map((book) => (
+    <Card key={book.id}>
       <div className="card_img">
-        <Image alt="img" src={item.img} />
+        <Image alt="img" src={book.url} />
       </div>
       <CardHeader>
-        <h1 color>{item.name}</h1>
-        <p>{item.description}</p>
+        <h1 color>{book.title}</h1>
+        <p>{book.subTitle}</p>
         <p className="price">
-          {item.price}
-          <span>{item.currency}</span>
+          <span>$</span>
+          {book.price}
         </p>
         <Button>Add to cart</Button>
       </CardHeader>

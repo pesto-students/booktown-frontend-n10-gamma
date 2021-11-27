@@ -1,0 +1,10 @@
+export const HOME = '/';
+export const PRODUCT_LISTING = '/product-listing';
+export const CART = '/cart';
+export const SIGN_IN = '/signin';
+export const SIGN_UP = '/signup';
+export const CHECKOUT = '/checkout';
+export const ORDER_HISTORY = '/order-history';
+export const ORDER_DETAILS = '/order-details';
+export const SELL_NOW = '/sell-now';
+export const ABOUT = '/about';

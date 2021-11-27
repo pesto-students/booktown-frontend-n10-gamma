@@ -1,13 +1,13 @@
 import Cart from '../components/Cart';
-import HomeComponent from '../components/home/homeComponent';
+import HomeComponent from '../components/home';
 import ProductListingPage from '../components/ProductListingPage';
-
-import SignIn from '../components/auth/signin/signinComponent';
-import SignUp from '../components/auth/signup/signupComponent';
+import { SignIn, SignUp } from '../components/auth';
+import { CART, HOME, PRODUCT_LISTING, SIGN_IN, SIGN_UP } from './types';
+import Error from '../components/common/Error';
 
 const routes = [
   {
-    path: '/',
+    path: HOME,
     component: HomeComponent,
     exact: true,
     meta: { authorizedRoles: [] },
@@ -16,7 +16,7 @@ const routes = [
     isProtectedRoute: true
   },
   {
-    path: '/products-listing',
+    path: PRODUCT_LISTING,
     component: ProductListingPage,
     meta: { authorizedRoles: [] },
     name: 'product-listing',
@@ -24,15 +24,15 @@ const routes = [
     isProtectedRoute: true
   },
   {
-    path: '/cart',
+    path: CART,
     component: Cart,
     meta: { authorizedRoles: [] },
-    name: 'product-listing',
+    name: 'cart',
     key: 'cart',
     isProtectedRoute: true
   },
   {
-    path: '/signin',
+    path: SIGN_IN,
     component: SignIn,
     meta: { authorizedRoles: [] },
     name: 'signin',
@@ -40,11 +40,18 @@ const routes = [
     isProtectedRoute: false
   },
   {
-    path: '/signup',
+    path: SIGN_UP,
     component: SignUp,
     meta: { authorizedRoles: [] },
     name: 'signup',
     key: 'signup',
+    isProtectedRoute: false
+  },
+  {
+    component: Error,
+    meta: { authorizedRoles: [] },
+    name: 'error',
+    key: 'error',
     isProtectedRoute: false
   }
 ];

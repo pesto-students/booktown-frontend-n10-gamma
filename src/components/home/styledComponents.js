@@ -2,7 +2,6 @@ import styled from 'styled-components';
 export const HomeContainer = styled.div`
   width: 99vw;
   height: 100vh;
-  z-index: -1;
   display: flex;
   position: relative;
   background-image: img {
@@ -15,7 +14,6 @@ export const HomeContainer = styled.div`
 export const HomeBannerOverlapper = styled.div`
   width: 390px;
   flex-direction: column;
-  z-index: 10;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -39,11 +37,21 @@ export const HomeBannerOverlapper = styled.div`
   .overlapper-btn {
     width: 150px;
     height: 50px;
+  }
+  .overlapper-btn-buy {
     background-color: ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.secondary};
+    &:hover {
+      background: transparent;
+      color: ${(props) => props.theme.colors.primary};
+    }
   }
-  .overlapper-btn-black {
+  .overlapper-btn-sell {
     background-color: ${(props) => props.theme.colors.secondary};
     color: ${(props) => props.theme.colors.primary};
+    &:hover {
+      background: transparent;
+      color: ${(props) => props.theme.colors.secondary};
+    }
   }
 `;
