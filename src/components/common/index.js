@@ -1,14 +1,13 @@
+import Button from './button';
+import CheckBox from './checkbox';
 import Footer from './footer';
 import Header from './header';
-import SearchBar from './search';
 import Input from './input';
-import Button from './button';
-import * as CommonStyled from './styledComponents';
-import FileUploader from './fileUploader';
-import Select from './select';
-import CheckBox from './checkbox';
-import Radio from './radio';
 import InputError from './inputError';
+import Radio from './radio';
+import SearchBar from './search';
+import Select from './select';
+import * as CommonStyled from './styledComponents';
 export {
   Select,
   Footer,
@@ -17,7 +16,6 @@ export {
   Input,
   Button,
   CommonStyled,
-  FileUploader,
   CheckBox,
   Radio,
   InputError
