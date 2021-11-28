@@ -35,6 +35,9 @@ export const SignInFormContainer = styled.div`
       }
     }
   }
+  .form-login-input {
+    width: 100%;
+  }
   .login-inputs {
     margin: 10px 0px;
   }
