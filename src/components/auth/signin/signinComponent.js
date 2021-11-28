@@ -7,7 +7,8 @@ import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom';
 
 const SignIn = (props) => {
-  const { handleStateChange, componentState, handleSignin } = useSigninContainer();
+  const { handleStateChange, componentState, handleSignin } =
+    useSigninContainer();
   return (
     <SignInContainer>
       <SignInFormContainer>
@@ -15,7 +16,8 @@ const SignIn = (props) => {
         <form className="login-form">
           <div className="login-inputs">
             <Input
-              style={{border:'1px solid'}}
+              width="100%"
+              style={{ border: '1px solid' }}
               type="text"
               label="Email"
               placeholder="Enter Email"
@@ -23,11 +25,13 @@ const SignIn = (props) => {
               name="email"
               onChange={(e) => handleStateChange(e.target.name, e.target.value)}
               value={componentState?.email}
+              className="form-login-input"
             />
           </div>
           <div className="login-inputs">
             <Input
-              style={{border:'1px solid'}}
+              width="100%"
+              style={{ border: '1px solid' }}
               type="password"
               label="Password"
               placeholder="Enter password"
@@ -35,11 +39,20 @@ const SignIn = (props) => {
               name="password"
               onChange={(e) => handleStateChange(e.target.name, e.target.value)}
               value={componentState?.password}
+              className="form-login-input"
             />
           </div>
-          <Button onClick={(e)=>{handleSignin('self', e)}} style={{ width: '100%', margin: '10px 0' }} text="Login" />
           <Button
-            onClick={(e)=>{handleSignin('google', e)}}
+            onClick={(e) => {
+              handleSignin('self', e);
+            }}
+            style={{ width: '100%', margin: '10px 0' }}
+            text="Login"
+          />
+          <Button
+            onClick={(e) => {
+              handleSignin('google', e);
+            }}
             style={{ width: '100%', margin: '10px 0' }}
             text="Google Login"
           />

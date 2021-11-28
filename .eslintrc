@@ -1,4 +1,7 @@
 {
-    "extends": ["react-app"]
-    
+    "extends": ["react-app"],
+    "rules": {
+        "ban-ts-comment": 0,
+        "@typescript-eslint/no-unused-vars": 0,
+    }
 }

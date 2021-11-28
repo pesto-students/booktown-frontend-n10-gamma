@@ -9,7 +9,8 @@ import {
 } from './styledComponents';
 
 const SignupComponent = (props) => {
-  const { componentState, handleChange, handleCreateAccount } =
+  const [recaptcha, setRecaptcha] = React.useState(true);
+  const { handleChange, handleCreateAccount, signupForm, errors } =
     useSignupContainer();
   return (
     <SignUpContainer>
@@ -17,71 +18,79 @@ const SignupComponent = (props) => {
       <form className="signup-form">
         <InputContainer>
           <Input
-            style={{ marginRight: '5px' }}
+            width="100%"
+            className="signup-form-inputs"
             type="text"
             name="firstName"
             placeholder="First Name"
             label="First Name"
-            value={componentState.firstName}
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            value={signupForm.firstName}
+            onChange={handleChange}
+            error={errors.errors.firstName}
           />
+        </InputContainer>
+        <InputContainer>
           <Input
-            className="signup-input"
+            width="100%"
+            className="signup-form-inputs"
             type="text"
             name="lastName"
             placeholder="Last Name"
             label="Last Name"
-            value={componentState.lastName}
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            value={signupForm.lastName}
+            onChange={handleChange}
+            error={errors.errors.lastName}
           />
         </InputContainer>
         <InputContainer>
           <Input
-            style={{ width: '320px' }}
+            width="100%"
+            className="signup-form-inputs"
             type="email"
             name="email"
             placeholder="Email"
             label="Email"
-            value={componentState.email}
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            value={signupForm.email}
+            onChange={handleChange}
+            error={errors.errors.email}
           />
         </InputContainer>
         <InputContainer>
           <Input
-            style={{ width: '320px' }}
+            width="100%"
+            className="signup-form-inputs"
             type="password"
             name="password"
             placeholder="Password"
             label="Password"
-            value={componentState.password}
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            value={signupForm.password}
+            onChange={handleChange}
+            error={errors.errors.password}
           />
         </InputContainer>
         <InputContainer>
           <Input
-            style={{ width: '320px' }}
+            width="100%"
+            className="signup-form-inputs"
             type="password"
             name="confirmPassword"
-            placeholder="Email"
+            placeholder="Enter password again"
             label="Confirm Password"
-            value={componentState.confirmPassword}
-            onChange={(e) => handleChange(e.target.name, e.target.value)}
+            value={signupForm.confirmPassword}
+            onChange={handleChange}
+            error={errors.errors.confirmPassword}
           />
         </InputContainer>
       </form>
       <Button
         onClick={handleCreateAccount}
-        disabled={!componentState.isSuccess}
+        disabled={recaptcha}
         style={{ margin: '10px 0', width: '320px' }}
         text="SignUp"
       />
       <ReCAPTCHA
         sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-        onChange={(e) => {
-          e
-            ? handleChange('isSuccess', true)
-            : handleChange('isSuccess', false);
-        }}
+        onChange={(e) => e && setRecaptcha(false)}
       />
     </SignUpContainer>
   );
