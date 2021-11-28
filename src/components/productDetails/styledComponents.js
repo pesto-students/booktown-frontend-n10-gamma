@@ -112,7 +112,7 @@ export const ProductDetailsCheckoutContainer = styled(CommonStyled.Container)`
   border-radius: ${(props) => props.theme.size.xsm};
   padding: 10px;
   box-sizing: border-box;
-  width: 20%;
+  width: 15%;
   align-self: flex-start;
   justify-content: center;
   align-items: center;
@@ -139,7 +139,7 @@ export const ProductDetailsCheckoutContainer = styled(CommonStyled.Container)`
     width: 80%;
     .product-checkout-buy-btn,
     .product-checkout-cart-btn {
-      width: 100%;
+      width: 250px;
       margin: 10px 0;
       border-radius: 50px;
     }
@@ -156,6 +156,8 @@ export const ProductDetailsCheckoutContainer = styled(CommonStyled.Container)`
   }
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     align-self: center;
+    width: 30%;
+    margin: 10px 0;
   }
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     align-self: center;

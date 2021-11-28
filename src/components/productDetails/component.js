@@ -14,9 +14,11 @@ import {
 import demoImg from './demoImg.png';
 import StarRatingComponent from 'react-star-rating-component';
 import FeatherIcon from 'feather-icons-react';
+import { Link } from 'react-router-dom';
+import { CART } from '../../router/types';
 
 const Component = (props) => {
-  const {} = useProductDetailsContainer();
+  const { refs, handleCarouselAction } = useProductDetailsContainer();
   return (
     <>
       <Header />
@@ -48,7 +50,7 @@ const Component = (props) => {
             </div>
 
             <div className="product-details-description-container">
-              <h4>About product</h4>
+              <h4>Product Description</h4>
               <p className="product-details-description">
                 In publishing and graphic design, Lorem ipsum is a placeholder
                 text commonly used to demonstrate the visual form of a document
@@ -87,14 +89,16 @@ const Component = (props) => {
             </div>
             <div className="product-checkout-qty-container">
               <span>Quantity </span>
-              <Input className="product-checkout-qty" type="number" />
+              <Input min={1} className="product-checkout-qty" type="number" />
             </div>
             <div className="product-checkout-btn-container">
               <Button className="product-checkout-buy-btn" text="Buy Now" />
-              <Button
-                className="product-checkout-cart-btn"
-                text="Add To Cart"
-              />
+              <Link to={CART}>
+                <Button
+                  className="product-checkout-cart-btn"
+                  text="Add To Cart"
+                />
+              </Link>
             </div>
           </ProductDetailsCheckoutContainer>
         </ProductDetailsRow>
@@ -126,8 +130,12 @@ const Component = (props) => {
         </ProductInsightContainer>
         <RecommendedProductsContainer>
           <div className="recommended-title">Recommended for you</div>
-          <FeatherIcon className="left-carousel-button" icon="chevron-left" />
-          <div className="recommended-carousel">
+          <FeatherIcon
+            onClick={() => handleCarouselAction('left', 270)}
+            className="left-carousel-button"
+            icon="chevron-left"
+          />
+          <div ref={refs.carouselRef} className="recommended-carousel">
             <RecommendedProductWrapper>
               <img alt={'preview'} src={demoImg} />
               <span className="recommended-product-title">
@@ -259,7 +267,11 @@ const Component = (props) => {
               <span className="recommended-product-price">$ 100</span>
             </RecommendedProductWrapper>
           </div>
-          <FeatherIcon className="right-carousel-button" icon="chevron-right" />
+          <FeatherIcon
+            onClick={() => handleCarouselAction('right', 270)}
+            className="right-carousel-button"
+            icon="chevron-right"
+          />
         </RecommendedProductsContainer>
       </ProductDetialsContainer>
       <Footer />
