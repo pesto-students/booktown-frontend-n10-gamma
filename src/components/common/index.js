@@ -1,7 +1,22 @@
+import Button from './button';
+import CheckBox from './checkbox';
 import Footer from './footer';
 import Header from './header';
-import SearchBar from './search';
 import Input from './input';
-import Button from './button';
-
-export { Footer, Header, SearchBar, Input, Button };
+import InputError from './inputError';
+import Radio from './radio';
+import SearchBar from './search';
+import Select from './select';
+import * as CommonStyled from './styledComponents';
+export {
+  Select,
+  Footer,
+  Header,
+  SearchBar,
+  Input,
+  Button,
+  CommonStyled,
+  CheckBox,
+  Radio,
+  InputError
+};

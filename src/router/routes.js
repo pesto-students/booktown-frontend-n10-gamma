@@ -2,8 +2,16 @@ import Cart from '../components/Cart';
 import HomeComponent from '../components/home';
 import ProductListingPage from '../components/ProductListingPage';
 import { SignIn, SignUp } from '../components/auth';
-import { CART, HOME, PRODUCT_LISTING, SIGN_IN, SIGN_UP } from './types';
+import {
+  CART,
+  HOME,
+  PRODUCT_LISTING,
+  PRODUCT_SELL,
+  SIGN_IN,
+  SIGN_UP
+} from './types';
 import Error from '../components/common/Error';
+import ProductSelling from '../components/productSelling';
 
 const routes = [
   {
@@ -46,6 +54,14 @@ const routes = [
     name: 'signup',
     key: 'signup',
     isProtectedRoute: false
+  },
+  {
+    path: PRODUCT_SELL,
+    component: ProductSelling,
+    meta: { authorizedRoles: [] },
+    name: 'product-sell',
+    key: 'product-sell',
+    isProtectedRoute: true
   },
   {
     component: Error,

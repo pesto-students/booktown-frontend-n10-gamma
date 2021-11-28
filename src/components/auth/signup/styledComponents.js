@@ -14,6 +14,9 @@ export const SignUpContainer = styled.div`
     padding: 10px;
     box-sizing: border-box;
   }
+  .signup-form-inputs {
+    width: 100%;
+  }
 `;
 
 export const InputContainer = styled.div`

@@ -4,7 +4,7 @@ export const HomeContainer = styled.div`
   height: 100vh;
   display: flex;
   position: relative;
-  img {
+  background-image: img {
     object-fit: fill;
     height: 100%;
     width: 99vw;
@@ -44,6 +44,7 @@ export const HomeBannerOverlapper = styled.div`
     &:hover {
       background: transparent;
       color: ${(props) => props.theme.colors.primary};
+      border: 1px solid ${(props) => props.theme.colors.secondary};
     }
   }
   .overlapper-btn-sell {
@@ -52,6 +53,7 @@ export const HomeBannerOverlapper = styled.div`
     &:hover {
       background: transparent;
       color: ${(props) => props.theme.colors.secondary};
+      border: 1px solid ${(props) => props.theme.colors.primary};
     }
   }
 `;

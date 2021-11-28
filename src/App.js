@@ -11,23 +11,23 @@ import './index.css';
 import TheBookTownApplication from './router';
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: 'http://localhost:3000/graphql',
   cache: new InMemoryCache()
 });
 
 const App = () => {
   return (
-    <Provider store={Store}>
-      <Router>
-        <ThemeProvider theme={theme}>
-          <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <Provider store={Store}>
+        <Router>
+          <ThemeProvider theme={theme}>
             <ErrorContextProvider>
               <TheBookTownApplication />
             </ErrorContextProvider>
-          </ApolloProvider>
-        </ThemeProvider>
-      </Router>
-    </Provider>
+          </ThemeProvider>
+        </Router>
+      </Provider>
+    </ApolloProvider>
   );
 };
 

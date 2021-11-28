@@ -51,7 +51,7 @@ const book_card = [
     id: 7,
     type: 3,
     name: 'Kalki',
-    description: 'Kal Kyu Aaj Kyu nahi?',
+    description: '',
     price: 500,
     currency: '$',
     img: './images/img12.jpg'

@@ -8,7 +8,7 @@ import { Container, ProductListing } from './styledComponents';
 function ProductListingPage() {
   return (
     <>
-    <Header />
+      <Header />
       <ProductListing>
         <SideBar />
         <Container>

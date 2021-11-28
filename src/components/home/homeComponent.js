@@ -5,7 +5,7 @@ import { HomeContainer, HomeBannerOverlapper } from './styledComponents';
 import bookTownImg from '../../assets/book-img-1.png';
 import { Button } from '../common';
 import { Link } from 'react-router-dom';
-import { PRODUCT_LISTING, SELL_NOW } from '../../router/types';
+import { PRODUCT_LISTING, PRODUCT_SELL } from '../../router/types';
 function HomeComponent(props) {
   return (
     <div>
@@ -23,7 +23,7 @@ function HomeComponent(props) {
             Sell & Buy old and new books here
           </p>
           <div className="overlapper-btn-container">
-            <Link to={SELL_NOW}>
+            <Link to={PRODUCT_SELL}>
               <Button
                 className="overlapper-btn overlapper-btn-sell"
                 text="Sell Now"
