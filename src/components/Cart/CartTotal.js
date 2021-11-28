@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import AddressModal from './AddressModal';
+import StripeCheckoutButton from './StripeCheckoutButton';
 import { ItemTotal } from './styledComponents';
 
 const CartTotal = ({ items }) => {
@@ -44,7 +45,7 @@ const CartTotal = ({ items }) => {
             />
           </span>
         </h4>
-        <button onClick={onClick}>Proceed to checkout</button>
+        <StripeCheckoutButton price={getTotalPrice()} />
       </ItemTotal>
     </>
   );
