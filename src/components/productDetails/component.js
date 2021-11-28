@@ -93,7 +93,7 @@ const Component = (props) => {
             </div>
             <div className="product-checkout-btn-container">
               <Button className="product-checkout-buy-btn" text="Buy Now" />
-              <Link to={CART}>
+              <Link style={{ width: '100%' }} to={CART}>
                 <Button
                   className="product-checkout-cart-btn"
                   text="Add To Cart"

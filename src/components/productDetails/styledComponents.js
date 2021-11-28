@@ -139,7 +139,7 @@ export const ProductDetailsCheckoutContainer = styled(CommonStyled.Container)`
     width: 80%;
     .product-checkout-buy-btn,
     .product-checkout-cart-btn {
-      width: 250px;
+      width: 100%;
       margin: 10px 0;
       border-radius: 50px;
     }
