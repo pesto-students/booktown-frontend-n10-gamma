@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { ErrorCodeAndMessage } from '../config/ErrorCodeAndMessage';
 
 export const ErrorContext = React.createContext({});
@@ -19,6 +19,9 @@ const ErrorContextProvider = ({ children }) => {
     let error = { message: errorMessage, code: errorCode };
     if (!error.message) {
       error = ErrorCodeAndMessage[error.code];
+      toast(error);
+    } else {
+      toast(errorMessage);
     }
     setComponentState({
       ...componentState,

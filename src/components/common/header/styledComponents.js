@@ -60,7 +60,6 @@ export const HeaderTitle = styled.div`
 
 export const HeaderProfile = styled.div`
   height: 70px;
-  width: 70px;
   border-radius: 50%;
   text-align: center;
   line-height: 70px;
