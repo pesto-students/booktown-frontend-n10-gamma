@@ -16,7 +16,7 @@ export const ProductFieldWrapper = styled.div`
   margin: 10px 0;
   padding: 10px;
   background: white;
-  border: 1px solid ${(props) => props.theme.colors.primary};
+  /* border: 1px solid ${(props) => props.theme.colors.primary}; */
   border-radius: 5px;
   .product-field-input {
     width: 100%;
