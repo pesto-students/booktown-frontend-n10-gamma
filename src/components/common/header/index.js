@@ -44,15 +44,13 @@ const Header = ({ title = 'The BookTown' }) => {
           icon="shopping-cart"
           size="20"
         />
-        <HeaderProfile>
-          <span className="header-right-content">
-            {isUserSuccessfulyLoggedIn ? (
-              `Hello ${user?.displayName}`
-            ) : (
-              <Link to={SIGN_IN}>Login</Link>
-            )}
-          </span>
-        </HeaderProfile>
+        <span className="header-right-content">
+          {isUserSuccessfulyLoggedIn ? (
+            `Hello ${user?.displayName}`
+          ) : (
+            <Link to={SIGN_IN}>Login</Link>
+          )}
+        </span>
       </HeaderRight>
     </HeaderContainer>
   );

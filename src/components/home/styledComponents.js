@@ -56,4 +56,12 @@ export const HomeBannerOverlapper = styled.div`
       border: 1px solid ${(props) => props.theme.colors.primary};
     }
   }
+  & {
+    @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+      width: 100%;
+      left: 0;
+
+      text-align: left;
+    }
+  }
 `;
