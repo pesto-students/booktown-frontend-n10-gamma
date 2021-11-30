@@ -9,9 +9,14 @@ import {
   HeaderRight,
   HeaderTitle
 } from './styledComponents';
-import { ABOUT, HOME } from '../../../router/types';
-
-const Header = ({ title = 'The BookTown', profileName = 'TP' }) => {
+import { ABOUT, HOME, SIGN_IN } from '../../../router/types';
+import { useSession } from '../../../hooks';
+const Header = ({ title = 'The BookTown' }) => {
+  const session = useSession();
+  const { isUserSuccessfulyLoggedIn, user } = session;
+  const handleLogout = () => {
+    session.logout(SIGN_IN);
+  };
   return (
     <HeaderContainer className="header-group-1">
       <HeaderCard>
@@ -29,13 +34,24 @@ const Header = ({ title = 'The BookTown', profileName = 'TP' }) => {
         <Link className="link" to={ABOUT}>
           <span className="header-right-content">About</span>
         </Link>
+        {isUserSuccessfulyLoggedIn && (
+          <span onClick={handleLogout} className="header-right-content">
+            Logout
+          </span>
+        )}
         <FeatherIcon
           className="search-icon header-right-content"
           icon="shopping-cart"
           size="20"
         />
         <HeaderProfile>
-          <span className="header-right-content">{profileName}</span>
+          <span className="header-right-content">
+            {isUserSuccessfulyLoggedIn ? (
+              `Hello ${user?.displayName}`
+            ) : (
+              <Link to={SIGN_IN}>Login</Link>
+            )}
+          </span>
         </HeaderProfile>
       </HeaderRight>
     </HeaderContainer>

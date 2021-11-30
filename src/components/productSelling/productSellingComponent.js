@@ -1,29 +1,33 @@
+import FeatherIcon from 'feather-icons-react';
+import 'firebase/compat/auth';
+import firebase from 'firebase/compat/app';
 import React from 'react';
 import {
+  Button,
   Footer,
   Header,
   Input,
-  Button,
-  Select,
+  InputError,
   Radio,
-  InputError
+  Select
 } from '../common';
 import useProductSellingContainer from './productSellingContainer';
 import {
+  FilePreviewWrapper,
+  FileUploadContainer,
+  FileUploadWrapper,
+  ProductButtonContainer,
   ProductContainer,
   ProductFieldHelperText,
   ProductFieldTitle,
-  ProductFieldWrapper,
-  ProductButtonContainer,
-  FileUploadWrapper,
-  FilePreviewWrapper,
-  FileUploadContainer
+  ProductFieldWrapper
 } from './styledComponent';
-import FeatherIcon from 'feather-icons-react';
+import useSession from '../../hooks/useSession';
 
 const ProductSellingComponent = (props) => {
   const { formState, handleChange, handleSubmit, handleDeleteFile, errors } =
     useProductSellingContainer();
+  console.log(useSession());
   return (
     <>
       <Header />

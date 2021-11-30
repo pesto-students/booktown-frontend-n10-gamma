@@ -2,7 +2,7 @@ import { Switch, Route } from 'react-router-dom';
 import routes from './routes';
 import ProtectiveRouter from './ProtectiveRouter';
 
-const TheBookTownApplication = () => (
+const TheBookTownApplication = (props) => (
   <Switch>
     {routes.map((route) =>
       route.isProtectedRoute ? (

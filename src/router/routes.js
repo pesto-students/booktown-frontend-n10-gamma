@@ -23,7 +23,7 @@ const routes = [
     meta: { authorizedRoles: [] },
     name: 'home',
     key: 'home',
-    isProtectedRoute: true
+    isProtectedRoute: false
   },
   {
     path: PRODUCT_LISTING,
