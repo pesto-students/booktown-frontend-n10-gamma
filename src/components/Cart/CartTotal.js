@@ -1,3 +1,4 @@
+import { Button } from '../common';
 import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import AddressModal from './AddressModal';
@@ -44,7 +45,7 @@ const CartTotal = ({ items }) => {
             />
           </span>
         </h4>
-        <button onClick={onClick}>Proceed to checkout</button>
+        <Button onClick={onClick} text={'Proceed to checkout'} />
       </ItemTotal>
     </>
   );
