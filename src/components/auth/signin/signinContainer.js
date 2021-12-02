@@ -55,7 +55,7 @@ const useSigninContainer = (props) => {
           isError: false
         });
       } catch (err) {
-        errorContext.showError(err.code, err.message);
+        errorContext.showError(err.code);
         setComponentState({
           ...componentState,
           isLoading: false,
