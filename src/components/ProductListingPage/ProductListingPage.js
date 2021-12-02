@@ -1,21 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Footer } from '../common';
 import Header from '../common/header';
 import Card from './Card';
+
+import { useQuery } from '@apollo/client';
+import { GET_BOOKS_DATA } from '../../Graphql/queries/product-listing';
+import { Item, ItemTotal } from '../Cart/styledComponents';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../../config/redux/features/cart/cartSlice';
+
 function ProductListingPage() {
+  const [books, setBooks] = useState([]);
+  const dispatch = useDispatch();
+
+  const booksData = useQuery(GET_BOOKS_DATA);
+
+  const onAddToCart = (item) => {
+    dispatch(addItem(item));
+  };
+
+  useEffect(() => {
+    const { error, loading, data } = booksData;
+    if (error) console.log(error.message);
+    if (!loading && data) {
+      console.log(data.books);
+      setBooks(data.books);
+    }
+  }, [booksData]);
   return (
     <>
       <Header />
       <ProductListingPageContainer>
-        {new Array(10).fill(0).map((item) => (
-          <Card
-            title={''}
-            description={''}
-            productPics={''}
-            originalPrice={''}
-          />
-        ))}
+        {books.map((item) => {
+          return (
+            <Card
+              item={item}
+              onAddToCart={onAddToCart}
+              title={item.title}
+              description={item.description}
+              productPics={[item.url]}
+              originalPrice={item.price}
+            />
+          );
+        })}
       </ProductListingPageContainer>
       <Footer />
     </>

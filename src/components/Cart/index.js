@@ -6,20 +6,19 @@ import CartItems from './CartItems';
 import CartTotal from './CartTotal';
 import { CartMain } from './styledComponents';
 
-
 function Cart() {
   const [cartItems, setCartItems] = useState(items);
   const [fixedPrice, setFixedPrice] = useState(itemsFixPrice);
   return (
     <>
-    <Header />
+      <Header />
       <CartMain>
-      <CartItems
-        items={cartItems}
-        setCartItems={setCartItems}
-        fixedPrice={fixedPrice}
-      />
-      <CartTotal items={cartItems} />
+        <CartItems
+          items={cartItems}
+          setCartItems={setCartItems}
+          fixedPrice={fixedPrice}
+        />
+        <CartTotal items={cartItems} />
       </CartMain>
       <Footer />
     </>

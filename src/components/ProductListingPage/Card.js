@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../common';
 import demoImg from './demoImg.png';
 import { CART } from '../../router/types';
+
 const ShoppingCard = ({
+  item,
   title,
   price,
   originalPrice,
   description,
   onClick,
   onAddToCart,
-  productPics = [],
+  productPics = [demoImg, demoImg, demoImg, demoImg, demoImg],
   category,
   subCategory
 }) => {
-  const picsList = [demoImg, demoImg, demoImg, demoImg, demoImg];
+  // const productPics = [demoImg, demoImg, demoImg, demoImg, demoImg];
   const [currentPicIndex, setCurrentPicIndex] = React.useState(0);
   const [intervalId, setIntervalId] = React.useState(null);
   const changeCurrentPic = () => {
     const id = setInterval(() => {
       console.log(currentPicIndex);
-      setCurrentPicIndex(() => (currentPicIndex + 1) % picsList.length);
+      setCurrentPicIndex(() => (currentPicIndex + 1) % productPics.length);
     }, 1000);
     setIntervalId(() => id);
   };
@@ -30,16 +32,20 @@ const ShoppingCard = ({
       <CardImgContainer
         onMouseEnter={changeCurrentPic}
         onMouseLeave={() => clearInterval(intervalId)}>
-        <img src={picsList[currentPicIndex]} alt="img" />
+        <img src={productPics[currentPicIndex]} alt="img" />
         <div className="img-overlay">
           <div>o o o o o </div>
-          <Link to={CART} style={{ width: '100%' }}>
-            <Button className="overly-cart-btn" text={'Add to cart'} />
-          </Link>
+          {/* <Link to={CART} style={{ width: '100%' }}> */}
+          <Button
+            onClick={() => onAddToCart(item)}
+            className="overly-cart-btn"
+            text={'Add to cart'}
+          />
+          {/* </Link> */}
         </div>
       </CardImgContainer>
       <CardBody>
-        <h6 className="card-body-title">Matt Ridley</h6>
+        <h6 className="card-body-title">{title}</h6>
         <Text lines={1}>{description || 'Product description'}</Text>
         <span className="price">
           <span style={{ fontWeight: 'bold' }}>{price || 'Rs. 100'}</span>
