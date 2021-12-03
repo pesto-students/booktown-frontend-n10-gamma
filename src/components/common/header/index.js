@@ -8,7 +8,7 @@ import {
   HeaderRight,
   HeaderTitle
 } from './styledComponents';
-import { ABOUT, HOME, SIGN_IN } from '../../../router/types';
+import { ABOUT, HOME, SIGN_IN, PRODUCT_LISTING } from '../../../router/types';
 import { useSession } from '../../../hooks';
 const Header = ({ title = 'The BookTown', isSearchBarHide = false }) => {
   const session = useSession();
@@ -36,8 +36,8 @@ const Header = ({ title = 'The BookTown', isSearchBarHide = false }) => {
             <Link to={SIGN_IN}>Login</Link>
           )}
         </span>
-        <Link className="link" to={HOME}>
-          <span className="header-right-content">Home</span>
+        <Link className="link" to={PRODUCT_LISTING}>
+          <span className="header-right-content">Product</span>
         </Link>
         <Link className="link" to={ABOUT}>
           <span className="header-right-content">About</span>
