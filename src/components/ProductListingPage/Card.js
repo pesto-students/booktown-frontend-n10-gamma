@@ -48,13 +48,13 @@ const ShoppingCard = ({
         <h6 className="card-body-title">{title}</h6>
         <Text lines={1}>{description || 'Product description'}</Text>
         <span className="price">
-          <span style={{ fontWeight: 'bold' }}>{price || 'Rs. 100'}</span>
+          <span style={{ fontWeight: 'bold' }}>Rs. {price || 'Rs. 100'}</span>
           <span style={{ textDecoration: 'line-through', margin: '0 10px' }}>
-            {originalPrice || 'Rs. 10000'}
+            Rs. {originalPrice || 'Rs. 10000'}
           </span>
         </span>
         <span>
-          <span>{category || 'category'}</span>
+          <span>{category || 'category'} | </span>
           <span style={{ margin: '0 10px' }}>
             {subCategory || 'subcategory'}
           </span>

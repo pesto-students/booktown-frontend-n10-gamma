@@ -1,43 +1,70 @@
+import FeatherIcon from 'feather-icons-react';
+import 'firebase/compat/auth';
 import React from 'react';
+import { categoryAndSubCategory, language } from '../../config/appConfig';
 import {
+  Button,
   Footer,
   Header,
   Input,
-  Button,
-  Select,
+  InputError,
   Radio,
-  InputError
+  Select
 } from '../common';
 import useProductSellingContainer from './productSellingContainer';
 import {
+  FilePreviewWrapper,
+  FileUploadContainer,
+  FileUploadWrapper,
+  ProductButtonContainer,
   ProductContainer,
   ProductFieldHelperText,
   ProductFieldTitle,
-  ProductFieldWrapper,
-  ProductButtonContainer,
-  FileUploadWrapper,
-  FilePreviewWrapper,
-  FileUploadContainer
+  ProductFieldWrapper
 } from './styledComponent';
-import FeatherIcon from 'feather-icons-react';
 
 const ProductSellingComponent = (props) => {
-  const { formState, handleChange, handleSubmit, handleDeleteFile, errors } =
-    useProductSellingContainer();
+  const {
+    formState,
+    handleChange,
+    handleSubmit,
+    handleDeleteFile,
+    errors,
+    disabledSubmit
+  } = useProductSellingContainer();
+
   return (
     <>
       <Header />
       <ProductContainer>
         <ProductFieldWrapper>
-          <ProductFieldTitle>Name</ProductFieldTitle>
+          <ProductFieldTitle>Book Detail</ProductFieldTitle>
           <Input
-            name="name"
+            name="title"
             onChange={handleChange}
-            value={formState.name}
-            placeholder={'Enter book name'}
+            value={formState.title}
+            placeholder={'Enter book title'}
             width="100%"
             className="product-field-input"
-            error={errors.errors.name}
+            error={errors.errors.title}
+          />
+          <Input
+            name="subTitle"
+            onChange={handleChange}
+            value={formState.subTitle}
+            placeholder={'Enter book sub title'}
+            width="100%"
+            className="product-field-input"
+            error={errors.errors.subTitle}
+          />
+          <Input
+            name="publisher"
+            onChange={handleChange}
+            value={formState.publisher}
+            placeholder={'Enter publisher'}
+            width="100%"
+            className="product-field-input"
+            error={errors.errors.publisher}
           />
           <Input
             name="author"
@@ -48,8 +75,21 @@ const ProductSellingComponent = (props) => {
             className="product-field-input"
             error={errors.errors.author}
           />
+          <Select
+            width="100%"
+            placeholder={'Select Langauge'}
+            className="product-field-input"
+            name="language"
+            onChange={handleChange}
+            value={formState.language}
+            options={language?.map((item) => ({
+              label: item,
+              value: item
+            }))}
+            error={errors.errors.language}
+          />
           <ProductFieldHelperText>
-            Enter the Book and Author name
+            Enter the Book details
           </ProductFieldHelperText>
         </ProductFieldWrapper>
         <ProductFieldWrapper>
@@ -76,16 +116,10 @@ const ProductSellingComponent = (props) => {
             name="category"
             onChange={handleChange}
             value={formState.category}
-            options={[
-              {
-                value: '2',
-                label: 'Technology'
-              },
-              {
-                value: '3',
-                label: 'College'
-              }
-            ]}
+            options={Object.keys(categoryAndSubCategory)?.map((key) => ({
+              label: key,
+              value: key
+            }))}
             error={errors.errors.category}
           />
           <ProductFieldHelperText>
@@ -101,16 +135,12 @@ const ProductSellingComponent = (props) => {
             name="subcategory"
             onChange={handleChange}
             value={formState.subcategory}
-            options={[
-              {
-                value: '2',
-                label: 'Technology'
-              },
-              {
-                value: '3',
-                label: 'College'
-              }
-            ]}
+            options={categoryAndSubCategory[formState.category]?.map(
+              (subcategory) => ({
+                label: subcategory,
+                value: subcategory
+              })
+            )}
             error={errors.errors.subcategory}
           />
           <ProductFieldHelperText>
@@ -164,50 +194,50 @@ const ProductSellingComponent = (props) => {
         <ProductFieldWrapper>
           <ProductFieldTitle>Shipping Address</ProductFieldTitle>
           <Input
-            name="shippingAddress"
+            name="address"
             onChange={handleChange}
-            value={formState.shippingAddress}
+            value={formState.address}
             placeholder={'Enter address'}
             width="100%"
             className="product-field-input"
-            error={errors.errors.shippingAddress}
+            error={errors.errors.address}
           />
           <Input
-            name="shippingCity"
+            name="city"
             onChange={handleChange}
-            value={formState.shippingCity}
+            value={formState.city}
             placeholder={'Enter city'}
             width="100%"
             className="product-field-input"
-            error={errors.errors.shippingCity}
+            error={errors.errors.city}
           />
           <Input
-            name="shippingState"
+            name="state"
             onChange={handleChange}
-            value={formState.shippingState}
+            value={formState.state}
             placeholder={'Enter state'}
             width="100%"
             className="product-field-input"
-            error={errors.errors.shippingState}
+            error={errors.errors.state}
           />
           <Input
-            name="shippingCountry"
+            name="country"
             onChange={handleChange}
-            value={formState.shippingCountry}
+            value={formState.country}
             placeholder={'Enter country'}
             width="100%"
             className="product-field-input"
-            error={errors.errors.shippingCountry}
+            error={errors.errors.country}
           />
           <Input
-            name="shippingZipCode"
+            name="zipCode"
             type="number"
             onChange={handleChange}
-            value={formState.shippingZipCode}
+            value={formState.zipCode}
             placeholder={'Enter zip code'}
             width="100%"
             className="product-field-input"
-            error={errors.errors.shippingZipCode}
+            error={errors.errors.zipCode}
           />
           <Input
             name="shippingContact"
@@ -258,6 +288,7 @@ const ProductSellingComponent = (props) => {
             className={'btn'}
             round={10}
             text={'Submit'}
+            disabled={disabledSubmit}
           />
         </ProductButtonContainer>
       </ProductContainer>

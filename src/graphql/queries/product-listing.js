@@ -3,11 +3,23 @@ import { gql } from '@apollo/client';
 const GET_BOOKS_DATA = gql`
   query getBooks {
     books {
-      _id
+      id
       title
+      subTitle
+      author
+      published
+      publisher
+      pages
       description
+      files
+      condition
+      language
       price
-      url
+      originalPrice
+      status
+      format
+      subcategory
+      category
     }
   }
 `;

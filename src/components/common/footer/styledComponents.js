@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 export const FooterContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -14,6 +15,10 @@ export const FooterContainer = styled.div`
       flex-direction: column;
       height: auto;
     }
+  }
+  .footer-link {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 export const FooterCards = styled.div`

@@ -1,33 +1,44 @@
+import { useMutation } from '@apollo/react-hooks';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/storage';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useHistory } from 'react-router';
 import * as yup from 'yup';
+import { addProduct } from '../../graphql/mutation/product';
+import { PRODUCT_LISTING } from '../../router/types';
 
 const useProductSellingContainer = () => {
+  const history = useHistory();
   const [formState, setFormState] = useState({
-    name: '',
+    title: '',
+    subTitle: '',
+    publisher: '',
     price: '',
     description: '',
+    originalPrice: Math.floor(Math.random() * 1000),
     author: '',
     files: new Map(),
     prevFiles: [],
     category: '',
     subcategory: '',
-    tags: [],
-    quantity: '',
-    shippingAddress: '',
-    shippingState: '',
-    shippingCity: '',
-    shippingZipCode: 0,
-    shippingCountry: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: '',
+    address: '',
     shippingContact: '',
     shippingEmail: '',
     condition: '',
-    format: ''
+    format: '',
+    language: ''
   });
   const [errors, setErrors] = useState({
     isError: false,
     errors: {}
   });
+  const [disabledSubmit, setDisabledSubmit] = useState(false);
+  const [addProductMutation] = useMutation(addProduct);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,13 +88,82 @@ const useProductSellingContainer = () => {
         setErrors(errors);
       } else {
         setErrors(errors);
+        setDisabledSubmit(true);
+        const payload = {
+          title: formState.title,
+          subTitle: formState.subTitle,
+          publisher: formState.publisher,
+          language: formState.language,
+          author: formState.author,
+          price: +formState.price,
+          originalPrice: +formState.originalPrice,
+          description: formState.description,
+          category: formState.category,
+          subcategory: formState.subcategory,
+          format: formState.format,
+          status: 'in-stock',
+          condition: formState.condition,
+          files: [],
+          shippingAddress: {
+            city: formState.city,
+            state: formState.state,
+            zipCode: +formState.zipCode,
+            country: formState.country,
+            address: formState.address
+          }
+        };
+        uploadFiles(Array.from(formState.files.values()))
+          .then((urls) => {
+            payload.files = urls;
+            addProductMutation({
+              variables: { payload }
+            })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {})
+              .finally(() => {
+                history.push(PRODUCT_LISTING);
+                setDisabledSubmit(false);
+              });
+          })
+          .catch(() => {});
       }
+    });
+  };
+  const uploadFiles = async (files = []) => {
+    const arrayOfPromises = [];
+    files.forEach((file) => {
+      const promise = new Promise((resolve, reject) => {
+        const storageRef = firebase.storage().ref('/images/' + file.name);
+        const uploadTask = storageRef.put(file);
+        uploadTask.on(
+          'state_changed',
+          function (snapshot) {},
+          function (error) {},
+          function () {
+            uploadTask.snapshot.ref
+              .getDownloadURL()
+              .then(function (downloadURL) {
+                resolve(downloadURL);
+              });
+          }
+        );
+      });
+      arrayOfPromises.push(promise);
+    });
+    return await toast.promise(Promise.all(arrayOfPromises), {
+      loading: 'Uploading...',
+      success: 'Uploaded Successfully',
+      error: 'Error in Uploading'
     });
   };
 
   const __validate = async (data) => {
     const schema = yup.object().shape({
-      name: yup.string().required('Name is required'),
+      title: yup.string().required('Name is required'),
+      subTitle: yup.string().required('Subtitle is required'),
+      publisher: yup.string().required('Publisher is required'),
       price: yup
         .number()
         .required('Price is required')
@@ -92,22 +172,24 @@ const useProductSellingContainer = () => {
       author: yup.string().required('Author is required'),
       category: yup.string().required('Category is required'),
       subcategory: yup.string().required('Sub Category is required'),
-      tags: yup.array().required('Tags is required'),
-      quantity: yup.number().required('Quantity is required'),
-      shippingAddress: yup.string().required('Shipping Address is required'),
-      shippingState: yup.string().required('Shipping State is required'),
-      shippingCity: yup.string().required('Shipping City is required'),
-      shippingZipCode: yup.number().required('Shipping Zip Code is required'),
-      shippingCountry: yup.string().required('Shipping Country is required'),
+      city: yup.string().required('City is required'),
+      state: yup.string().required('State is required'),
+      zipCode: yup
+        .number()
+        .required('Zip Code is required')
+        .typeError('Zip Code is not valid'),
+      country: yup.string().required('Country is required'),
+      address: yup.string().required('Address is required'),
       shippingContact: yup.string().required('Shipping Contact is required'),
       shippingEmail: yup.string().required('Shipping Email is required'),
       condition: yup.string().required('Condition is required'),
-      format: yup.string().required('Format is required')
+      format: yup.string().required('Format is required'),
+      language: yup.string().required('Language is required')
     });
     return schema
       .validate(data, { abortEarly: false })
       .then(() => {
-        return { isError: false, errors: null };
+        return { isError: false, errors: {} };
       })
       .catch((err) => {
         const validationErrors = { isError: true, errors: {} };
@@ -122,7 +204,8 @@ const useProductSellingContainer = () => {
     handleChange,
     handleSubmit,
     handleDeleteFile,
-    errors
+    errors,
+    disabledSubmit
   };
 };
 

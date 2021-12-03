@@ -3,6 +3,8 @@ import * as yup from 'yup';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import toast from 'react-hot-toast';
+import { createUser } from '../../../graphql/mutation/user.mutation';
+import { useMutation } from '@apollo/react-hooks';
 
 const useSignupContainer = (props) => {
   const [signupForm, setSignupForm] = React.useState({
@@ -12,6 +14,8 @@ const useSignupContainer = (props) => {
     firstName: '',
     lastName: ''
   });
+  const [createUserMutation, createUserMutationRes] = useMutation(createUser);
+
   const [errors, setErrors] = React.useState({
     isError: false,
     errors: {}
@@ -24,8 +28,24 @@ const useSignupContainer = (props) => {
           .auth()
           .createUserWithEmailAndPassword(signupForm.email, signupForm.password)
           .then((user) => {
-            user.user.updateProfile({
-              displayName: `${signupForm.firstName} ${signupForm.lastName}`
+            const userData = {
+              firstName: signupForm.firstName,
+              lastName: signupForm.lastName,
+              email: signupForm.email,
+              uid: user.user.uid,
+              password: signupForm.password
+            };
+            createUserMutation({
+              variables: {
+                payload: userData
+              }
+            }).then((res) => {
+              if (res.data.createUser.errors) {
+                toast.error('Account creation failed');
+              } else {
+                toast.success('Account created successfully');
+                props.history.push('/');
+              }
             });
           })
           .catch((error) => {

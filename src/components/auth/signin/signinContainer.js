@@ -3,8 +3,11 @@ import 'firebase/compat/auth';
 import { useState } from 'react';
 import { googleAuthProvider } from '../../../config/firebase/authProviders';
 import useErrorContext from '../../../hooks/useErrorContext';
-
+import { useHistory } from 'react-router-dom';
+import { HOME } from '../../../router/types';
+import toast from 'react-hot-toast';
 const useSigninContainer = (props) => {
+  const history = useHistory();
   const errorContext = useErrorContext();
   const [componentState, setComponentState] = useState({
     email: '',
@@ -29,6 +32,11 @@ const useSigninContainer = (props) => {
       const userCred = await firebase
         .auth()
         .signInWithPopup(googleAuthProvider);
+      if (userCred) {
+        history.push(HOME);
+      } else {
+        toast.error('Error signing in');
+      }
     } else if (providerName === 'self') {
       try {
         const userCred = await firebase
@@ -37,6 +45,9 @@ const useSigninContainer = (props) => {
             componentState.email,
             componentState.password
           );
+        if (userCred) {
+          history.push(HOME);
+        }
         setComponentState({
           ...componentState,
           isLoading: false,
@@ -44,8 +55,7 @@ const useSigninContainer = (props) => {
           isError: false
         });
       } catch (err) {
-        console.log(err.code, err.message);
-        errorContext.showError(err.code, err.message);
+        errorContext.showError(err.code);
         setComponentState({
           ...componentState,
           isLoading: false,

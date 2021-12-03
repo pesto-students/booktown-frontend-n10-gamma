@@ -31,7 +31,7 @@ const CartItems = ({ items, setCartItems, fixedPrice }) => {
   return (
     <Items>
       <h1>Shopping Cart</h1>
-      <button onClick={handleClick}>increment me {cartState?.count}</button>
+
       <hr />
       <div>
         {items.map((item, index) => (
