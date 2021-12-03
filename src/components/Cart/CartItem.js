@@ -4,12 +4,12 @@ import NumberFormat from 'react-number-format';
 import { Item, ItemActions, ItemImage, ItemInfo } from './styledComponents';
 
 const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
-  const { title, stock, price, quantity, image, description} = item;
+  const { title, price, quantity, url, description } = item;
 
   return (
     <Item>
       <ItemImage>
-        <img className="img" src={image} alt="" />
+        <img className="img" src={url} alt="img" />
       </ItemImage>
 
       <ItemInfo>
@@ -17,11 +17,11 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
           <h2>{title}</h2>
           <p>{description}</p>
         </div>
-       
 
         <ItemActions>
           <div className="itemQuantity">
-            <select className = "Select"
+            <select
+              className="Select"
               value={quantity}
               onChange={(event) => changeItemQuantity(event, index)}>
               <option value="1">Qty: 1</option>
@@ -36,9 +36,9 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
             </select>
           </div>
           <div className="itemActionsDivider">|</div>
-          <i className = "fa-solid fa-trash itemDelete" onClick={deleteItem.bind(this, index)}>
-         
-          </i>
+          <i
+            className="fa-solid fa-trash itemDelete"
+            onClick={() => deleteItem(item)}></i>
         </ItemActions>
       </ItemInfo>
       <div className="Price">

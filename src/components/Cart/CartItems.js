@@ -1,10 +1,15 @@
 import React from 'react';
 
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import CartItem from './CartItem';
 import { Items } from './styledComponents';
+import { useDispatch } from 'react-redux';
+import { removeItem } from '../../config/redux/features/cart/cartSlice';
 
 const CartItems = ({ items, setCartItems, fixedPrice }) => {
+  const dispatch = useDispatch();
+  const [load, setReload] = useState(false);
   const changeItemQuantity = (event, index) => {
     const newItems = [...items];
     newItems[index].quantity = event.target.value;

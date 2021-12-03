@@ -49,6 +49,12 @@ export const HeaderRight = styled.div`
   .link {
     text-decoration: none;
     color: ${(props) => props.theme.colors.secondary};
+    .cart-count {
+      color: ${(props) => props.theme.colors.secondary};
+      position: relative;
+      right: 34px;
+      bottom: 12px;
+    }
   }
 `;
 

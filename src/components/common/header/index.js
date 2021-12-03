@@ -17,6 +17,11 @@ const Header = ({ title = 'The BookTown' }) => {
   const handleLogout = () => {
     session.logout(SIGN_IN);
   };
+import { ABOUT, CART, HOME } from '../../../router/types';
+import { useSelector } from 'react-redux';
+
+const Header = ({ title = 'The BookTown', profileName = 'TP' }) => {
+  const cartCount = useSelector((state) => state.cartReducer.cartItems.length);
   return (
     <HeaderContainer className="header-group-1">
       <HeaderCard>
@@ -34,16 +39,14 @@ const Header = ({ title = 'The BookTown' }) => {
         <Link className="link" to={ABOUT}>
           <span className="header-right-content">About</span>
         </Link>
-        {isUserSuccessfulyLoggedIn && (
-          <span onClick={handleLogout} className="header-right-content">
-            Logout
-          </span>
-        )}
-        <FeatherIcon
-          className="search-icon header-right-content"
-          icon="shopping-cart"
-          size="20"
-        />
+        <Link className="link" to={CART}>
+          <FeatherIcon
+            className="search-icon header-right-content"
+            icon="shopping-cart"
+            size="20"
+          />
+          <span className="cart-count">{cartCount}</span>
+        </Link>
         <HeaderProfile>
           <span className="header-right-content">
             {isUserSuccessfulyLoggedIn ? (

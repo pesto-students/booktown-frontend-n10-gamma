@@ -8,7 +8,10 @@ const CartTotal = ({ items }) => {
 
   const getTotalPrice = () => {
     let totalPrice = 0;
-    items.map((item) => (totalPrice += item.price * item.quantity));
+    items.map((item) => {
+      console.log(item.quantity);
+      return (totalPrice += item.price * item.quantity);
+    });
     return totalPrice;
   };
 
