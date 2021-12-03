@@ -5,10 +5,11 @@ import Header from '../common/header';
 import Card from './Card';
 
 import { useQuery } from '@apollo/client';
-import { GET_BOOKS_DATA } from '../../Graphql/queries/product-listing';
+
 import { Item, ItemTotal } from '../Cart/styledComponents';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../config/redux/features/cart/cartSlice';
+import { GET_BOOKS_DATA } from '../../Graphql/queries/product-listing';
 
 function ProductListingPage() {
   const [books, setBooks] = useState([]);

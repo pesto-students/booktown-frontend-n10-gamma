@@ -9,7 +9,8 @@ import {
   HeaderRight,
   HeaderTitle
 } from './styledComponents';
-import { ABOUT, HOME } from '../../../router/types';
+import { ABOUT, CART, HOME } from '../../../router/types';
+import { useSelector } from 'react-redux';
 
 const Header = ({ title = 'The BookTown', profileName = 'TP' }) => {
   return (

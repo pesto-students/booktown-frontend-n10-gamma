@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 const GET_BOOKS_DATA = gql`
   query getBooks {
     books {
-      id
+      _id
       title
       description
       price
