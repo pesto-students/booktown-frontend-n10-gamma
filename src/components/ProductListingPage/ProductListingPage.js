@@ -32,12 +32,16 @@ function ProductListingPage() {
         {books.map((item) => {
           return (
             <Card
+              key={item.id}
               item={item}
               onAddToCart={onAddToCart}
               title={item.title}
               description={item.description}
-              productPics={[item.url]}
-              originalPrice={item.price}
+              productPics={item.files || []}
+              originalPrice={item.originalPrice}
+              category={item.category}
+              subCategory={item.subcategory}
+              price={item.price}
             />
           );
         })}
