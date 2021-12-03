@@ -5,9 +5,21 @@ const GET_BOOKS_DATA = gql`
     books {
       id
       title
+      subTitle
+      author
+      published
+      publisher
+      pages
       description
+      files
+      condition
+      language
       price
-      url
+      originalPrice
+      status
+      format
+      subcategory
+      category
     }
   }
 `;

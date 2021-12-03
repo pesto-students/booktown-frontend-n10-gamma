@@ -21,10 +21,6 @@ const CartTotal = ({ items }) => {
     return totalTtems;
   };
 
-  const onClick = () => {
-    setShow(true);
-  };
-
   const onHide = () => {
     setShow(false);
   };

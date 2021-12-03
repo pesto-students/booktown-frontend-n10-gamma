@@ -5,15 +5,14 @@ import SearchBar from '../search';
 import {
   HeaderCard,
   HeaderContainer,
-  HeaderProfile,
   HeaderRight,
   HeaderTitle
 } from './styledComponents';
-import { ABOUT, HOME, SIGN_IN } from '../../../router/types';
+import { ABOUT, HOME, SIGN_IN, PRODUCT_LISTING } from '../../../router/types';
 import { useSession } from '../../../hooks';
-const Header = ({ title = 'The BookTown' }) => {
+const Header = ({ title = 'The BookTown', isSearchBarHide = false }) => {
   const session = useSession();
-  const { isUserSuccessfulyLoggedIn, user } = session;
+  const { user } = session;
   const handleLogout = () => {
     session.logout(SIGN_IN);
   };
@@ -24,17 +23,26 @@ const Header = ({ title = 'The BookTown' }) => {
           <HeaderTitle>{title}</HeaderTitle>
         </Link>
       </HeaderCard>
-      <HeaderCard className="header-group-1" width={'35%'}>
-        <SearchBar />
-      </HeaderCard>
+      {!isSearchBarHide && (
+        <HeaderCard className="header-group-1" width={'35%'}>
+          <SearchBar />
+        </HeaderCard>
+      )}
       <HeaderRight>
-        <Link className="link" to={HOME}>
-          <span className="header-right-content">Home</span>
+        <span className="header-right-content">
+          {user ? (
+            `Hello, ${user?.displayName?.split(' ')[0]}`
+          ) : (
+            <Link to={SIGN_IN}>Login</Link>
+          )}
+        </span>
+        <Link className="link" to={PRODUCT_LISTING}>
+          <span className="header-right-content">Product</span>
         </Link>
         <Link className="link" to={ABOUT}>
           <span className="header-right-content">About</span>
         </Link>
-        {isUserSuccessfulyLoggedIn && (
+        {user && (
           <span onClick={handleLogout} className="header-right-content">
             Logout
           </span>
@@ -44,15 +52,6 @@ const Header = ({ title = 'The BookTown' }) => {
           icon="shopping-cart"
           size="20"
         />
-        <HeaderProfile>
-          <span className="header-right-content">
-            {isUserSuccessfulyLoggedIn ? (
-              `Hello ${user?.displayName}`
-            ) : (
-              <Link to={SIGN_IN}>Login</Link>
-            )}
-          </span>
-        </HeaderProfile>
       </HeaderRight>
     </HeaderContainer>
   );

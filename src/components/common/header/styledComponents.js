@@ -10,18 +10,11 @@ export const HeaderContainer = styled.div`
   width: 100%;
   padding: 10px 20px;
   box-sizing: border-box;
-  & {
-    @media (max-width: ${650}px) {
-      .header-group-1 {
-        width: 80%;
-      }
-    }
-  }
 `;
 
 export const HeaderCard = styled.div`
   display: flex;
-  justify-content: space-space-evenly;
+  justify-content: space-evenly;
   align-items: center;
   box-sizing: border-box;
   ${(props) => ({
@@ -30,6 +23,11 @@ export const HeaderCard = styled.div`
   .link {
     color: ${(props) => props.theme.colors.secondary};
     text-decoration: none;
+  }
+  & {
+    @media (min-width: 550px) {
+      width: 500px;
+    }
   }
 `;
 
@@ -42,6 +40,14 @@ export const HeaderRight = styled.div`
     margin: 0 20px;
     opacity: 0.6;
     cursor: pointer;
+    & {
+      @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+        margin: 0 5px;
+      }
+      @media (max-width: 600px) {
+        display: block;
+      }
+    }
     &:hover {
       opacity: 1;
     }
@@ -56,13 +62,6 @@ export const HeaderTitle = styled.div`
   ${(props) => ({ ...props.theme.fonts.h4 })}
   margin: 0;
   padding: 0;
-`;
-
-export const HeaderProfile = styled.div`
-  height: 70px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 70px;
 `;
 
 export const HamburgerContainer = styled(HeaderContainer)`
