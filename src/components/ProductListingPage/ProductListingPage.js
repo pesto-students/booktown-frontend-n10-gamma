@@ -1,14 +1,12 @@
+import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { addItem } from '../../config/redux/features/cart/cartSlice';
+import { GET_BOOKS_DATA } from '../../graphql/queries/product-listing';
 import { Footer } from '../common';
 import Header from '../common/header';
 import Card from './Card';
-
-import { useQuery } from '@apollo/client';
-import { GET_BOOKS_DATA } from '../../Graphql/queries/product-listing';
-import { Item, ItemTotal } from '../Cart/styledComponents';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from '../../config/redux/features/cart/cartSlice';
 
 function ProductListingPage() {
   const [books, setBooks] = useState([]);
@@ -24,7 +22,6 @@ function ProductListingPage() {
     const { error, loading, data } = booksData;
     if (error) console.log(error.message);
     if (!loading && data) {
-      console.log(data.books);
       setBooks(data.books);
     }
   }, [booksData]);

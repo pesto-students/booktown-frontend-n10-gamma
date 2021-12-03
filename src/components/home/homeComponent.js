@@ -9,7 +9,7 @@ import { PRODUCT_LISTING, PRODUCT_SELL } from '../../router/types';
 function HomeComponent(props) {
   return (
     <div>
-      <Header />
+      <Header isSearchBarHide={true} />
       <HomeContainer>
         <img src={bookTownImg} alt="books" />
         <HomeBannerOverlapper>
