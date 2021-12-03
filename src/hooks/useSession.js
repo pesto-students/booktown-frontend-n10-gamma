@@ -2,28 +2,29 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import {
+  login,
+  logout as logoutUser
+} from '../config/redux/features/auth/authSlice';
 
 const useSession = () => {
   const history = useHistory();
-  const [session, setSession] = useState({ user: null });
-  const [sessionLoading, setSessionLoading] = useState(true);
-  const [sessionError, setSessionError] = useState(null);
-  const [isUserSuccessfulyLoggedIn, setIsUserSuccessfulyLoggedIn] =
-    useState(false);
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
   /**
    *
    * @param {String} redirectUrl
    */
   const logout = (redirectUrl) => {
-    setSessionLoading(() => true);
     firebase
       .auth()
       .signOut()
       .then(() => {
-        setSession(() => ({ user: null }));
-        setIsUserSuccessfulyLoggedIn(() => false);
-        setSessionLoading(() => false);
+        dispatch(logoutUser());
         toast.success('Logged out successfully');
         setTimeout(() => {
           if (redirectUrl) history.push(redirectUrl);
@@ -31,43 +32,29 @@ const useSession = () => {
       })
       .catch((error) => {
         toast.error(error.message);
-        setSessionLoading(() => false);
-        setSession(() => ({ user: null }));
-        setIsUserSuccessfulyLoggedIn(() => false);
       });
   };
   useEffect(() => {
-    getUserSession().catch((err) => {
-      setSessionError(err.message);
-      setSessionLoading(() => false);
-      setSession(() => ({ user: null }));
-      setIsUserSuccessfulyLoggedIn(() => false);
-    });
-  }, []);
-  const getUserSession = async () => {
-    setSessionLoading(() => true);
-    const userDataPromise = new Promise((resolve, reject) => {
+    if (authState.isAuthenticated) {
+      // console.log('user loged in ', authState);
+      setLoading(() => false);
+    } else {
       firebase.auth().onAuthStateChanged((user) => {
+        setLoading(() => false);
         if (user) {
-          setIsUserSuccessfulyLoggedIn(() => true);
-          setSessionLoading(() => false);
-          setSession(() => ({ user: user._delegate }));
-          resolve(user._delegate);
+          setUser(() => user._delegate);
+          dispatch(login({ user: user._delegate }));
         } else {
-          reject(new Error('User not signed in'));
+          dispatch(logoutUser());
         }
       });
-    });
-    const userData = await userDataPromise;
-    return userData;
-  };
+    }
+  }, []);
+
   return {
-    ...session,
-    sessionLoading,
-    sessionError,
-    isUserSuccessfulyLoggedIn,
     logout,
-    getUserSession
+    loading,
+    user: authState.user || user
   };
 };
 
