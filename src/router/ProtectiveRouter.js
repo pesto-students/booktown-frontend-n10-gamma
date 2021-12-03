@@ -7,27 +7,18 @@ import useSession from '../hooks/useSession';
 const ProtectiveRouter = (props) => {
   const session = useSession();
   const history = useHistory();
-  const [isUserLogin, setUserLogin] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(() => true);
-    session
-      .getUserSession()
-      .then((user) => {
-        setLoading(() => false);
-        console.log(user);
-        if (user) {
-          setUserLogin(true);
-        } else {
-          setUserLogin(false);
-          history.push('/signin');
-        }
-      })
-      .catch((err) => {
-        setLoading(() => false);
-        history.push('/signin');
-      });
-  }, []);
+    console.log(session);
+    if (!session.loading && session.user !== null) {
+      setLoading(() => false);
+    } else if (!session.loading && session.user === null) {
+      console.log('no session');
+      setLoading(() => false);
+      history.push('/signin');
+    }
+  }, [session]);
+
   return (
     <>
       {loading ? (
@@ -49,9 +40,7 @@ const ProtectiveRouter = (props) => {
           />
         </div>
       ) : (
-        isUserLogin && (
-          <Route path={props.path} component={props.component} {...props} />
-        )
+        <Route path={props.path} component={props.component} {...props} />
       )}
     </>
   );
