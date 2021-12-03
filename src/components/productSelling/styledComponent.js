@@ -23,7 +23,7 @@ export const ProductFieldWrapper = styled.div`
   }
   & {
     @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
-      width: 98%;
+      width: 96% !important;
     }
     @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
       width: 70%;
