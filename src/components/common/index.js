@@ -8,6 +8,7 @@ import Radio from './radio';
 import SearchBar from './search';
 import Select from './select';
 import * as CommonStyled from './styledComponents';
+import Skeleton from './skeleton';
 export {
   Select,
   Footer,
@@ -18,5 +19,6 @@ export {
   CommonStyled,
   CheckBox,
   Radio,
-  InputError
+  InputError,
+  Skeleton
 };
