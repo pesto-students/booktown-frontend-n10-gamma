@@ -1,18 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import toast, { Toaster } from 'react-hot-toast';
 import { ErrorCodeAndMessage } from '../config/ErrorCodeAndMessage';
-
-const ErrorContainer = styled.div`
-  position: absolute;
-  bottom: 30px;
-  right: 20px;
-  max-width: 300px;
-  min-width: 200px;
-  background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.secondary};
-  padding: 10px;
-  transition: all 0.5s ease-in-out;
-`;
 
 export const ErrorContext = React.createContext({});
 const ErrorContextProvider = ({ children }) => {
@@ -31,6 +19,9 @@ const ErrorContextProvider = ({ children }) => {
     let error = { message: errorMessage, code: errorCode };
     if (!error.message) {
       error = ErrorCodeAndMessage[error.code];
+      toast(error.message);
+    } else {
+      toast(errorMessage || 'Error');
     }
     setComponentState({
       ...componentState,
@@ -51,9 +42,7 @@ const ErrorContextProvider = ({ children }) => {
 
   return (
     <ErrorContext.Provider value={context}>
-      {componentState.showError && (
-        <ErrorContainer>{componentState.error.message}</ErrorContainer>
-      )}
+      <Toaster position="top-right" reverseOrder={false} />
       {children}
     </ErrorContext.Provider>
   );

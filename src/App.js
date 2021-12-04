@@ -1,32 +1,43 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  HttpLink
+} from '@apollo/client';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
 import theme from './config/appTheme';
 import './config/firebase/firebaseconfig';
-import Store from './config/redux/store';
+import { store, persist } from './config/redux/store';
 import ErrorContextProvider from './contextProviders/ErrorContextProvider';
 import './index.css';
 import TheBookTownApplication from './router';
+// import { authLink } from './config/graphql';
 
+// const httpLink = new HttpLink({ uri: 'http://localhost:8000/graphql' });
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  // link: authLink.concat(httpLink),
+  uri: 'http://localhost:8000/graphql',
   cache: new InMemoryCache()
 });
 
 const App = () => {
   return (
-    <Provider store={Store}>
-      <Router>
-        <ThemeProvider theme={theme}>
-          <ApolloProvider client={client}>
-            <ErrorContextProvider>
-              <TheBookTownApplication />
-            </ErrorContextProvider>
-          </ApolloProvider>
-        </ThemeProvider>
-      </Router>
+    <Provider store={store}>
+      <PersistGate persistor={persist}>
+        <Router>
+          <ThemeProvider theme={theme}>
+            <ApolloProvider client={client}>
+              <ErrorContextProvider>
+                <TheBookTownApplication />
+              </ErrorContextProvider>
+            </ApolloProvider>
+          </ThemeProvider>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 };

@@ -135,21 +135,7 @@ const ItemTotal = styled.div`
   }
 
   button {
-    background-color: black;
-    transition: all 0.4s ease;
-    border-radius: 35px;
-    color: white;
-    font-size: 16px;
     width: 280px;
-    border: 2px solid black;
-    padding: 4px 8px;
-    cursor: pointer;
-    margin-left: 16px;
-    text-align: left;
-    &: hover {
-      background-color: white;
-      color: black;
-    }
     @media (min-width: 992px) {
       margin-left: 0;
       text-align: center;
@@ -159,20 +145,17 @@ const ItemTotal = styled.div`
 `;
 
 const Address = styled.div`
-
-Modal{
-  Modal.Footer {
-.closeButton{
-  border-radius = 35px;
-  &:hover {
-    background-color: white;
-    color: black;
+  Modal {
+    Modal.Footer {
+      .closeButton {
+        border-radius: 35px;
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
   }
-}
-  }
-}
-
-
 `;
 
 export {

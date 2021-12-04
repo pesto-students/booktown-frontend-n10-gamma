@@ -8,3 +8,5 @@ export const ORDER_HISTORY = '/order-history';
 export const ORDER_DETAILS = '/order-details';
 export const SELL_NOW = '/sell-now';
 export const ABOUT = '/about';
+export const PRODUCT_SELL = '/product-sell';
+export const PRODUCT_DETAILS = '/product-details';
