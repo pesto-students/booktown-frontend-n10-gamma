@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../common';
 import demoImg from './demoImg.png';
-import { CART } from '../../router/types';
 
 const ShoppingCard = ({
   item,
@@ -17,31 +15,17 @@ const ShoppingCard = ({
   category,
   subCategory
 }) => {
-  // const productPics = [demoImg, demoImg, demoImg, demoImg, demoImg];
-  const [currentPicIndex, setCurrentPicIndex] = React.useState(0);
-  const [intervalId, setIntervalId] = React.useState(null);
-  const changeCurrentPic = () => {
-    const id = setInterval(() => {
-      console.log(currentPicIndex);
-      setCurrentPicIndex(() => (currentPicIndex + 1) % productPics.length);
-    }, 1000);
-    setIntervalId(() => id);
-  };
   return (
-    <ShoppingCardContainer>
-      <CardImgContainer
-        onMouseEnter={changeCurrentPic}
-        onMouseLeave={() => clearInterval(intervalId)}>
-        <img src={productPics[currentPicIndex]} alt="img" />
+    <ShoppingCardContainer onClick={() => onClick(item)}>
+      <CardImgContainer>
+        <img src={productPics[0]} alt="img" />
         <div className="img-overlay">
           <div>o o o o o </div>
-          {/* <Link to={CART} style={{ width: '100%' }}> */}
           <Button
-            onClick={() => onAddToCart(item)}
+            onClick={(e) => onAddToCart(item, e)}
             className="overly-cart-btn"
             text={'Add to cart'}
           />
-          {/* </Link> */}
         </div>
       </CardImgContainer>
       <CardBody>
