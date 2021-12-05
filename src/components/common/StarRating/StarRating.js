@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Star } from '../../ProductListingPage/styledComponents';
 
 const StarRating = ({ count, rating, color, onRating }) => {
   const [hoverRating, setHoverRating] = useState(0);
@@ -31,7 +32,7 @@ const StarRating = ({ count, rating, color, onRating }) => {
       });
   }, [count, rating, hoverRating]);
 
-  return <div>{star}</div>;
+  return <Star>{star}</Star>;
 };
 
 StarRating.propTypes = {

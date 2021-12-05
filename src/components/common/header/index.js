@@ -8,9 +8,24 @@ import {
   HeaderRight,
   HeaderTitle
 } from './styledComponents';
-import { ABOUT, HOME, SIGN_IN, PRODUCT_LISTING } from '../../../router/types';
+import {
+  ABOUT,
+  HOME,
+  SIGN_IN,
+  PRODUCT_LISTING,
+  CART
+} from '../../../router/types';
 import { useSession } from '../../../hooks';
-const Header = ({ title = 'The BookTown', isSearchBarHide = false }) => {
+import { useSelector } from 'react-redux';
+
+const Header = ({
+  title = 'The BookTown',
+  isSearchBarHide = false,
+  onChangeSearch
+}) => {
+  const numberOfItemsInCart = useSelector(
+    (state) => state.cartReducer.cartItems.length
+  );
   const session = useSession();
   const { user } = session;
   const handleLogout = () => {
@@ -25,7 +40,7 @@ const Header = ({ title = 'The BookTown', isSearchBarHide = false }) => {
       </HeaderCard>
       {!isSearchBarHide && (
         <HeaderCard className="header-group-1" width={'35%'}>
-          <SearchBar />
+          <SearchBar onChangeSearch={onChangeSearch} />
         </HeaderCard>
       )}
       <HeaderRight>
@@ -47,11 +62,17 @@ const Header = ({ title = 'The BookTown', isSearchBarHide = false }) => {
             Logout
           </span>
         )}
-        <FeatherIcon
-          className="search-icon header-right-content"
-          icon="shopping-cart"
-          size="20"
-        />
+        <Link className="link" to={CART}>
+          <div className="cart-count">
+            {' '}
+            <span>{numberOfItemsInCart}</span>
+            <FeatherIcon
+              className="search-icon header-right-content"
+              icon="shopping-cart"
+              size="20"
+            />
+          </div>
+        </Link>
       </HeaderRight>
     </HeaderContainer>
   );

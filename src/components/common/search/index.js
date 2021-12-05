@@ -6,11 +6,11 @@ import {
   SearchResultsContainer
 } from './styledComponents';
 
-function SearchBar(props) {
+function SearchBar({ onChangeSearch }) {
   return (
     <SearchContainer>
       <SearchInputContainer>
-        <input type="text" placeholder="Search" onChange={props.onChange} />
+        <input onChange={onChangeSearch} type="text" placeholder="Search" />
         <FeatherIcon
           className="search-icon"
           style={{ color: 'black' }}

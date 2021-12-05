@@ -6,6 +6,7 @@ import { ItemTotal } from './styledComponents';
 
 const CartTotal = ({ items }) => {
   const [show, setShow] = useState(false);
+  console.log(items);
 
   const getTotalPrice = () => {
     let totalPrice = 0;

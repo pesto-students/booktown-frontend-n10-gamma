@@ -55,6 +55,15 @@ export const HeaderRight = styled.div`
   .link {
     text-decoration: none;
     color: ${(props) => props.theme.colors.secondary};
+    .cart-count {
+      position: relative;
+      span {
+        position: absolute;
+        bottom: 17px;
+        left: 26px;
+        color: tomato;
+      }
+    }
   }
 `;
 

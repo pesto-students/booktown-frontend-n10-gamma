@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import { countIncrement } from '../../config/redux/features/cart/cartSlice';
+import { removeItem } from '../../config/redux/features/cart/cartSlice';
+
 import CartItem from './CartItem';
 import { Items } from './styledComponents';
 
@@ -12,31 +12,28 @@ const CartItems = ({ items, setCartItems, fixedPrice }) => {
 
   const changeItemQuantity = (event, index) => {
     const newItems = [...items];
+    console.log(newItems);
     newItems[index].quantity = event.target.value;
     newItems[index].price = fixedPrice[index] * newItems[index].quantity;
     setCartItems(newItems);
   };
 
-  const deleteItem = (indexToDelete) => {
-    const newItems = items.filter((item, index) => {
-      return index !== indexToDelete;
-    });
-    setCartItems(newItems);
-  };
-
-  const handleClick = () => {
-    dispatch(countIncrement(Math.random() * 1000));
+  const deleteItem = (item, e) => {
+    e.stopPropagation();
+    dispatch(removeItem(item));
+    // window.location.reload();
   };
 
   return (
     <Items>
       <h1>Shopping Cart</h1>
-      <button onClick={handleClick}>increment me {cartState?.count}</button>
+
       <hr />
       <div>
         {items.map((item, index) => (
           <CartItem
-            key={uuidv4()}
+            item={item}
+            key={item.id}
             index={index}
             item={item}
             changeItemQuantity={changeItemQuantity}
