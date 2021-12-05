@@ -1,10 +1,9 @@
 import React from 'react';
-
 import NumberFormat from 'react-number-format';
 import { Item, ItemActions, ItemImage, ItemInfo } from './styledComponents';
 
 const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
-  const { title, stock, price, quantity, image, description} = item;
+  const { title, price, quantity, image, description } = item;
 
   return (
     <Item>
@@ -17,28 +16,24 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
           <h2>{title}</h2>
           <p>{description}</p>
         </div>
-       
 
         <ItemActions>
           <div className="itemQuantity">
-            <select className = "Select"
+            <select
+              className="Select"
               value={quantity}
               onChange={(event) => changeItemQuantity(event, index)}>
-              <option value="1">Qty: 1</option>
-              <option value="2">Qty: 2</option>
-              <option value="3">Qty: 3</option>
-              <option value="4">Qty: 4</option>
-              <option value="5">Qty: 5</option>
-              <option value="6">Qty: 6</option>
-              <option value="7">Qty: 7</option>
-              <option value="8">Qty: 8</option>
-              <option value="9">Qty: 9</option>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, i) => (
+                <option key={item} value={item}>
+                  Qty: {item}
+                </option>
+              ))}
             </select>
           </div>
           <div className="itemActionsDivider">|</div>
-          <i className = "fa-solid fa-trash itemDelete" onClick={deleteItem.bind(this, index)}>
-         
-          </i>
+          <i
+            className="fa-solid fa-trash itemDelete"
+            onClick={deleteItem.bind(this, index)}></i>
         </ItemActions>
       </ItemInfo>
       <div className="Price">

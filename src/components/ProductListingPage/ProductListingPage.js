@@ -7,7 +7,6 @@ import { addItem } from '../../config/redux/features/cart/cartSlice';
 import { GET_BOOKS_DATA } from '../../graphql/queries/product-listing';
 import { Header, Footer, Skeleton } from '../common';
 import Card from './Card';
-import { PRODUCT_DETAILS } from '../../router/types';
 
 function ProductListingPage() {
   const [books, setBooks] = useState([]);
@@ -15,11 +14,17 @@ function ProductListingPage() {
   const history = useHistory();
   const booksData = useQuery(GET_BOOKS_DATA);
 
-  const onAddToCart = (item) => {
+  /**
+   *
+   * @param {Object} item
+   * @param {Event} e
+   */
+  const onAddToCart = (item, e) => {
+    e.stopPropagation();
     dispatch(addItem(item));
   };
   const onCardClick = (item) => {
-    history.push(`${PRODUCT_DETAILS}/${item.id}`);
+    history.push(`/product-details/${item.id}`);
   };
 
   useEffect(() => {
@@ -51,7 +56,9 @@ function ProductListingPage() {
                 />
               );
             })
-          : [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((item) => <Skeleton />)}
+          : [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((item) => (
+              <Skeleton key={item} />
+            ))}
       </ProductListingPageContainer>
       <Footer />
     </>

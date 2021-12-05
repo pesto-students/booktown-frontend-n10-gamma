@@ -3,6 +3,7 @@ import HomeComponent from '../components/home';
 import ProductListingPage from '../components/ProductListingPage';
 import { SignIn, SignUp } from '../components/auth';
 import {
+  ABOUT,
   CART,
   HOME,
   PRODUCT_DETAILS,
@@ -14,7 +15,7 @@ import {
 import Error from '../components/common/Error';
 import ProductSelling from '../components/productSelling';
 import ProductDetails from '../components/productDetails';
-
+import About from '../components/about';
 const routes = [
   {
     path: HOME,
@@ -23,6 +24,14 @@ const routes = [
     meta: { authorizedRoles: [] },
     name: 'home',
     key: 'home',
+    isProtectedRoute: false
+  },
+  {
+    path: ABOUT,
+    component: About,
+    meta: { authorizedRoles: [] },
+    name: 'about',
+    key: 'about',
     isProtectedRoute: false
   },
   {

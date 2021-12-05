@@ -22,6 +22,7 @@ const useProductDetailsContainer = () => {
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const carouselRef = useRef(null);
   const handleCarouselAction = (actionName, value) => {

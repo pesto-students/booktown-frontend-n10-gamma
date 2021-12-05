@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { Button, Modal, Row, Col, Form } from 'react-bootstrap';
+import React from 'react';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Address } from './styledComponents';
 
 function AddressModal({ show, onHide }) {

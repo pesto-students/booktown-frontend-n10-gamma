@@ -1,11 +1,10 @@
+import FeatherIcon from 'feather-icons-react';
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   SearchContainer,
   SearchInputContainer,
   SearchResultsContainer
 } from './styledComponents';
-import FeatherIcon from 'feather-icons-react';
 
 function SearchBar(props) {
   return (

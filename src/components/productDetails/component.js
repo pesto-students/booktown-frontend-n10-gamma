@@ -80,7 +80,7 @@ const Component = (props) => {
                 onChange={(e) => {
                   setCurrentQty(e.target.value);
                 }}
-                value={currentQty}
+                value={currentQty + ''}
                 className="product-checkout-qty"
                 type="number"
               />

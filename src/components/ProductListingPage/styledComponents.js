@@ -5,17 +5,16 @@ const ProductListing = styled.div`
 `;
 
 const Image = styled.img`
- height: 250px;
- width: 190px;
- margin-top: -5vw;
+  height: 250px;
+  width: 190px;
+  margin-top: -5vw;
   transform: scale(0.8);
   transition: all 1s ease-in-out;
-  &: hover {
+  &:hover {
     background-color: lightgrey;
     transform: scale(1.1);
     cursor: pointer;
   }
-}
 `;
 
 const Content = styled.div`
@@ -71,7 +70,7 @@ const Button = styled.button`
   font-size: 14px;
   border-radius: 35px;
   background-color: black;
-  cursor:pointer;
+  cursor: pointer;
   color: white;
   display: flex;
   align-items: center;
@@ -79,7 +78,7 @@ const Button = styled.button`
   transition: all 0.3s ease;
   overflow: hidden;
   position: relative;
-  &: hover {
+  &:hover {
     background-color: white;
     color: black;
   }

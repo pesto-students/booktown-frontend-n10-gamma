@@ -8,7 +8,7 @@ import { CartMain } from './styledComponents';
 
 function Cart() {
   const [cartItems, setCartItems] = useState(items);
-  const [fixedPrice, setFixedPrice] = useState(itemsFixPrice);
+  const [fixedPrice] = useState(itemsFixPrice);
   return (
     <>
       <Header />
