@@ -23,11 +23,13 @@ const Header = ({
   isSearchBarHide = false,
   onChangeSearch
 }) => {
-  const numberOfItemsInCart = useSelector(
-    (state) => state.cartReducer.cartItems.length
-  );
   const session = useSession();
   const { user } = session;
+  const cartState = useSelector((state) => state.cart);
+  const numberOfItemsInCart = Object.keys(
+    cartState?.cartItems[user?.uid || ''] || {}
+  ).length;
+
   const handleLogout = () => {
     session.logout(SIGN_IN);
   };
