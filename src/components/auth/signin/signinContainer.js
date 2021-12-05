@@ -29,14 +29,16 @@ const useSigninContainer = (props) => {
     event?.preventDefault();
     setComponentState({ ...componentState, isLoading: true });
     if (providerName === 'google') {
-      const userCred = await firebase
-        .auth()
-        .signInWithPopup(googleAuthProvider);
-      if (userCred) {
-        history.push(HOME);
-      } else {
-        toast.error('Error signing in');
-      }
+      try {
+        const userCred = await firebase
+          .auth()
+          .signInWithPopup(googleAuthProvider);
+        if (userCred) {
+          history.push(HOME);
+        } else {
+          toast.error('Error signing in');
+        }
+      } catch (error) {}
     } else if (providerName === 'self') {
       try {
         const userCred = await firebase
