@@ -1,7 +1,5 @@
 import FeatherIcon from 'feather-icons-react';
 import { MyButton } from './styledComponets';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItemToCart } from '../../../config/redux/features/cart/cart.utils';
 
 const Button = ({
   text = 'Button',

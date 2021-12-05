@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { filterOptions1, filterOptions2 } from '../../DummyData/FilterOptions';
+import { Button } from '../common';
 
 import StarRating from '../common/StarRating/StarRating';
 
@@ -19,7 +20,7 @@ function SideBar(props) {
       <Option>
         {filterOptions1.map((options) => (
           <SidebarOptions>
-            <h2>{options.header}</h2>
+            <div className="filter-option-title">{options.header}</div>
             {options.options.map((d) => (
               <CheckBox>
                 <input type="checkbox"></input>
@@ -32,13 +33,13 @@ function SideBar(props) {
         ))}
 
         <SidebarOptions>
-          <h2>Customer review</h2>
+          <div className="filter-option-title">Customer Review</div>
           <StarRating rating={rating} onRating={(rate) => setRating(rate)} />
         </SidebarOptions>
 
         {filterOptions2.map((options) => (
           <SidebarOptions>
-            <h2>{options.header}</h2>
+            <div className="filter-option-title">{options.header}</div>
             {options.options.map((d) => (
               <Options>{d.text}</Options>
             ))}

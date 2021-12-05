@@ -5,8 +5,11 @@ import 'firebase/compat/auth';
 import toast from 'react-hot-toast';
 import { createUser } from '../../../graphql/mutation/user.mutation';
 import { useMutation } from '@apollo/react-hooks';
+import { HOME } from '../../../router/types';
+import { useHistory } from 'react-router';
 
 const useSignupContainer = (props) => {
+  const history = useHistory();
   const [signupForm, setSignupForm] = React.useState({
     email: '',
     password: '',
@@ -14,7 +17,7 @@ const useSignupContainer = (props) => {
     firstName: '',
     lastName: ''
   });
-  const [createUserMutation, createUserMutationRes] = useMutation(createUser);
+  const [createUserMutation] = useMutation(createUser);
 
   const [errors, setErrors] = React.useState({
     isError: false,
@@ -28,25 +31,39 @@ const useSignupContainer = (props) => {
           .auth()
           .createUserWithEmailAndPassword(signupForm.email, signupForm.password)
           .then((user) => {
+            user.user.updateProfile({
+              displayName: `${signupForm.firstName} ${signupForm.lastName}`
+            });
             const userData = {
               firstName: signupForm.firstName,
               lastName: signupForm.lastName,
               email: signupForm.email,
-              uid: user.user.uid,
+              id: user.user.uid,
               password: signupForm.password
             };
             createUserMutation({
               variables: {
                 payload: userData
               }
-            }).then((res) => {
-              if (res.data.createUser.errors) {
+            })
+              .then((res) => {
+                console.log(res);
+                if (res.errors) {
+                  toast.error('Account creation failed');
+                } else if (
+                  res.data.createUser?.status === 500 ||
+                  res.data.createUser?.status === 400
+                ) {
+                  toast.error(res.data.createUser?.message);
+                } else {
+                  toast.success('Account created successfully');
+                  history.push(HOME);
+                }
+              })
+              .catch((err) => {
+                user.user.delete();
                 toast.error('Account creation failed');
-              } else {
-                toast.success('Account created successfully');
-                props.history.push('/');
-              }
-            });
+              });
           })
           .catch((error) => {
             toast.error(error.message);

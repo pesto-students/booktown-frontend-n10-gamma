@@ -9,14 +9,13 @@ const ProtectiveRouter = (props) => {
   const history = useHistory();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    console.log(session);
     if (!session.loading && session.user !== null) {
       setLoading(() => false);
     } else if (!session.loading && session.user === null) {
-      console.log('no session');
       setLoading(() => false);
       history.push('/signin');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   return (

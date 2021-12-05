@@ -1,17 +1,16 @@
+import FeatherIcon from 'feather-icons-react';
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   SearchContainer,
   SearchInputContainer,
   SearchResultsContainer
 } from './styledComponents';
-import FeatherIcon from 'feather-icons-react';
 
-function SearchBar(props) {
+function SearchBar({ onChangeSearch }) {
   return (
     <SearchContainer>
       <SearchInputContainer>
-        <input type="text" placeholder="Search" onChange={props.onChange} />
+        <input onChange={onChangeSearch} type="text" placeholder="Search" />
         <FeatherIcon
           className="search-icon"
           style={{ color: 'black' }}

@@ -5,18 +5,22 @@ import Header from '../common/header';
 import CartItems from './CartItems';
 import CartTotal from './CartTotal';
 import { CartMain } from './styledComponents';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Cart() {
-  const [cartItems, setCartItems] = useState(items);
-  const [fixedPrice, setFixedPrice] = useState(itemsFixPrice);
+  const AllcartItems = useSelector((state) => state.cartReducer.cartItems);
+
+  const [cartItems, setcartItems] = useState(AllcartItems);
+
+  const itemsFixPrice = cartItems.map((item) => item.price);
   return (
     <>
       <Header />
       <CartMain>
         <CartItems
           items={cartItems}
-          setCartItems={setCartItems}
-          fixedPrice={fixedPrice}
+          setCartItems={setcartItems}
+          fixedPrice={itemsFixPrice}
         />
         <CartTotal items={cartItems} />
       </CartMain>

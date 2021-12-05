@@ -1,14 +1,18 @@
-import { ApolloLink } from '@apollo/client';
-
-export const authLink = new ApolloLink((operation, forward) => {
-  // Retrieve the authorization token from local storage.
-  const token = 'my token';
-  // Use the setContext method to set the HTTP headers.
-  operation.setContext({
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+/**
+ *
+ * @param {{token:string}}} param0
+ * @returns
+ */
+export const getClient = () => {
+  const token = window.localStorage.getItem('user-token');
+  console.log('token', token);
+  const client = new ApolloClient({
+    uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
+    cache: new InMemoryCache(),
     headers: {
-      authorization: token ? `Bearer ${token}` : ''
+      authorization: `Bearer ${token}`
     }
   });
-  // Call the next link in the middleware chain.
-  return forward(operation);
-});
+  return client;
+};
