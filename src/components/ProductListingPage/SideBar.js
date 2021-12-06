@@ -15,11 +15,11 @@ function SideBar(props) {
   return (
     <Sidebar>
       <Option>
-        {filterOptions1.map((options) => (
-          <SidebarOptions>
+        {filterOptions1.map((options, index) => (
+          <SidebarOptions key={index}>
             <div className="filter-option-title">{options.header}</div>
-            {options.options.map((d) => (
-              <CheckBox>
+            {options.options.map((d, index) => (
+              <CheckBox key={index}>
                 <input type="checkbox"></input>
                 <span>
                   <Options>{d.text}</Options>
@@ -34,11 +34,11 @@ function SideBar(props) {
           <StarRating rating={rating} onRating={(rate) => setRating(rate)} />
         </SidebarOptions>
 
-        {filterOptions2.map((options) => (
-          <SidebarOptions>
+        {filterOptions2.map((options, index) => (
+          <SidebarOptions key={index}>
             <div className="filter-option-title">{options.header}</div>
-            {options.options.map((d) => (
-              <Options>{d.text}</Options>
+            {options.options.map((d, index) => (
+              <Options key={index}>{d.text}</Options>
             ))}
           </SidebarOptions>
         ))}

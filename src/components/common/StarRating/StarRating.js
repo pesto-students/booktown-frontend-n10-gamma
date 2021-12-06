@@ -19,7 +19,6 @@ const StarRating = ({ count, rating, color, onRating }) => {
       .fill(0)
       .map((_, i) => i + 1)
       .map((idx) => {
-        console.log(idx);
         return (
           <i
             key={idx}
@@ -30,6 +29,7 @@ const StarRating = ({ count, rating, color, onRating }) => {
             onClick={() => onRating(idx)}></i>
         );
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, rating, hoverRating]);
 
   return <Star>{star}</Star>;
@@ -49,8 +49,8 @@ StarRating.defaultProps = {
   count: 5,
   rating: 0,
   color: {
-    filled: '#56504E',
-    unfilled: '#E0AC9D'
+    filled: '#E0AC9D',
+    unfilled: '#56504E'
   }
 };
 
