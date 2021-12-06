@@ -42,7 +42,7 @@ const useSession = () => {
       firebase.auth().onAuthStateChanged((user) => {
         setLoading(() => false);
         if (user) {
-          user.getIdToken().then((token) => {
+          user.getIdToken(true).then((token) => {
             setUser(() => user._delegate);
             setToken(() => token);
             window.localStorage.setItem('user-token', token);

@@ -1,17 +1,16 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
+import ReactPaginate from 'react-paginate';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { addItem } from '../../config/redux/features/cart/cartSlice';
 import { GET_BOOKS_DATA } from '../../graphql/queries/product-listing';
+import { useSession } from '../../hooks';
 import { Footer, Skeleton } from '../common';
 import Header from '../common/header';
 import Card from './Card';
 import SideBar from './SideBar';
 import { MainContainer, ProductListingPageContainer } from './styledComponents';
-import ReactPaginate from 'react-paginate';
-import { useHistory } from 'react-router';
-import { useSession } from '../../hooks';
 
 function ProductListingPage() {
   const [books, setBooks] = useState([]);
@@ -22,22 +21,15 @@ function ProductListingPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const booksData = useQuery(GET_BOOKS_DATA);
-  const cartState = useSelector((state) => state.cart);
 
   const onAddToCart = (item, e) => {
     e.stopPropagation();
     const uid = session?.user?.uid;
-    const newCartItemState = {
-      ...cartState.cartItems,
-      [uid]: {
-        ...cartState.cartItems[uid],
-        [item.id]: {
-          ...item,
-          quantity: 1
-        }
-      }
+    const payload = {
+      uid,
+      item
     };
-    dispatch(addItem(newCartItemState));
+    dispatch(addItem(payload));
   };
 
   useEffect(() => {

@@ -18,13 +18,11 @@ const CartItems = () => {
 
   const handleDeleteCartItem = (itemId, e) => {
     e.stopPropagation();
-    const userSpecificClone = { ...userSpecificItem };
-    delete userSpecificClone[itemId];
-    const newCartState = {
-      ...cartItems,
-      [session.user?.uid]: userSpecificClone
+    const payload = {
+      uid: session.user?.uid,
+      itemId
     };
-    dispatch(removeItem(newCartState));
+    dispatch(removeItem(payload));
   };
 
   const handleItemQtyChange = (itemId, qty) => {
