@@ -23,11 +23,13 @@ const Header = ({
   isSearchBarHide = false,
   onChangeSearch
 }) => {
-  const numberOfItemsInCart = useSelector(
-    (state) => state.cartReducer.cartItems.length
-  );
   const session = useSession();
   const { user } = session;
+  const cartState = useSelector((state) => state.cart);
+  const numberOfItemsInCart = Object.keys(
+    cartState?.cartItems[user?.uid || ''] || {}
+  ).length;
+
   const handleLogout = () => {
     session.logout(SIGN_IN);
   };
@@ -65,7 +67,7 @@ const Header = ({
         <Link className="link" to={CART}>
           <div className="cart-count">
             {' '}
-            <span>{numberOfItemsInCart}</span>
+            <span>{+numberOfItemsInCart ? numberOfItemsInCart : ''}</span>
             <FeatherIcon
               className="search-icon header-right-content"
               icon="shopping-cart"

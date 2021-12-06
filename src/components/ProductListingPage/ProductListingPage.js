@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addItem } from '../../config/redux/features/cart/cartSlice';
 import { GET_BOOKS_DATA } from '../../graphql/queries/product-listing';
@@ -11,25 +11,36 @@ import SideBar from './SideBar';
 import { MainContainer, ProductListingPageContainer } from './styledComponents';
 import ReactPaginate from 'react-paginate';
 import { useHistory } from 'react-router';
+import { useSession } from '../../hooks';
 
 function ProductListingPage() {
   const [books, setBooks] = useState([]);
   const [searchInputText, setSearchInputText] = useState('');
   const [booksFilter, setBooksFilter] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-
+  const session = useSession();
   const dispatch = useDispatch();
   const history = useHistory();
-
   const booksData = useQuery(GET_BOOKS_DATA);
+  const cartState = useSelector((state) => state.cart);
 
   const onAddToCart = (item, e) => {
     e.stopPropagation();
-    dispatch(addItem(item));
+    const uid = session?.user?.uid;
+    const newCartItemState = {
+      ...cartState.cartItems,
+      [uid]: {
+        ...cartState.cartItems[uid],
+        [item.id]: {
+          ...item,
+          quantity: 1
+        }
+      }
+    };
+    dispatch(addItem(newCartItemState));
   };
 
   useEffect(() => {
-    console.log(booksData);
     const { error, loading, data } = booksData;
     if (error) console.log(error.message);
     if (!loading && data) {
@@ -43,7 +54,6 @@ function ProductListingPage() {
         searchInputText.toLocaleLowerCase()
       )
     );
-    console.log(filteredBooks);
     setBooksFilter(filteredBooks);
   }, [books, searchInputText]);
 

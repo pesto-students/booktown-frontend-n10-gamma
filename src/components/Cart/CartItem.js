@@ -1,13 +1,21 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
+import { Input } from '../common';
 import { Item, ItemActions, ItemImage, ItemInfo } from './styledComponents';
 
-const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
-  const { title, price, quantity, files, description } = item;
+const CartItem = ({
+  index,
+  item,
+  itemId,
+  onItemQtyChange = () => {},
+  onDeleteCartItem = () => {},
+  onCartItemClick = () => {}
+}) => {
+  const { title, price, quantity, files, description } = item || {};
 
   return (
     <Item>
-      <ItemImage>
+      <ItemImage onClick={(e) => onCartItemClick(itemId, e)}>
         <img className="img" src={files[0]} alt="img" />
       </ItemImage>
 
@@ -19,21 +27,18 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
 
         <ItemActions>
           <div className="itemQuantity">
-            <select
-              className="Select"
+            <Input
               value={quantity}
-              onChange={(event) => changeItemQuantity(event, index)}>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, i) => (
-                <option key={item} value={item}>
-                  Qty: {item}
-                </option>
-              ))}
-            </select>
+              onChange={(e) => onItemQtyChange(itemId, e.target.value)}
+              type="number"
+              min={1}
+              max={100}
+            />
           </div>
           <div className="itemActionsDivider">|</div>
           <i
             className="fa-solid fa-trash itemDelete"
-            onClick={(e) => deleteItem(item, e)}></i>
+            onClick={(e) => onDeleteCartItem(itemId, e)}></i>
         </ItemActions>
       </ItemInfo>
       <div className="Price">
@@ -50,3 +55,6 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
 };
 
 export default CartItem;
+
+/*
+ */
