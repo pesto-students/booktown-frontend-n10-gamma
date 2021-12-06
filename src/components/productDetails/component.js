@@ -33,29 +33,27 @@ const Component = (props) => {
           <ProductImagePreviewContainer>
             <div className="row-image-preview">
               {productInfo?.files && (
-                <>
-                  <img
-                    onLoad={() => {
-                      setPrevImageLoad(true);
-                    }}
-                    alt={'preview'}
-                    src={productInfo?.files[currentPicIndex]}
+                <img
+                  onLoad={() => {
+                    setPrevImageLoad(true);
+                  }}
+                  alt={'preview'}
+                  src={productInfo?.files[currentPicIndex]}
+                />
+              )}
+              {!prevImageLoad && (
+                <div className="skeleton-loader">
+                  <GenreicSkeleton
+                    type={'box'}
+                    height={'450px'}
+                    width={'100%'}
                   />
-                  {!prevImageLoad && (
-                    <div className="skeleton-loader">
-                      <GenreicSkeleton
-                        type={'box'}
-                        height={'450px'}
-                        width={'100%'}
-                      />
-                      <GenreicSkeleton
-                        type={'line'}
-                        height={'10px'}
-                        width={'100%'}
-                      />
-                    </div>
-                  )}
-                </>
+                  <GenreicSkeleton
+                    type={'line'}
+                    height={'10px'}
+                    width={'100%'}
+                  />
+                </div>
               )}
             </div>
             <div className="row-img-list">
@@ -97,7 +95,7 @@ const Component = (props) => {
 
             <div className="product-details-description-container">
               <h4>Product Description</h4>
-              <p className="product-details-description">
+              <div className="product-details-description">
                 {productInfo?.description || (
                   <GenreicSkeleton
                     type={'line'}
@@ -105,7 +103,7 @@ const Component = (props) => {
                     width={'200px'}
                   />
                 )}
-              </p>
+              </div>
             </div>
             <div className="product-details-rating">
               <StarRatingComponent name={'Star Raiting'} starCount={5} />

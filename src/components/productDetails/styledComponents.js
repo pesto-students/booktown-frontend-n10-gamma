@@ -23,16 +23,11 @@ export const ProductImagePreviewContainer = styled(CommonStyled.Container)`
   justify-content: center;
   align-items: center;
   .row-image-preview {
-    position: relative;
     height: 500px;
     width: 400px;
     .skeleton-loader {
-      position: absolute;
-      z-index: 10000000;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
+      width: 400px;
+      height: 500px;
     }
     img {
       height: 100%;
