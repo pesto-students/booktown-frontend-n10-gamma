@@ -14,7 +14,6 @@ const useProductDetailsContainer = () => {
       }
     })
       .then((res) => {
-        console.log(res);
         if (res.data.getProductById.status === 200) {
           setProductInfo(() => res.data.getProductById.data);
         }

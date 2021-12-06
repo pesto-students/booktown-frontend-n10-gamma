@@ -61,6 +61,7 @@ const Component = (props) => {
             <div className="row-img-list">
               {productInfo?.files?.map((file, index) => (
                 <img
+                  key={index}
                   alt={'preview'}
                   src={file}
                   onClick={() => setCurrentPicIndex(index)}

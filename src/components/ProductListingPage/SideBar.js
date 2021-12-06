@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { filterOptions1, filterOptions2 } from '../../DummyData/FilterOptions';
-import { Button } from '../common';
-
 import StarRating from '../common/StarRating/StarRating';
-
 import {
   CheckBox,
   Option,

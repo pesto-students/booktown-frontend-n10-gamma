@@ -6,7 +6,6 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
  */
 export const getClient = () => {
   const token = window.localStorage.getItem('user-token');
-  console.log('token', token);
   const client = new ApolloClient({
     uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),

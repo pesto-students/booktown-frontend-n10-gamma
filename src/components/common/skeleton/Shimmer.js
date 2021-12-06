@@ -14,11 +14,13 @@ Shimmer.propTypes = {};
 const AnimateShimmer = keyframes`
     0% {
         /* background-position: -468px 0; */
-        transform: translateX(-150px);
+        transform: translateX(0%);
+       
     }
     100% {
         /* background-position: 468px 0; */
-        transform: translateX(150px)
+        transform: translateX(100%);
+       
     }
 `;
 const ShimmerWrapper = styled.div`
