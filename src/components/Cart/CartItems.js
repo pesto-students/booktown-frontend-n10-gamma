@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import {
   addItem,
   removeItem
@@ -13,6 +14,8 @@ const CartItems = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const userSpecificItem = cartItems[session.user?.uid] || {};
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleDeleteCartItem = (itemId, e) => {
     e.stopPropagation();
     const userSpecificClone = { ...userSpecificItem };
@@ -23,6 +26,7 @@ const CartItems = () => {
     };
     dispatch(removeItem(newCartState));
   };
+
   const handleItemQtyChange = (itemId, qty) => {
     const data = { ...userSpecificItem[itemId] };
     data.quantity = qty;
@@ -31,6 +35,11 @@ const CartItems = () => {
       [session.user?.uid]: { ...userSpecificItem, [itemId]: data }
     };
     dispatch(addItem(newCartState));
+  };
+
+  const handleCartClick = (itemId, e) => {
+    e.stopPropagation();
+    history.push(`/product-details/${itemId}`);
   };
 
   return (
@@ -46,6 +55,7 @@ const CartItems = () => {
             index={index}
             onItemQtyChange={handleItemQtyChange}
             onDeleteCartItem={handleDeleteCartItem}
+            onCartItemClick={handleCartClick}
           />
         ))}
       </div>

@@ -67,7 +67,7 @@ const Header = ({
         <Link className="link" to={CART}>
           <div className="cart-count">
             {' '}
-            <span>{numberOfItemsInCart}</span>
+            <span>{+numberOfItemsInCart ? numberOfItemsInCart : ''}</span>
             <FeatherIcon
               className="search-icon header-right-content"
               icon="shopping-cart"

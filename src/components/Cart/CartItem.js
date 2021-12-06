@@ -8,13 +8,14 @@ const CartItem = ({
   item,
   itemId,
   onItemQtyChange = () => {},
-  onDeleteCartItem = () => {}
+  onDeleteCartItem = () => {},
+  onCartItemClick = () => {}
 }) => {
   const { title, price, quantity, files, description } = item || {};
 
   return (
     <Item>
-      <ItemImage>
+      <ItemImage onClick={(e) => onCartItemClick(itemId, e)}>
         <img className="img" src={files[0]} alt="img" />
       </ItemImage>
 
