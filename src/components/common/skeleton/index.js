@@ -59,3 +59,60 @@ const SkeletonContainer = styled.div`
   }
 `;
 export default Skeleton;
+
+/**
+ *
+ * @param {{
+ *  type: ('box' | 'line' | 'circle'),
+ * }} param0
+ * @returns
+ */
+export const GenreicSkeleton = ({
+  type,
+  width = 'auto',
+  height = 'auto',
+  containerClass = '',
+  skeletonClass = '',
+  ...rest
+}) => {
+  return (
+    <GenreicSkeletonContainer
+      className={containerClass}
+      width={width}
+      height={height}>
+      <div className={`skeleton ${type} ${skeletonClass}`} {...rest}>
+        <Shimmer />
+      </div>
+    </GenreicSkeletonContainer>
+  );
+};
+
+const GenreicSkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  width: ${(props) => (props.width ? props.width : 'auto')};
+  height: ${(props) => (props.height ? props.height : 'auto')};
+  .skeleton.box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    border-radius: ${(props) => props.theme.size.xsm};
+  }
+  .skeleton.circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #ddd;
+  }
+  .skeleton.line {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+  }
+`;

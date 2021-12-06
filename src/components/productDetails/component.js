@@ -17,12 +17,14 @@ import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom';
 import { CART } from '../../router/types';
 import StripeCheckoutButton from '../Cart/StripeCheckoutButton';
+import { GenreicSkeleton } from '../common/skeleton';
 
 const Component = (props) => {
   const { refs, handleCarouselAction, productInfo } =
     useProductDetailsContainer();
   const [currentPicIndex, setCurrentPicIndex] = useState(0);
   const [currentQty, setCurrentQty] = useState(1);
+  const [prevImageLoad, setPrevImageLoad] = useState(false);
   return (
     <>
       <Header />
@@ -31,10 +33,29 @@ const Component = (props) => {
           <ProductImagePreviewContainer>
             <div className="row-image-preview">
               {productInfo?.files && (
-                <img
-                  alt={'preview'}
-                  src={productInfo?.files[currentPicIndex]}
-                />
+                <>
+                  <img
+                    onLoad={() => {
+                      setPrevImageLoad(true);
+                    }}
+                    alt={'preview'}
+                    src={productInfo?.files[currentPicIndex]}
+                  />
+                  {!prevImageLoad && (
+                    <div className="skeleton-loader">
+                      <GenreicSkeleton
+                        type={'box'}
+                        height={'450px'}
+                        width={'100%'}
+                      />
+                      <GenreicSkeleton
+                        type={'line'}
+                        height={'10px'}
+                        width={'100%'}
+                      />
+                    </div>
+                  )}
+                </>
               )}
             </div>
             <div className="row-img-list">
@@ -50,17 +71,39 @@ const Component = (props) => {
           <ProductDetailsInfoContainer>
             <div className="product-details-info-title">
               {' '}
-              {productInfo?.title || 'Title'}
+              {productInfo?.title || (
+                <GenreicSkeleton
+                  type={'line'}
+                  height={'10px'}
+                  width={'200px'}
+                />
+              )}
             </div>
             <div className="product-details-info-price">
-              <span>M.R.P</span>
-              <span className="product-price">$ {productInfo?.price}</span>
+              {productInfo?.price ? (
+                <>
+                  <span>M.R.P</span>
+                  <span className="product-price">$ {productInfo?.price}</span>)
+                </>
+              ) : (
+                <GenreicSkeleton
+                  type={'line'}
+                  height={'10px'}
+                  width={'200px'}
+                />
+              )}
             </div>
 
             <div className="product-details-description-container">
               <h4>Product Description</h4>
               <p className="product-details-description">
-                {productInfo?.description || 'Description'}
+                {productInfo?.description || (
+                  <GenreicSkeleton
+                    type={'line'}
+                    height={'10px'}
+                    width={'200px'}
+                  />
+                )}
               </p>
             </div>
             <div className="product-details-rating">
@@ -100,14 +143,28 @@ const Component = (props) => {
         </ProductDetailsRow>
         <ProductInsightContainer>
           <div>
-            <span className="product-insight-field">Author : </span>{' '}
-            <span className="product-insight-value">{productInfo?.author}</span>
+            {productInfo?.author ? (
+              <>
+                <span className="product-insight-field">Author : </span>{' '}
+                <span className="product-insight-value">
+                  {productInfo?.author}
+                </span>
+              </>
+            ) : (
+              <GenreicSkeleton type={'line'} height={'10px'} width={'200px'} />
+            )}
           </div>
           <div>
-            <span className="product-insight-field">Publisher : </span>{' '}
-            <span className="product-insight-value">
-              {productInfo?.publisher}
-            </span>
+            {productInfo?.publisher ? (
+              <>
+                <span className="product-insight-field">Publisher : </span>{' '}
+                <span className="product-insight-value">
+                  {productInfo?.publisher}
+                </span>
+              </>
+            ) : (
+              <GenreicSkeleton type={'line'} height={'10px'} width={'200px'} />
+            )}
           </div>
           <div>
             <span className="product-insight-field">Language : </span>{' '}

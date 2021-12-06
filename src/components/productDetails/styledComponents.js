@@ -23,14 +23,24 @@ export const ProductImagePreviewContainer = styled(CommonStyled.Container)`
   justify-content: center;
   align-items: center;
   .row-image-preview {
+    position: relative;
     height: 500px;
-    height: 80%;
+    width: 400px;
+    .skeleton-loader {
+      position: absolute;
+      z-index: 10000000;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
     img {
       height: 100%;
       width: 100%;
     }
   }
   .row-img-list {
+    margin: 10px 0;
     height: 20%;
     display: flex;
     justify-content: space-evenly;
