@@ -5,23 +5,33 @@ import SearchBar from '../search';
 import {
   HeaderCard,
   HeaderContainer,
-  HeaderProfile,
   HeaderRight,
   HeaderTitle
 } from './styledComponents';
-import { ABOUT, HOME, SIGN_IN } from '../../../router/types';
+import {
+  ABOUT,
+  HOME,
+  SIGN_IN,
+  PRODUCT_LISTING,
+  CART
+} from '../../../router/types';
 import { useSession } from '../../../hooks';
-const Header = ({ title = 'The BookTown' }) => {
+import { useSelector } from 'react-redux';
+const Header = ({
+  title = 'The BookTown',
+  isSearchBarHide = false,
+  onChangeSearch
+}) => {
   const session = useSession();
-  const { isUserSuccessfulyLoggedIn, user } = session;
+  const { user } = session;
+  const cartState = useSelector((state) => state.cart);
+  const numberOfItemsInCart = Object.keys(
+    cartState?.cartItems[user?.uid || ''] || {}
+  ).length;
+
   const handleLogout = () => {
     session.logout(SIGN_IN);
   };
-import { ABOUT, CART, HOME } from '../../../router/types';
-import { useSelector } from 'react-redux';
-
-const Header = ({ title = 'The BookTown', profileName = 'TP' }) => {
-  const cartCount = useSelector((state) => state.cartReducer.cartItems.length);
   return (
     <HeaderContainer className="header-group-1">
       <HeaderCard>
@@ -29,37 +39,44 @@ const Header = ({ title = 'The BookTown', profileName = 'TP' }) => {
           <HeaderTitle>{title}</HeaderTitle>
         </Link>
       </HeaderCard>
-      <HeaderCard className="header-group-1" width={'35%'}>
-        <SearchBar />
-      </HeaderCard>
+      {!isSearchBarHide && (
+        <HeaderCard className="header-group-1" width={'35%'}>
+          <SearchBar onChangeSearch={onChangeSearch} />
+        </HeaderCard>
+      )}
       <HeaderRight>
-        <Link className="link" to={HOME}>
-          <span className="header-right-content">Home</span>
+        <span className="header-right-content">
+          {user ? (
+            `Hello, ${user?.displayName?.split(' ')[0]}`
+          ) : (
+            <Link to={SIGN_IN}>Login</Link>
+          )}
+        </span>
+        <Link className="link" to={PRODUCT_LISTING}>
+          <span className="header-right-content">Product</span>
         </Link>
         <Link className="link" to={ABOUT}>
           <span className="header-right-content">About</span>
         </Link>
-        <Link className="link" to={CART}>
-          <FeatherIcon
-            className="search-icon header-right-content"
-            icon="shopping-cart"
-            size="20"
-          />
-          <span className="cart-count">{cartCount}</span>
-        </Link>
-        <HeaderProfile>
-          <span className="header-right-content">
-            {isUserSuccessfulyLoggedIn ? (
-              `Hello ${user?.displayName}`
-            ) : (
-              <Link to={SIGN_IN}>Login</Link>
-            )}
+        {user && (
+          <span onClick={handleLogout} className="header-right-content">
+            Logout
           </span>
-        </HeaderProfile>
+        )}
+        <Link className="link" to={CART}>
+          <div className="cart-count">
+            {' '}
+            <span>{+numberOfItemsInCart ? numberOfItemsInCart : ''}</span>
+            <FeatherIcon
+              className="search-icon header-right-content"
+              icon="shopping-cart"
+              size="20"
+            />
+          </div>
+        </Link>
       </HeaderRight>
     </HeaderContainer>
   );
 };
-
 Header.propTypes = {};
 export default Header;

@@ -24,13 +24,18 @@ export const ProductImagePreviewContainer = styled(CommonStyled.Container)`
   align-items: center;
   .row-image-preview {
     height: 500px;
-    height: 80%;
+    width: 400px;
+    .skeleton-loader {
+      width: 400px;
+      height: 500px;
+    }
     img {
       height: 100%;
       width: 100%;
     }
   }
   .row-img-list {
+    margin: 10px 0;
     height: 20%;
     display: flex;
     justify-content: space-evenly;
@@ -41,6 +46,7 @@ export const ProductImagePreviewContainer = styled(CommonStyled.Container)`
       margin: 5px 5px;
       width: 100px;
       height: 100px;
+      cursor: pointer;
     }
 
     &::-webkit-scrollbar {
@@ -244,6 +250,7 @@ export const RecommendedProductWrapper = styled.div`
 
 export const ProductInsightContainer = styled(CommonStyled.Container)`
   align-self: flex-start;
+  align-items: flex-start;
   padding: 10px;
   margin: 10px 0;
   color: ${(props) => props.theme.colors.primaryLight};
@@ -253,5 +260,6 @@ export const ProductInsightContainer = styled(CommonStyled.Container)`
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     align-self: center;
     width: 90%;
+    align-items: center;
   }
 `;

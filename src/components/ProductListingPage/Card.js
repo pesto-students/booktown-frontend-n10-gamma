@@ -1,54 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../common';
 import demoImg from './demoImg.png';
-import { CART } from '../../router/types';
+
 const ShoppingCard = ({
+  item,
   title,
   price,
   originalPrice,
   description,
   onClick,
   onAddToCart,
-  productPics = [],
+  productPics = [demoImg, demoImg, demoImg, demoImg, demoImg],
   category,
   subCategory
 }) => {
-  const picsList = [demoImg, demoImg, demoImg, demoImg, demoImg];
-  const [currentPicIndex, setCurrentPicIndex] = React.useState(0);
-  const [intervalId, setIntervalId] = React.useState(null);
-  const changeCurrentPic = () => {
-    const id = setInterval(() => {
-      console.log(currentPicIndex);
-      setCurrentPicIndex(() => (currentPicIndex + 1) % picsList.length);
-    }, 1000);
-    setIntervalId(() => id);
-  };
   return (
-    <ShoppingCardContainer>
-      <CardImgContainer
-        onMouseEnter={changeCurrentPic}
-        onMouseLeave={() => clearInterval(intervalId)}>
-        <img src={picsList[currentPicIndex]} alt="img" />
+    <ShoppingCardContainer onClick={() => onClick(item)}>
+      <CardImgContainer>
+        <img src={productPics[0]} alt="img" />
         <div className="img-overlay">
           <div>o o o o o </div>
-          <Link to={CART} style={{ width: '100%' }}>
-            <Button className="overly-cart-btn" text={'Add to cart'} />
-          </Link>
+          <Button
+            onClick={(e) => onAddToCart(item, e)}
+            className="overly-cart-btn"
+            text={'Add to cart'}
+          />
         </div>
       </CardImgContainer>
       <CardBody>
-        <h6 className="card-body-title">Matt Ridley</h6>
+        <h6 className="card-body-title">{title}</h6>
         <Text lines={1}>{description || 'Product description'}</Text>
         <span className="price">
-          <span style={{ fontWeight: 'bold' }}>{price || 'Rs. 100'}</span>
+          <span style={{ fontWeight: 'bold' }}>Rs. {price || 'Rs. 100'}</span>
           <span style={{ textDecoration: 'line-through', margin: '0 10px' }}>
-            {originalPrice || 'Rs. 10000'}
+            Rs. {originalPrice || 'Rs. 10000'}
           </span>
         </span>
         <span>
-          <span>{category || 'category'}</span>
+          <span>{category || 'category'} | </span>
           <span style={{ margin: '0 10px' }}>
             {subCategory || 'subcategory'}
           </span>

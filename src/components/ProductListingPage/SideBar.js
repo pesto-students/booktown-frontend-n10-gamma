@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { filterOptions1, filterOptions2 } from '../../DummyData/FilterOptions';
-
 import StarRating from '../common/StarRating/StarRating';
-
+import { Button } from '../common';
 import {
   CheckBox,
   Option,
@@ -14,15 +13,23 @@ import {
 function SideBar(props) {
   const [rating, setRating] = useState(0);
 
+  const onChangeCheckBox = (e, d) => {
+    console.log(e.target.value);
+    console.log(d);
+  };
+
   return (
     <Sidebar>
+      <Button text="Filter here" />
       <Option>
-        {filterOptions1.map((options) => (
-          <SidebarOptions>
-            <h2>{options.header}</h2>
-            {options.options.map((d) => (
-              <CheckBox>
-                <input type="checkbox"></input>
+        {filterOptions1.map((options, index) => (
+          <SidebarOptions key={index}>
+            <div className="filter-option-title">{options.header}</div>
+            {options.options.map((d, index) => (
+              <CheckBox key={index}>
+                <input
+                  onClick={(e) => onChangeCheckBox(e, d.text)}
+                  type="checkbox"></input>
                 <span>
                   <Options>{d.text}</Options>
                 </span>
@@ -32,15 +39,15 @@ function SideBar(props) {
         ))}
 
         <SidebarOptions>
-          <h2>Customer review</h2>
+          <div className="filter-option-title">Customer Review</div>
           <StarRating rating={rating} onRating={(rate) => setRating(rate)} />
         </SidebarOptions>
 
-        {filterOptions2.map((options) => (
-          <SidebarOptions>
-            <h2>{options.header}</h2>
-            {options.options.map((d) => (
-              <Options>{d.text}</Options>
+        {filterOptions2.map((options, index) => (
+          <SidebarOptions key={index}>
+            <div className="filter-option-title">{options.header}</div>
+            {options.options.map((d, index) => (
+              <Options key={index}>{d.text}</Options>
             ))}
           </SidebarOptions>
         ))}

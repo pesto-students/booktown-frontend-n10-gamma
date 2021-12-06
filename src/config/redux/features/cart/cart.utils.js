@@ -1,31 +1,47 @@
-export const addItemToCart = (cartItems, cartItemToAdd) => {
-  const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id === cartItemToAdd.id
-  );
-
-  if (existingCartItem) {
-    return cartItems.map((cartItem) =>
-      cartItem.id === cartItemToAdd.id
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-        : cartItem
-    );
-  }
-
-  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+export const addItemToCart = (cartItems, payload) => {
+  const { uid, item } = payload || {};
+  const newCartItemState = {
+    ...cartItems,
+    [uid]: {
+      ...cartItems[uid],
+      [item.id]: {
+        ...item,
+        quantity: 1
+      }
+    }
+  };
+  return newCartItemState;
 };
 
-export const removeItemFromCart = (cartItems, cartItemToRemove) => {
-  // const existingCartItem = cartItems.find(
-  //   (cartItem) => cartItem.id === cartItemToRemove.id
-  // );
+export const removeItemFromCart = (cartItems, payload) => {
+  const { uid, itemId } = payload || {};
+  const userSpecificItem = cartItems[uid] || {};
+  const userSpecificClone = { ...userSpecificItem };
+  delete userSpecificClone[itemId];
+  const newCartState = {
+    ...cartItems,
+    [uid]: userSpecificClone
+  };
+  return newCartState;
+};
 
-  // if (existingCartItem.quantity === 1) {
-  return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
-  // }
+export const removeUserCartItems = (cartItems, payload) => {
+  const { uid } = payload || {};
+  const newCartState = {
+    ...cartItems,
+    [uid]: {}
+  };
+  return newCartState;
+};
 
-  // return cartItems.map((cartItem) =>
-  //   cartItem.id === cartItemToRemove.id
-  //     ? { ...cartItem, quantity: cartItem.quantity - 1 }
-  //     : cartItem
-  // );
+export const updateCartItemQuantity = (cartItems, payload) => {
+  const { itemId, qty, uid } = payload || {};
+  const userSpecificItem = cartItems[uid];
+  const data = { ...userSpecificItem[itemId] };
+  data.quantity = qty;
+  const newCartState = {
+    ...cartItems,
+    [uid]: { ...userSpecificItem, [itemId]: data }
+  };
+  return newCartState;
 };

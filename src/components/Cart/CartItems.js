@@ -1,27 +1,40 @@
 import React from 'react';
-
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import {
+  removeItem,
+  updateQuantity
+} from '../../config/redux/features/cart/cartSlice';
+import { useSession } from '../../hooks';
 import CartItem from './CartItem';
 import { Items } from './styledComponents';
-import { useDispatch } from 'react-redux';
-import { removeItem } from '../../config/redux/features/cart/cartSlice';
 
-const CartItems = ({ items, setCartItems, fixedPrice }) => {
+const CartItems = () => {
+  const session = useSession();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const userSpecificItem = cartItems[session.user?.uid] || {};
   const dispatch = useDispatch();
-  const [load, setReload] = useState(false);
-  const changeItemQuantity = (event, index) => {
-    const newItems = [...items];
-    newItems[index].quantity = event.target.value;
-    newItems[index].price = fixedPrice[index] * newItems[index].quantity;
-    setCartItems(newItems);
+  const history = useHistory();
+
+  const handleDeleteCartItem = (itemId, e) => {
+    e.stopPropagation();
+    const payload = {
+      uid: session.user?.uid,
+      itemId
+    };
+    dispatch(removeItem(payload));
   };
 
-  const deleteItem = (indexToDelete) => {
-    const newItems = items.filter((item, index) => {
-      return index !== indexToDelete;
-    });
-    setCartItems(newItems);
+  const handleItemQtyChange = (itemId, qty) => {
+    const payload = { itemId, qty, uid: session.user?.uid };
+    console.log(payload);
+
+    dispatch(updateQuantity(payload));
+  };
+
+  const handleCartClick = (itemId, e) => {
+    e.stopPropagation();
+    history.push(`/product-details/${itemId}`);
   };
 
   return (
@@ -29,15 +42,23 @@ const CartItems = ({ items, setCartItems, fixedPrice }) => {
       <h1>Shopping Cart</h1>
       <hr />
       <div>
-        {items.map((item, index) => (
-          <CartItem
-            key={uuidv4()}
-            index={index}
-            item={item}
-            changeItemQuantity={changeItemQuantity}
-            deleteItem={deleteItem}
-          />
-        ))}
+        {Object.keys(userSpecificItem).length > 0 ? (
+          Object.keys(userSpecificItem)?.map((key, index) => {
+            return (
+              <CartItem
+                itemId={key}
+                item={userSpecificItem[key]}
+                key={key}
+                index={index}
+                onItemQtyChange={handleItemQtyChange}
+                onDeleteCartItem={handleDeleteCartItem}
+                onCartItemClick={handleCartClick}
+              />
+            );
+          })
+        ) : (
+          <h2>No Items in your cart</h2>
+        )}
       </div>
     </Items>
   );

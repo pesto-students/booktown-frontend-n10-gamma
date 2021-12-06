@@ -1,28 +1,70 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FooterContainer, FooterCards, FooterSocial } from './styledComponents';
 import FeatherIcon from 'feather-icons-react';
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { CART, PRODUCT_LISTING, PRODUCT_SELL } from '../../../router/types';
+import { FooterCards, FooterContainer, FooterSocial } from './styledComponents';
 function Footer({ title = '' }) {
   return (
     <FooterContainer>
       <FooterCards>
         <span className="footer-card-title">Connect with us</span>
-        <p className="footer-card-text">Facebook</p>
-        <p className="footer-card-text">Instagram</p>
-        <p className="footer-card-text">Twitter</p>
+        <p className="footer-card-text">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+            href={'https://www.facebook.com/'}>
+            Facebook
+          </a>
+        </p>
+        <p className="footer-card-text">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+            href={'https://www.instagram.com/'}>
+            Instagram
+          </a>
+        </p>
+        <p className="footer-card-text">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+            href={'https://twitter.com/'}>
+            Twitter
+          </a>
+        </p>
       </FooterCards>
       <FooterCards>
         <span className="footer-card-title">Let us help you</span>
         <p className="footer-card-text">Your account</p>
-        <p className="footer-card-text">Your cart</p>
+        <p className="footer-card-text">
+          <Link className="footer-link" to={CART}>
+            Your cart
+          </Link>
+        </p>
         <p className="footer-card-text">Your Orders</p>
       </FooterCards>
       <FooterCards>
         <span className="footer-card-title">Use our features</span>
-        <p className="footer-card-text">Sell Books</p>
-        <p className="footer-card-text">Buy old & new books</p>
-        <p className="footer-card-text">Checkout cart</p>
+        <p className="footer-card-text">
+          <Link className="footer-link" to={PRODUCT_SELL}>
+            {' '}
+            Sell Books
+          </Link>
+        </p>
+        <p className="footer-card-text">
+          <Link className="footer-link" to={PRODUCT_LISTING}>
+            Buy old & new books
+          </Link>
+        </p>
+        <p className="footer-card-text">
+          <Link className="footer-link" to={CART}>
+            {' '}
+            Checkout cart{' '}
+          </Link>
+        </p>
       </FooterCards>
       <FooterCards height={'100px'} width={'100%'}>
         <FooterSocial>

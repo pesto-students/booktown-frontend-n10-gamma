@@ -19,9 +19,9 @@ const ErrorContextProvider = ({ children }) => {
     let error = { message: errorMessage, code: errorCode };
     if (!error.message) {
       error = ErrorCodeAndMessage[error.code];
-      toast(error);
+      toast(error.message);
     } else {
-      toast(errorMessage);
+      toast(errorMessage || 'Error');
     }
     setComponentState({
       ...componentState,

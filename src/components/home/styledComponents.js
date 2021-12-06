@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 export const HomeContainer = styled.div`
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
   display: flex;
   position: relative;
   img {
     object-fit: fill;
     height: 100%;
-    width: 99vw;
+    width: 100vw;
   }
 `;
 
@@ -54,6 +54,14 @@ export const HomeBannerOverlapper = styled.div`
       background: transparent;
       color: ${(props) => props.theme.colors.secondary};
       border: 1px solid ${(props) => props.theme.colors.primary};
+    }
+  }
+  & {
+    @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+      width: 100%;
+      left: 0;
+
+      text-align: left;
     }
   }
 `;
