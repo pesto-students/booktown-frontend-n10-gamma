@@ -27,7 +27,6 @@ const CartItems = () => {
 
   const handleItemQtyChange = (itemId, qty) => {
     const payload = { itemId, qty, uid: session.user?.uid };
-    console.log(payload);
 
     dispatch(updateQuantity(payload));
   };

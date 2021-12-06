@@ -29,17 +29,9 @@ const CartTotal = () => {
     return totalTtems;
   };
 
-  const onHide = () => {
-    setShow(false);
-  };
-
-  console.log(cartState.cartItems);
-
-  console.log(Object.keys(cartState.cartItems).length);
-
   return (
     <>
-      {Object.keys(userSpecificItem).length > 0 > 0 && (
+      {Object.keys(userSpecificItem).length > 0 && (
         <ItemTotal>
           <h4>
             Subtotal({getTotalItems()} items):

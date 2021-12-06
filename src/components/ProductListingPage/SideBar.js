@@ -29,7 +29,8 @@ function SideBar(props) {
               <CheckBox key={index}>
                 <input
                   onClick={(e) => onChangeCheckBox(e, d.text)}
-                  type="checkbox"></input>
+                  type="checkbox"
+                />
                 <span>
                   <Options>{d.text}</Options>
                 </span>
