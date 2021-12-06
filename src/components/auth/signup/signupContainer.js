@@ -17,7 +17,7 @@ const useSignupContainer = (props) => {
     firstName: '',
     lastName: ''
   });
-  const [createUserMutation, createUserMutationRes] = useMutation(createUser);
+  const [createUserMutation] = useMutation(createUser);
 
   const [errors, setErrors] = React.useState({
     isError: false,

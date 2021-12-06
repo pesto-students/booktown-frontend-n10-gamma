@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
+import { useSelector } from 'react-redux';
+import { useSession } from '../../hooks';
 import AddressModal from './AddressModal';
 import StripeCheckoutButton from './StripeCheckoutButton';
 import { ItemTotal } from './styledComponents';
 
-const CartTotal = ({ items }) => {
+const CartTotal = () => {
+  const cartState = useSelector((state) => state.cart);
+  const session = useSession();
   const [show, setShow] = useState(false);
-
   const getTotalPrice = () => {
     let totalPrice = 0;
-    items.map((item) => (totalPrice += item.price * item.quantity));
+    const items = Object.values(cartState.cartItems[session.user?.uid] || {});
+    items?.map((item) => (totalPrice += item.price * item.quantity));
     return totalPrice;
   };
 
   const getTotalItems = () => {
     let totalTtems = 0;
+    const items = Object.values(cartState.cartItems[session.user?.uid] || {});
     items.forEach((item) => {
       totalTtems += parseInt(item.quantity);
     });

@@ -1,14 +1,30 @@
 import { ApolloLink } from '@apollo/client';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
-export const authLink = new ApolloLink((operation, forward) => {
-  // Retrieve the authorization token from local storage.
-  const token = 'my token';
-  // Use the setContext method to set the HTTP headers.
-  operation.setContext({
-    headers: {
-      authorization: token ? `Bearer ${token}` : ''
-    }
+export const authMiddleware = new ApolloLink(async (operation, forward) => {
+  // add the authorization to the headers
+  let intervalId = 0;
+  const token = await new Promise((resolve, reject) => {
+    intervalId = setInterval(() => {
+      firebase
+        .auth()
+        ?.currentUser?.getIdToken(true)
+        .then((token) => {
+          resolve(token);
+          clearInterval(intervalId);
+        });
+    }, 1000);
   });
-  // Call the next link in the middleware chain.
+
+  operation.setContext(({ headers = {} }) => {
+    return {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${token || null}`
+      }
+    };
+  });
+
   return forward(operation);
 });

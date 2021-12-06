@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import items, { itemsFixPrice } from '../../DummyData/cartData';
+import React from 'react';
 import { Footer } from '../common';
 import Header from '../common/header';
 import CartItems from './CartItems';
@@ -7,18 +6,12 @@ import CartTotal from './CartTotal';
 import { CartMain } from './styledComponents';
 
 function Cart() {
-  const [cartItems, setCartItems] = useState(items);
-  const [fixedPrice, setFixedPrice] = useState(itemsFixPrice);
   return (
     <>
       <Header />
       <CartMain>
-        <CartItems
-          items={cartItems}
-          setCartItems={setCartItems}
-          fixedPrice={fixedPrice}
-        />
-        <CartTotal items={cartItems} />
+        <CartItems />
+        <CartTotal />
       </CartMain>
       <Footer />
     </>

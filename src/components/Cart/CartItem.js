@@ -1,15 +1,22 @@
 import React from 'react';
-
 import NumberFormat from 'react-number-format';
+import { Input } from '../common';
 import { Item, ItemActions, ItemImage, ItemInfo } from './styledComponents';
 
-const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
-  const { title, stock, price, quantity, image, description} = item;
+const CartItem = ({
+  index,
+  item,
+  itemId,
+  onItemQtyChange = () => {},
+  onDeleteCartItem = () => {},
+  onCartItemClick = () => {}
+}) => {
+  const { title, price, quantity, files, description } = item || {};
 
   return (
     <Item>
-      <ItemImage>
-        <img className="img" src={image} alt="" />
+      <ItemImage onClick={(e) => onCartItemClick(itemId, e)}>
+        <img className="img" src={files[0]} alt="img" />
       </ItemImage>
 
       <ItemInfo>
@@ -17,28 +24,21 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
           <h2>{title}</h2>
           <p>{description}</p>
         </div>
-       
 
         <ItemActions>
           <div className="itemQuantity">
-            <select className = "Select"
+            <Input
               value={quantity}
-              onChange={(event) => changeItemQuantity(event, index)}>
-              <option value="1">Qty: 1</option>
-              <option value="2">Qty: 2</option>
-              <option value="3">Qty: 3</option>
-              <option value="4">Qty: 4</option>
-              <option value="5">Qty: 5</option>
-              <option value="6">Qty: 6</option>
-              <option value="7">Qty: 7</option>
-              <option value="8">Qty: 8</option>
-              <option value="9">Qty: 9</option>
-            </select>
+              onChange={(e) => onItemQtyChange(itemId, e.target.value)}
+              type="number"
+              min={1}
+              max={100}
+            />
           </div>
           <div className="itemActionsDivider">|</div>
-          <i className = "fa-solid fa-trash itemDelete" onClick={deleteItem.bind(this, index)}>
-         
-          </i>
+          <i
+            className="fa-solid fa-trash itemDelete"
+            onClick={(e) => onDeleteCartItem(itemId, e)}></i>
         </ItemActions>
       </ItemInfo>
       <div className="Price">
@@ -55,3 +55,6 @@ const CartItem = ({ index, item, changeItemQuantity, deleteItem }) => {
 };
 
 export default CartItem;
+
+/*
+ */

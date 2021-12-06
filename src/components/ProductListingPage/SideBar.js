@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { filterOptions1, filterOptions2 } from '../../DummyData/FilterOptions';
-
 import StarRating from '../common/StarRating/StarRating';
-
 import {
   CheckBox,
   Option,
@@ -17,11 +15,11 @@ function SideBar(props) {
   return (
     <Sidebar>
       <Option>
-        {filterOptions1.map((options) => (
-          <SidebarOptions>
-            <h2>{options.header}</h2>
-            {options.options.map((d) => (
-              <CheckBox>
+        {filterOptions1.map((options, index) => (
+          <SidebarOptions key={index}>
+            <div className="filter-option-title">{options.header}</div>
+            {options.options.map((d, index) => (
+              <CheckBox key={index}>
                 <input type="checkbox"></input>
                 <span>
                   <Options>{d.text}</Options>
@@ -32,15 +30,15 @@ function SideBar(props) {
         ))}
 
         <SidebarOptions>
-          <h2>Customer review</h2>
+          <div className="filter-option-title">Customer Review</div>
           <StarRating rating={rating} onRating={(rate) => setRating(rate)} />
         </SidebarOptions>
 
-        {filterOptions2.map((options) => (
-          <SidebarOptions>
-            <h2>{options.header}</h2>
-            {options.options.map((d) => (
-              <Options>{d.text}</Options>
+        {filterOptions2.map((options, index) => (
+          <SidebarOptions key={index}>
+            <div className="filter-option-title">{options.header}</div>
+            {options.options.map((d, index) => (
+              <Options key={index}>{d.text}</Options>
             ))}
           </SidebarOptions>
         ))}

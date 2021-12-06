@@ -1,23 +1,33 @@
 import React from 'react';
-import StripeCheckout from 'react-stripe-checkout';
-import { useHistory } from 'react-router';
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import StripeCheckout from 'react-stripe-checkout';
+import { deleteUserCart } from '../../config/redux/features/cart/cartSlice';
+import { useSession } from '../../hooks';
 
 const StripeCheckoutButton = ({ price }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const session = useSession();
 
   const priceForStripe = price * 100;
   const publishableKey =
     'pk_test_51HgPkdItMNgOLBqdPoJCGKUdHfpXgpTJn2c8mSiY24VzX94k5EuzEhLYNjtGHrnFkqSgCpsfuKYfcqsmsly2DbtL00hmLhSQ7U';
 
   const onToken = (token) => {
-    console.log(token);
     toast.success('Payment Succesful!');
+    const payload = {
+      uid: session.user?.uid
+    };
+
+    dispatch(deleteUserCart(payload));
     history.push('/product-listing');
   };
 
   return (
     <StripeCheckout
+      style={{ backgroundColor: 'red' }}
       label="Pay Now"
       name="The Book Town"
       billingAddress

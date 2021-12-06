@@ -1,15 +1,35 @@
-export const addItemToCart = (cartItems, cartItemToAdd) => {
-  const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id === cartItemToAdd.id
-  );
+export const addItemToCart = (cartItems, payload) => {
+  const { uid, item } = payload || {};
+  const newCartItemState = {
+    ...cartItems,
+    [uid]: {
+      ...cartItems[uid],
+      [item.id]: {
+        ...item,
+        quantity: 1
+      }
+    }
+  };
+  return newCartItemState;
+};
 
-  if (existingCartItem) {
-    return cartItems.map((cartItem) =>
-      cartItem.id === cartItemToAdd.id
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
-        : cartItem
-    );
-  }
+export const removeItemFromCart = (cartItems, payload) => {
+  const { uid, itemId } = payload || {};
+  const userSpecificItem = cartItems[uid] || {};
+  const userSpecificClone = { ...userSpecificItem };
+  delete userSpecificClone[itemId];
+  const newCartState = {
+    ...cartItems,
+    [uid]: userSpecificClone
+  };
+  return newCartState;
+};
 
-  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+export const removeUserCartItems = (cartItems, payload) => {
+  const { uid } = payload || {};
+  const newCartState = {
+    ...cartItems,
+    [uid]: {}
+  };
+  return newCartState;
 };

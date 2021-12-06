@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addItemToCart } from './cart.utils';
+import {
+  addItemToCart,
+  removeItemFromCart,
+  removeUserCartItems
+} from './cart.utils';
 const namespace = 'cart';
 const initialState = {
-  count: 0,
-  hidden: true,
-  cartItems: []
+  cartItems: {},
+  loading: false
 };
 export const cartSlice = createSlice({
   name: namespace,
@@ -13,11 +16,14 @@ export const cartSlice = createSlice({
     addItem: (state, action) => {
       state.cartItems = addItemToCart(state.cartItems, action.payload);
     },
-    countIncrement: (state, action) => {
-      state.count = action.payload;
+    removeItem: (state, action) => {
+      state.cartItems = removeItemFromCart(state.cartItems, action.payload);
+    },
+    deleteUserCart: (state, action) => {
+      state.cartItems = removeUserCartItems(state.cartItems, action.payload);
     }
   }
 });
 // Action creators are generated for each case reducer function
-export const { addItem, countIncrement } = cartSlice.actions;
+export const { deleteUserCart, addItem, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;

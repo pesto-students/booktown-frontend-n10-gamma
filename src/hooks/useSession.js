@@ -15,6 +15,7 @@ const useSession = () => {
   const authState = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   /**
    *
    * @param {String} redirectUrl
@@ -36,25 +37,32 @@ const useSession = () => {
   };
   useEffect(() => {
     if (authState.isAuthenticated) {
-      // console.log('user loged in ', authState);
       setLoading(() => false);
     } else {
       firebase.auth().onAuthStateChanged((user) => {
         setLoading(() => false);
         if (user) {
-          setUser(() => user._delegate);
-          dispatch(login({ user: user._delegate }));
+          user.getIdToken(true).then((token) => {
+            setUser(() => user._delegate);
+            setToken(() => token);
+            window.localStorage.setItem('user-token', token);
+            dispatch(login({ user: user._delegate, token }));
+          });
         } else {
+          window.localStorage.removeItem('user-token');
           dispatch(logoutUser());
         }
       });
     }
+    return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
     logout,
     loading,
-    user: authState.user || user
+    user: authState.user || user,
+    token: authState.token || token
   };
 };
 
