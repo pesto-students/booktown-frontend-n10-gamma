@@ -1,23 +1,21 @@
+import FeatherIcon from 'feather-icons-react';
 import React, { useState } from 'react';
-import { Footer, Header, Input, Button } from '../common';
+import StarRatingComponent from 'react-star-rating-component';
+import StripeCheckoutButton from '../Cart/StripeCheckoutButton';
+import { Footer, Header, Input } from '../common';
+import { GenreicSkeleton } from '../common/skeleton';
 import useProductDetailsContainer from './container';
+import demoImg from './demoImg.png';
 import {
+  ProductDetailsCheckoutContainer,
+  ProductDetailsInfoContainer,
   ProductDetailsRow,
   ProductDetialsContainer,
   ProductImagePreviewContainer,
-  ProductDetailsInfoContainer,
-  ProductDetailsCheckoutContainer,
+  ProductInsightContainer,
   RecommendedProductsContainer,
-  RecommendedProductWrapper,
-  ProductInsightContainer
+  RecommendedProductWrapper
 } from './styledComponents';
-import demoImg from './demoImg.png';
-import StarRatingComponent from 'react-star-rating-component';
-import FeatherIcon from 'feather-icons-react';
-import { Link } from 'react-router-dom';
-import { CART } from '../../router/types';
-import StripeCheckoutButton from '../Cart/StripeCheckoutButton';
-import { GenreicSkeleton } from '../common/skeleton';
 
 const Component = (props) => {
   const { refs, handleCarouselAction, productInfo } =
@@ -131,12 +129,6 @@ const Component = (props) => {
             <div className="product-checkout-btn-container">
               {/* <Button className="product-checkout-buy-btn" text="Buy Now" /> */}
               <StripeCheckoutButton price={productInfo?.price * currentQty} />
-              <Link style={{ width: '100%' }} to={CART}>
-                <Button
-                  className="product-checkout-cart-btn"
-                  text="Add To Cart"
-                />
-              </Link>
             </div>
           </ProductDetailsCheckoutContainer>
         </ProductDetailsRow>
