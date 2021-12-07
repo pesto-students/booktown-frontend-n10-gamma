@@ -92,7 +92,15 @@ const Header = ({ isSearchBarHide = false, onChangeSearch }) => {
             </CartMenu>
           </Link>
         </MenuItem>
-        {user && <MenuItem onClick={handleLogout}>Logout</MenuItem>}
+        {user && (
+          <MenuItem title={'Logout'} onClick={handleLogout}>
+            <FeatherIcon
+              onClick={() => setHamburgClicked(false)}
+              icon="log-out"
+              size="30"
+            />
+          </MenuItem>
+        )}
       </MenuContainer>
     </HeaderContainer>
   );

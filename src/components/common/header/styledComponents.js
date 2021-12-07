@@ -23,6 +23,7 @@ export const MenuItem = styled.div`
   }
 `;
 export const HeaderContainer = styled.div`
+  padding: 0 10px;
   display: flex;
   justify-content: space-between;
   height: 70px;
