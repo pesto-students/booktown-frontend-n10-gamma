@@ -1,86 +1,129 @@
 import styled from 'styled-components';
 
+export const MenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+
+  & {
+    @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+      width: 100%;
+    }
+  }
+  .close-icon {
+    display: none;
+  }
+`;
+export const MenuItem = styled.div`
+  opacity: 0.7;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+`;
 export const HeaderContainer = styled.div`
+  padding: 0 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.secondary};
   height: 70px;
-  width: 100%;
-  padding: 10px 20px;
   box-sizing: border-box;
-`;
-
-export const HeaderCard = styled.div`
-  display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  box-sizing: border-box;
-  ${(props) => ({
-    width: props.width ? props.width : 'auto'
-  })};
+  color: white;
+  background: ${(props) => props.theme.colors.primary};
+  flex-wrap: wrap;
   .link {
-    color: ${(props) => props.theme.colors.secondary};
+    color: white;
     text-decoration: none;
   }
-  & {
-    @media (min-width: 550px) {
-      width: 500px;
-    }
-  }
-`;
-
-export const HeaderRight = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 40%;
-  .header-right-content {
-    margin: 0 20px;
-    opacity: 0.6;
+  .hamburg-menu {
+    display: none;
     cursor: pointer;
-    & {
-      @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
-        margin: 0 5px;
-      }
-      @media (max-width: 600px) {
-        display: block;
-      }
-    }
+    opacity: 0.5;
+    width: 10%;
+    text-align: center;
     &:hover {
       opacity: 1;
     }
   }
-  .link {
-    text-decoration: none;
-    color: ${(props) => props.theme.colors.secondary};
-    .cart-count {
-      position: relative;
-      span {
-        position: absolute;
-        bottom: 17px;
-        left: 26px;
-        color: tomato;
+  & {
+    @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+      ${MenuContainer} {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        height: 100vh;
+        width: 50vw;
+        z-index: 100;
+        font-size: 20px;
+        background-color: ${(props) => props.theme.colors.primary};
+        margin-left: 50%;
+        transition: all 0.5s ease-in-out;
+        .close-icon {
+          display: block;
+          text-align: right;
+          &:hover {
+            border: none !important;
+          }
+        }
+        ${MenuItem} {
+          &:hover {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+          }
+          margin: 10px 0;
+          padding: 10px;
+        }
+      }
+      .hamburg-menu {
+        display: block;
       }
     }
   }
 `;
-
-export const HeaderTitle = styled.div`
-  ${(props) => ({ ...props.theme.fonts.h4 })}
-  margin: 0;
-  padding: 0;
+export const SearchBarContainer = styled.div`
+  flex: 0.6;
+  margin-right: 10%;
 `;
+export const HeaderLeftContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+  & {
+    @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+      ${SearchBarContainer} {
+        flex: 0.9;
+        margin-right: 5%;
+      }
+    }
 
-export const HamburgerContainer = styled(HeaderContainer)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: none;
-  border: 1px solid red;
-  height: 100vh;
-  width: 100vw;
-  z-index: 100;
-  transition: width 0.5s ease-in-out;
+    @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+      width: 90%;
+      ${SearchBarContainer} {
+        flex: 0.8;
+        margin-right: 2%;
+      }
+    }
+    @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+      ${SearchBarContainer} {
+        flex: 1;
+        margin: 0 2%;
+      }
+    }
+  }
+`;
+export const CartMenu = styled.div`
+  position: relative;
+  span {
+    position: absolute;
+    bottom: 17px;
+    left: 12px;
+    color: tomato;
+  }
+`;
+export const BrandName = styled.h4`
+  padding: 0;
+  margin: 0;
 `;

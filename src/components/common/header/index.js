@@ -1,81 +1,107 @@
-import FeatherIcon from 'feather-icons-react';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import SearchBar from '../search';
-import {
-  HeaderCard,
-  HeaderContainer,
-  HeaderRight,
-  HeaderTitle
-} from './styledComponents';
+import { useSelector } from 'react-redux';
+import { useSession } from '../../../hooks';
 import {
   ABOUT,
+  CART,
   HOME,
-  SIGN_IN,
   PRODUCT_LISTING,
-  CART
+  SIGN_IN
 } from '../../../router/types';
-import { useSession } from '../../../hooks';
-import { useSelector } from 'react-redux';
+import FeatherIcon from 'feather-icons-react';
+import { SearchBar } from '../.';
+import {
+  MenuContainer,
+  MenuItem,
+  CartMenu,
+  HeaderLeftContainer,
+  HeaderContainer,
+  BrandName,
+  SearchBarContainer
+} from './styledComponents';
+import { Link } from 'react-router-dom';
 
-const Header = ({
-  title = 'The BookTown',
-  isSearchBarHide = false,
-  onChangeSearch
-}) => {
+const Header = ({ isSearchBarHide = false, onChangeSearch }) => {
   const session = useSession();
   const { user } = session;
   const cartState = useSelector((state) => state.cart);
+  const [hamburgClicked, setHamburgClicked] = React.useState(false);
   const numberOfItemsInCart = Object.keys(
     cartState?.cartItems[user?.uid || ''] || {}
   ).length;
-
   const handleLogout = () => {
     session.logout(SIGN_IN);
   };
   return (
-    <HeaderContainer className="header-group-1">
-      <HeaderCard>
-        <Link className="link" to={HOME}>
-          <HeaderTitle>{title}</HeaderTitle>
+    <HeaderContainer>
+      <HeaderLeftContainer>
+        <Link to={HOME} className="link">
+          <BrandName>The</BrandName>
+          <BrandName>Booktown</BrandName>
         </Link>
-      </HeaderCard>
-      {!isSearchBarHide && (
-        <HeaderCard className="header-group-1" width={'35%'}>
-          <SearchBar onChangeSearch={onChangeSearch} />
-        </HeaderCard>
-      )}
-      <HeaderRight>
-        <span className="header-right-content">
+        {!isSearchBarHide && (
+          <SearchBarContainer>
+            <SearchBar onChangeSearch={onChangeSearch} />
+          </SearchBarContainer>
+        )}
+      </HeaderLeftContainer>
+
+      <div className="hamburg-menu">
+        <FeatherIcon
+          onClick={() => setHamburgClicked(true)}
+          className=""
+          icon="menu"
+          size="30"
+        />
+      </div>
+      <MenuContainer style={{ display: hamburgClicked && 'block' }}>
+        <MenuItem className="close-icon">
+          <FeatherIcon
+            onClick={() => setHamburgClicked(false)}
+            icon="x"
+            size="30"
+          />
+        </MenuItem>
+        <MenuItem>
           {user ? (
             `Hello, ${user?.displayName?.split(' ')[0]}`
           ) : (
             <Link to={SIGN_IN}>Login</Link>
           )}
-        </span>
-        <Link className="link" to={PRODUCT_LISTING}>
-          <span className="header-right-content">Product</span>
-        </Link>
-        <Link className="link" to={ABOUT}>
-          <span className="header-right-content">About</span>
-        </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link className="link" to={PRODUCT_LISTING}>
+            Product
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link className="link" to={ABOUT}>
+            About
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link className="link" to={CART}>
+            <CartMenu>
+              {' '}
+              <span>{+numberOfItemsInCart ? numberOfItemsInCart : ''}</span>
+              <FeatherIcon
+                className="search-icon header-right-content"
+                icon="shopping-cart"
+                size="25"
+              />
+            </CartMenu>
+          </Link>
+        </MenuItem>
         {user && (
-          <span onClick={handleLogout} className="header-right-content">
-            Logout
-          </span>
-        )}
-        <Link className="link" to={CART}>
-          <div className="cart-count">
-            {' '}
-            <span>{+numberOfItemsInCart ? numberOfItemsInCart : ''}</span>
+          <MenuItem title={'Logout'} onClick={handleLogout}>
             <FeatherIcon
-              className="search-icon header-right-content"
-              icon="shopping-cart"
-              size="20"
+              onClick={() => setHamburgClicked(false)}
+              icon="log-out"
+              size="30"
             />
-          </div>
-        </Link>
-      </HeaderRight>
+          </MenuItem>
+        )}
+      </MenuContainer>
     </HeaderContainer>
   );
 };
