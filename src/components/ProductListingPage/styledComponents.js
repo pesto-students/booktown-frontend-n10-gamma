@@ -130,6 +130,8 @@ const Sidebar = styled.div`
   color: #40394d;
   flex-direction: column;
   align-items: center;
+  padding-left: 10px;
+  margin-top: 10px;
 `;
 
 const SidebarOptions = styled.div`
