@@ -30,7 +30,7 @@ export const HeaderContainer = styled.div`
   box-sizing: border-box;
   align-items: center;
   color: white;
-  background: #263238;
+  background: ${(props) => props.theme.colors.primary};
   flex-wrap: wrap;
   .link {
     color: white;
@@ -55,11 +55,12 @@ export const HeaderContainer = styled.div`
         left: 0;
         flex-direction: column;
         height: 100vh;
-        width: 100vw;
+        width: 50vw;
         z-index: 100;
         font-size: 20px;
-        background-color: ${(props) => props.theme.colors.primaryLight};
-        justify-content: flex-start;
+        background-color: ${(props) => props.theme.colors.primary};
+        margin-left: 50%;
+        transition: all 0.5s ease-in-out;
         .close-icon {
           display: block;
           text-align: right;
@@ -71,7 +72,6 @@ export const HeaderContainer = styled.div`
           &:hover {
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
           }
-          width: 100%;
           margin: 10px 0;
           padding: 10px;
         }
