@@ -7,7 +7,7 @@ function Footer({ title = '' }) {
   return (
     <FooterContainer>
       <FooterCards>
-        <span className="footer-card-title">Connect with us</span>
+        <p className="footer-card-title">Connect with us</p>
         <p className="footer-card-text">
           <a
             target="_blank"
@@ -37,7 +37,7 @@ function Footer({ title = '' }) {
         </p>
       </FooterCards>
       <FooterCards>
-        <span className="footer-card-title">Let us help you</span>
+        <p className="footer-card-title">Let us help you</p>
         <p className="footer-card-text">Your account</p>
         <p className="footer-card-text">
           <Link className="footer-link" to={CART}>
@@ -47,7 +47,7 @@ function Footer({ title = '' }) {
         <p className="footer-card-text">Your Orders</p>
       </FooterCards>
       <FooterCards>
-        <span className="footer-card-title">Use our features</span>
+        <p className="footer-card-title">Use our features</p>
         <p className="footer-card-text">
           <Link className="footer-link" to={PRODUCT_SELL}>
             {' '}

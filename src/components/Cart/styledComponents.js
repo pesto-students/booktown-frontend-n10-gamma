@@ -39,6 +39,7 @@ const Item = styled.div`
 
 const ItemInfo = styled.div`
   display: flex;
+  align-items: flex-start;
   .infoTitle {
     margin-left: 16px;
     max-width: 250px;
@@ -47,6 +48,9 @@ const ItemInfo = styled.div`
     margin-top: 4px;
     color: #007600;
     margin-left: 16px;
+  }
+  .title {
+    margin: 0;
   }
 
   @media (min-width: 992px) {

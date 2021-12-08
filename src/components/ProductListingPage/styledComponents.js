@@ -135,6 +135,8 @@ const Sidebar = styled.div`
     position: relative;
     left: -50px;
   }
+  padding-left: 10px;
+  margin-top: 10px;
 `;
 
 const SidebarOptions = styled.div`

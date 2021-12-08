@@ -21,7 +21,7 @@ const CartItem = ({
 
       <ItemInfo>
         <div className="infoTitle">
-          <h5>{title}</h5>
+          <h5 className="title">{title}</h5>
           <p>{description}</p>
         </div>
       </ItemInfo>
