@@ -22,6 +22,10 @@ const Item = styled.div`
 
   .Price {
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
     font-weight: 700;
     margin-left: 16px;
     padding-top: 10px;
@@ -54,7 +58,6 @@ const ItemActions = styled.div`
   margin-top: 4px;
   display: flex;
   align-items: center;
-  margin-left: 16px;
 
   .itemQuantity {
     .Select {
@@ -77,6 +80,11 @@ const ItemActions = styled.div`
     color: black;
     cursor: pointer;
   }
+  i {
+    &:hover {
+      color: red !important;
+    }
+  }
 `;
 
 const ItemImage = styled.div`
@@ -90,6 +98,9 @@ const ItemImage = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 

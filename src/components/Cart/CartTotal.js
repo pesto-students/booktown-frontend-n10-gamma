@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumberFormat from 'react-number-format';
 import { useSelector } from 'react-redux';
 import { useSession } from '../../hooks';
-import AddressModal from './AddressModal';
 import StripeCheckoutButton from './StripeCheckoutButton';
 import { ItemTotal } from './styledComponents';
 
@@ -12,7 +11,6 @@ const CartTotal = () => {
   const session = useSession();
   const userSpecificItem = cartItems[session.user?.uid] || {};
 
-  const [show, setShow] = useState(false);
   const getTotalPrice = () => {
     let totalPrice = 0;
     const items = Object.values(cartState.cartItems[session.user?.uid] || {});

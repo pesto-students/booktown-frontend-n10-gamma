@@ -38,7 +38,7 @@ const CartItems = () => {
 
   return (
     <Items>
-      <h1>Shopping Cart</h1>
+      <h4>Shopping Cart</h4>
       <hr />
       <div>
         {Object.keys(userSpecificItem).length > 0 ? (
@@ -56,7 +56,7 @@ const CartItems = () => {
             );
           })
         ) : (
-          <h2>No Items in your cart</h2>
+          <h5>No Items in your cart</h5>
         )}
       </div>
     </Items>

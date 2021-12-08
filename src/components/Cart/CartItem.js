@@ -21,25 +21,9 @@ const CartItem = ({
 
       <ItemInfo>
         <div className="infoTitle">
-          <h2>{title}</h2>
+          <h5>{title}</h5>
           <p>{description}</p>
         </div>
-
-        <ItemActions>
-          <div className="itemQuantity">
-            <Input
-              value={quantity}
-              onChange={(e) => onItemQtyChange(itemId, e.target.value)}
-              type="number"
-              min={1}
-              max={100}
-            />
-          </div>
-          <div className="itemActionsDivider">|</div>
-          <i
-            className="fa-solid fa-trash itemDelete"
-            onClick={(e) => onDeleteCartItem(itemId, e)}></i>
-        </ItemActions>
       </ItemInfo>
       <div className="Price">
         <NumberFormat
