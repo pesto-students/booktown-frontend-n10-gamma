@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import StripeCheckout from 'react-stripe-checkout';
 import { deleteUserCart } from '../../config/redux/features/cart/cartSlice';
@@ -10,7 +10,7 @@ const StripeCheckoutButton = ({ price, onCheckout = () => {} }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const session = useSession();
-  const cartState = useSelector((state) => state.cart);
+
   const priceForStripe = price * 100;
   const publishableKey =
     'pk_test_51HgPkdItMNgOLBqdPoJCGKUdHfpXgpTJn2c8mSiY24VzX94k5EuzEhLYNjtGHrnFkqSgCpsfuKYfcqsmsly2DbtL00hmLhSQ7U';
@@ -22,7 +22,7 @@ const StripeCheckoutButton = ({ price, onCheckout = () => {} }) => {
       uid
     };
 
-    onCheckout(cartState[uid], price);
+    onCheckout(price);
     dispatch(deleteUserCart(payload));
     history.push('/product-listing');
   };

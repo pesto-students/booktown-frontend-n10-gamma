@@ -30,8 +30,25 @@ const CartTotal = () => {
     setShow(false);
   };
 
-  const handleUserOrderHistory = (cartItems, totalAmount) => {
-    const payload = {};
+  const handleUserOrderHistory = (totalAmount) => {
+    const cartItems = Object.values(cartState.cartItems[session.user.uid]);
+    const payload = {
+      orderItems: cartItems,
+      orderAmount: totalAmount,
+      orderDate: new Date().toLocaleDateString(),
+      orderId: (
+        Math.floor(Math.random() * (9999999999999999 - 10000000000)) +
+        10000000000
+      ).toString(),
+      orderStatus: 'Success',
+      orderTotal: cartItems.length,
+      orderPaymentStatus: 'Success',
+      orderPaymentMethod: 'Online'
+    };
+    session.service
+      .handleAddUserOrderHistory(payload)
+      .then(() => {})
+      .catch(() => {});
   };
 
   return (
@@ -52,7 +69,7 @@ const CartTotal = () => {
         </h4>
         <StripeCheckoutButton
           onCheckout={handleUserOrderHistory}
-          price={getTotalItems()}
+          price={getTotalPrice()}
         />
       </ItemTotal>
     </>
