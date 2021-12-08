@@ -33,3 +33,15 @@ export const removeUserCartItems = (cartItems, payload) => {
   };
   return newCartState;
 };
+
+export const updateCartItemQuantity = (cartItems, payload) => {
+  const { itemId, qty, uid } = payload || {};
+  const userSpecificItem = cartItems[uid];
+  const data = { ...userSpecificItem[itemId] };
+  data.quantity = qty;
+  const newCartState = {
+    ...cartItems,
+    [uid]: { ...userSpecificItem, [itemId]: data }
+  };
+  return newCartState;
+};

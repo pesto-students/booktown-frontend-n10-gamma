@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import {
-  addItem,
-  removeItem
+  removeItem,
+  updateQuantity
 } from '../../config/redux/features/cart/cartSlice';
 import { useSession } from '../../hooks';
 import CartItem from './CartItem';
@@ -26,13 +26,9 @@ const CartItems = () => {
   };
 
   const handleItemQtyChange = (itemId, qty) => {
-    const data = { ...userSpecificItem[itemId] };
-    data.quantity = qty;
-    const newCartState = {
-      ...cartItems,
-      [session.user?.uid]: { ...userSpecificItem, [itemId]: data }
-    };
-    dispatch(addItem(newCartState));
+    const payload = { itemId, qty, uid: session.user?.uid };
+
+    dispatch(updateQuantity(payload));
   };
 
   const handleCartClick = (itemId, e) => {
