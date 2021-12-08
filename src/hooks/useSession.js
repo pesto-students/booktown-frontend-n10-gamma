@@ -8,6 +8,7 @@ import {
   login,
   logout as logoutUser
 } from '../config/redux/features/auth/authSlice';
+import { useUserService } from '.';
 
 const useSession = () => {
   const history = useHistory();
@@ -16,6 +17,8 @@ const useSession = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const userService = useUserService();
+
   /**
    *
    * @param {String} redirectUrl
@@ -62,7 +65,10 @@ const useSession = () => {
     logout,
     loading,
     user: authState.user || user,
-    token: authState.token || token
+    token: authState.token || token,
+    service: {
+      ...userService
+    }
   };
 };
 
