@@ -23,11 +23,13 @@ function ProductListingPage() {
   const booksData = useQuery(GET_BOOKS_DATA);
 
   const onAddToCart = (item, e) => {
+    const itemClone = { ...item };
+    delete itemClone.__typename;
     e.stopPropagation();
     const uid = session?.user?.uid;
     const payload = {
       uid,
-      item
+      item: itemClone
     };
     dispatch(addItem(payload));
   };
