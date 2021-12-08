@@ -30,6 +30,10 @@ const CartTotal = () => {
     setShow(false);
   };
 
+  const handleUserOrderHistory = (cartItems, totalAmount) => {
+    const payload = {};
+  };
+
   return (
     <>
       <AddressModal show={show} onHide={onHide} />
@@ -46,7 +50,10 @@ const CartTotal = () => {
             />
           </span>
         </h4>
-        <StripeCheckoutButton price={getTotalItems()} />
+        <StripeCheckoutButton
+          onCheckout={handleUserOrderHistory}
+          price={getTotalItems()}
+        />
       </ItemTotal>
     </>
   );
