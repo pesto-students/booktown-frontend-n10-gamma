@@ -14,6 +14,9 @@ export const cartSlice = createSlice({
   name: namespace,
   initialState,
   reducers: {
+    updateQuantity: (state, action) => {
+      state.cartItems = updateCartItemQuantity(state.cartItems, action.payload);
+    },
     addItem: (state, action) => {
       state.cartItems = addItemToCart(state.cartItems, action.payload);
     },

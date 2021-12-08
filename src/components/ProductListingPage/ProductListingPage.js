@@ -11,7 +11,6 @@ import Header from '../common/header';
 import Card from './Card';
 import SideBar from './SideBar';
 import { MainContainer, ProductListingPageContainer } from './styledComponents';
-
 function ProductListingPage() {
   const [books, setBooks] = useState([]);
   const [searchInputText, setSearchInputText] = useState('');
@@ -21,7 +20,6 @@ function ProductListingPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const booksData = useQuery(GET_BOOKS_DATA);
-
   const onAddToCart = (item, e) => {
     e.stopPropagation();
     const uid = session?.user?.uid;
@@ -31,7 +29,6 @@ function ProductListingPage() {
     };
     dispatch(addItem(payload));
   };
-
   useEffect(() => {
     const { error, loading, data } = booksData;
     if (error) console.log(error.message);
@@ -39,7 +36,6 @@ function ProductListingPage() {
       setBooks(data.books);
     }
   }, [booksData]);
-
   useEffect(() => {
     const filteredBooks = books.filter((d) =>
       (d.title.toLowerCase() || d.author.toLowerCase()).includes(
@@ -48,29 +44,22 @@ function ProductListingPage() {
     );
     setBooksFilter(filteredBooks);
   }, [books, searchInputText]);
-
   const onChangeSearch = (e) => {
     setSearchInputText(e.target.value);
   };
-
   const booksPerPage = 12;
   const pagesVisited = pageNumber * booksPerPage;
-
   const displayBooks = booksFilter.slice(
     pagesVisited,
     pagesVisited + booksPerPage
   );
-
   const pageCount = Math.ceil(booksFilter.length / booksPerPage);
-
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
-
   const onCardClick = (item) => {
     history.push(`/product-details/${item.id}`);
   };
-
   return (
     <>
       <Header onChangeSearch={onChangeSearch} />
@@ -98,7 +87,6 @@ function ProductListingPage() {
             : [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((item) => (
                 <Skeleton key={item} />
               ))}
-
           <ReactPaginate
             previousLabel={'<<'}
             nextLabel={'>>'}
@@ -116,5 +104,4 @@ function ProductListingPage() {
     </>
   );
 }
-
 export default ProductListingPage;

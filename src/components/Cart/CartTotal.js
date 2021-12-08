@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumberFormat from 'react-number-format';
 import { useSelector } from 'react-redux';
 import { useSession } from '../../hooks';
-import AddressModal from './AddressModal';
 import StripeCheckoutButton from './StripeCheckoutButton';
 import { ItemTotal } from './styledComponents';
 
 const CartTotal = () => {
   const cartState = useSelector((state) => state.cart);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const session = useSession();
-  const [show, setShow] = useState(false);
+  const userSpecificItem = cartItems[session.user?.uid] || {};
+
   const getTotalPrice = () => {
     let totalPrice = 0;
     const items = Object.values(cartState.cartItems[session.user?.uid] || {});
@@ -26,28 +27,25 @@ const CartTotal = () => {
     return totalTtems;
   };
 
-  const onHide = () => {
-    setShow(false);
-  };
-
   return (
     <>
-      <AddressModal show={show} onHide={onHide} />
-      <ItemTotal>
-        <h4>
-          Subtotal({getTotalItems()} items):
-          <span className="itemTotal-price">
-            <NumberFormat
-              value={getTotalPrice()}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={'$'}
-              decimalScale={2}
-            />
-          </span>
-        </h4>
-        <StripeCheckoutButton price={getTotalItems()} />
-      </ItemTotal>
+      {Object.keys(userSpecificItem).length > 0 && (
+        <ItemTotal>
+          <h4>
+            Subtotal({getTotalItems()} items):
+            <span className="itemTotal-price">
+              <NumberFormat
+                value={getTotalPrice()}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'$'}
+                decimalScale={2}
+              />
+            </span>
+          </h4>
+          <StripeCheckoutButton price={getTotalPrice()} />
+        </ItemTotal>
+      )}
     </>
   );
 };

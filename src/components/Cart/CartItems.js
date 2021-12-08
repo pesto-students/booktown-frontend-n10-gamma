@@ -38,20 +38,26 @@ const CartItems = () => {
 
   return (
     <Items>
-      <h1>Shopping Cart</h1>
+      <h4>Shopping Cart</h4>
       <hr />
       <div>
-        {Object.keys(userSpecificItem)?.map((key, index) => (
-          <CartItem
-            itemId={key}
-            item={userSpecificItem[key]}
-            key={key}
-            index={index}
-            onItemQtyChange={handleItemQtyChange}
-            onDeleteCartItem={handleDeleteCartItem}
-            onCartItemClick={handleCartClick}
-          />
-        ))}
+        {Object.keys(userSpecificItem).length > 0 ? (
+          Object.keys(userSpecificItem)?.map((key, index) => {
+            return (
+              <CartItem
+                itemId={key}
+                item={userSpecificItem[key]}
+                key={key}
+                index={index}
+                onItemQtyChange={handleItemQtyChange}
+                onDeleteCartItem={handleDeleteCartItem}
+                onCartItemClick={handleCartClick}
+              />
+            );
+          })
+        ) : (
+          <h5>No Items in your cart</h5>
+        )}
       </div>
     </Items>
   );

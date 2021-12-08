@@ -5,7 +5,6 @@ export const MenuContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 40%;
-
   & {
     @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
       width: 100%;
@@ -98,7 +97,6 @@ export const HeaderLeftContainer = styled.div`
         margin-right: 5%;
       }
     }
-
     @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
       width: 90%;
       ${SearchBarContainer} {
@@ -118,8 +116,8 @@ export const CartMenu = styled.div`
   position: relative;
   span {
     position: absolute;
-    bottom: 17px;
-    left: 12px;
+    bottom: 25px;
+    left: 10px;
     color: tomato;
   }
 `;

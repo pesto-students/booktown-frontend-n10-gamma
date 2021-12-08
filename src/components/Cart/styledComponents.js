@@ -22,6 +22,10 @@ const Item = styled.div`
 
   .Price {
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
     font-weight: 700;
     margin-left: 16px;
     padding-top: 10px;
@@ -35,6 +39,7 @@ const Item = styled.div`
 
 const ItemInfo = styled.div`
   display: flex;
+  align-items: flex-start;
   .infoTitle {
     margin-left: 16px;
     max-width: 250px;
@@ -43,6 +48,9 @@ const ItemInfo = styled.div`
     margin-top: 4px;
     color: #007600;
     margin-left: 16px;
+  }
+  .title {
+    margin: 0;
   }
 
   @media (min-width: 992px) {
@@ -54,7 +62,6 @@ const ItemActions = styled.div`
   margin-top: 4px;
   display: flex;
   align-items: center;
-  margin-left: 16px;
 
   .itemQuantity {
     .Select {
@@ -77,6 +84,11 @@ const ItemActions = styled.div`
     color: black;
     cursor: pointer;
   }
+  i {
+    &:hover {
+      color: red !important;
+    }
+  }
 `;
 
 const ItemImage = styled.div`
@@ -90,6 +102,9 @@ const ItemImage = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
