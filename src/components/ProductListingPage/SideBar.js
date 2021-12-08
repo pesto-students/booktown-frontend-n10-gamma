@@ -52,17 +52,13 @@ function SideBar(props) {
       }
     });
   };
-
-  // const handleOnChange = (e, header, option) => {
-  //   switch (header) {
-  //     case 'Language':
-  //       setLanguage(option);
-  //   }
-  // };
-
   return (
     <Sidebar>
-      <Button text="Filter here" onClick={handleFilter} />
+      <Button
+        className="side-bar-filter__btn"
+        text="Filter here"
+        onClick={handleFilter}
+      />
       <Option>
         {filterOptions1.map((options, index) => (
           <SidebarOptions key={index}>
