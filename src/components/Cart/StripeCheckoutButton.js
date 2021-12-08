@@ -1,26 +1,28 @@
 import React from 'react';
 import { toast } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import StripeCheckout from 'react-stripe-checkout';
 import { deleteUserCart } from '../../config/redux/features/cart/cartSlice';
 import { useSession } from '../../hooks';
 
-const StripeCheckoutButton = ({ price }) => {
+const StripeCheckoutButton = ({ price, onCheckout = () => {} }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const session = useSession();
-
+  const cartState = useSelector((state) => state.cart);
   const priceForStripe = price * 100;
   const publishableKey =
     'pk_test_51HgPkdItMNgOLBqdPoJCGKUdHfpXgpTJn2c8mSiY24VzX94k5EuzEhLYNjtGHrnFkqSgCpsfuKYfcqsmsly2DbtL00hmLhSQ7U';
 
   const onToken = (token) => {
     toast.success('Payment Succesful!');
+    const uid = session.user?.uid;
     const payload = {
-      uid: session.user?.uid
+      uid
     };
 
+    onCheckout(cartState[uid], price);
     dispatch(deleteUserCart(payload));
     history.push('/product-listing');
   };
