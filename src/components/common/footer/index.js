@@ -1,7 +1,12 @@
 import FeatherIcon from 'feather-icons-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CART, PRODUCT_LISTING, PRODUCT_SELL } from '../../../router/types';
+import {
+  CART,
+  ORDER_HISTORY,
+  PRODUCT_LISTING,
+  PRODUCT_SELL
+} from '../../../router/types';
 import { FooterCards, FooterContainer, FooterSocial } from './styledComponents';
 function Footer({ title = '' }) {
   return (
@@ -44,7 +49,9 @@ function Footer({ title = '' }) {
             Your cart
           </Link>
         </p>
-        <p className="footer-card-text">Your Orders</p>
+        <Link className="footer-link" to={ORDER_HISTORY}>
+          <p className="footer-card-text">Your Orders</p>
+        </Link>
       </FooterCards>
       <FooterCards>
         <p className="footer-card-title">Use our features</p>
