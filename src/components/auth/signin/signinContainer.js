@@ -1,14 +1,16 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { googleAuthProvider } from '../../../config/firebase/authProviders';
 import useErrorContext from '../../../hooks/useErrorContext';
 import { useHistory } from 'react-router-dom';
 import { HOME } from '../../../router/types';
 import toast from 'react-hot-toast';
+import { useSession } from '../../../hooks';
 const useSigninContainer = (props) => {
   const history = useHistory();
   const errorContext = useErrorContext();
+  const session = useSession();
   const [componentState, setComponentState] = useState({
     email: '',
     password: '',
@@ -17,7 +19,12 @@ const useSigninContainer = (props) => {
     isSuccess: false,
     isError: false
   });
-
+  useEffect(() => {
+    if (session.user) {
+      history.goBack();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const handleStateChange = (name, value) => {
     setComponentState({
       ...componentState,
