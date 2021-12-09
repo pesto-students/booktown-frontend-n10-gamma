@@ -1,22 +1,22 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import ReactPaginate from 'react-paginate';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { addItem } from '../../config/redux/features/cart/cartSlice';
+import { getBooksCount } from '../../graphql/queries/product';
 import { GET_BOOKS_DATA } from '../../graphql/queries/product-listing';
 import { useSession } from '../../hooks';
-import { Footer, Loader, Skeleton } from '../common';
+import { Footer, Skeleton } from '../common';
 import Header from '../common/header';
 import Card from './Card';
 import SideBar from './SideBar';
 import {
   MainContainer,
-  ProductListingPageContainer,
-  PaginationContainer
+  PaginationContainer,
+  ProductListingPageContainer
 } from './styledComponents';
-import ReactPaginate from 'react-paginate';
-import { getBooksCount } from '../../graphql/queries/product';
 
 const totalItemsPerPage = 8;
 function ProductListingPage() {
