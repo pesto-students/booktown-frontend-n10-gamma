@@ -2,7 +2,6 @@ import React from 'react';
 import { Footer } from '../common';
 import Header from '../common/header';
 import { HomeContainer, HomeBannerOverlapper } from './styledComponents';
-import bookTownImg from '../../assets/book-img-1.png';
 import { Button } from '../common';
 import { Link } from 'react-router-dom';
 import { PRODUCT_LISTING, PRODUCT_SELL } from '../../router/types';
@@ -11,10 +10,9 @@ function HomeComponent(props) {
     <div>
       <Header isSearchBarHide={true} />
       <HomeContainer>
-        <img src={bookTownImg} alt="books" />
         <HomeBannerOverlapper>
           <div className="banner-overlapper-title">
-            <span>BookTown</span>
+            <span>The BookTown</span>
           </div>
           <p className="banner-overlapper-slogan">
             Read more, Gain more, Win more
