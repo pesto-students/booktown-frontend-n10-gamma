@@ -58,7 +58,7 @@ export const HeaderContainer = styled.div`
         width: 50vw;
         z-index: 100;
         font-size: 20px;
-        background-color: ${(props) => props.theme.colors.primary};
+        background-color: ${(props) => props.theme.colors.primaryLight};
         margin-left: 50%;
         transition: all 0.5s ease-in-out;
         .close-icon {
@@ -69,6 +69,7 @@ export const HeaderContainer = styled.div`
           }
         }
         ${MenuItem} {
+          text-align: center;
           &:hover {
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
           }
