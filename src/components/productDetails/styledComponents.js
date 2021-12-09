@@ -67,6 +67,7 @@ export const ProductDetailsInfoContainer = styled(CommonStyled.Container)`
   box-sizing: border-box;
   padding: 0 10px;
   .product-details-info-title {
+    align-self: flex-start;
     margin: 10px 0;
     ${(props) => ({ ...props.theme.fonts.h4 })}
     display: -webkit-box;

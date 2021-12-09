@@ -1,13 +1,18 @@
 import FeatherIcon from 'feather-icons-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CART, PRODUCT_LISTING, PRODUCT_SELL } from '../../../router/types';
+import {
+  CART,
+  ORDER_HISTORY,
+  PRODUCT_LISTING,
+  PRODUCT_SELL
+} from '../../../router/types';
 import { FooterCards, FooterContainer, FooterSocial } from './styledComponents';
 function Footer({ title = '' }) {
   return (
     <FooterContainer>
       <FooterCards>
-        <span className="footer-card-title">Connect with us</span>
+        <p className="footer-card-title">Connect with us</p>
         <p className="footer-card-text">
           <a
             target="_blank"
@@ -37,17 +42,19 @@ function Footer({ title = '' }) {
         </p>
       </FooterCards>
       <FooterCards>
-        <span className="footer-card-title">Let us help you</span>
+        <p className="footer-card-title">Let us help you</p>
         <p className="footer-card-text">Your account</p>
         <p className="footer-card-text">
           <Link className="footer-link" to={CART}>
             Your cart
           </Link>
         </p>
-        <p className="footer-card-text">Your Orders</p>
+        <Link className="footer-link" to={ORDER_HISTORY}>
+          <p className="footer-card-text">Your Orders</p>
+        </Link>
       </FooterCards>
       <FooterCards>
-        <span className="footer-card-title">Use our features</span>
+        <p className="footer-card-title">Use our features</p>
         <p className="footer-card-text">
           <Link className="footer-link" to={PRODUCT_SELL}>
             {' '}

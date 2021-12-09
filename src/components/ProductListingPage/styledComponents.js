@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
   display: flex;
+  min-height: 100vh;
 `;
 
 const ProductListingPageContainer = styled.div`
@@ -14,33 +15,6 @@ const ProductListingPageContainer = styled.div`
   padding: 0;
   margin: 0;
   background: ${(props) => props.theme.colors.secondary};
-  .paginationBttns {
-    position: relative;
-    bottom: -5px;
-    width: 80%;
-    height: 40px;
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    a {
-      padding: 10px;
-      margin: 8px;
-      border-radius: 5px;
-      border: 1px solid grey;
-      color: grey;
-      cursor: pointer;
-      &:hover {
-        border: 1px solid ${(props) => props.theme.colors.primary};
-        color: ${(props) => props.theme.colors.primary};
-      }
-    }
-  }
-  .paginationActive {
-    a {
-      color: ${(props) => props.theme.colors.primary};
-      background-color: lightgrey;
-    }
-  }
 `;
 
 const Image = styled.img`
@@ -56,73 +30,6 @@ const Image = styled.img`
   }
 `;
 
-const Content = styled.div`
-  display: flex;
-  flex: 70%;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 50px auto;
-  padding: 50px 0 0;
-  box-sizing: border-box;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-const Card = styled.div`
-  padding: 10px;
-  width: 30%;
-  border-radius: 15px;
-  display: flex;
-
-  flex-direction: column;
-  position: relative;
-  justify-content: center;
-  text-align: center;
-  transform: scale(0.8);
-  transition: all 1s ease-in-out;
-  margin-bottom: 50px;
-  align-items: center;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 30px 50px 20px 50px;
-  box-sizing: border-box;
-  background-color: white;
-  flex-wrap: wrap;
-`;
-
-const CardHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 25px 0;
-  align-items: center;
-`;
-
-const Button = styled.button`
-  width: 130px;
-  height: 35px;
-  font-size: 14px;
-  border-radius: 35px;
-  background-color: black;
-  cursor: pointer;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  position: relative;
-  &:hover {
-    background-color: white;
-    color: black;
-  }
-`;
-
 const Sidebar = styled.div`
   background: ${(props) => props.theme.colors.secondary};
   display: flex;
@@ -130,6 +37,8 @@ const Sidebar = styled.div`
   color: #40394d;
   flex-direction: column;
   align-items: center;
+  padding-left: 10px;
+  margin-top: 10px;
 `;
 
 const SidebarOptions = styled.div`
@@ -167,20 +76,61 @@ const Options = styled.p`
     color: #242526;
   }
 `;
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  .paginate-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    list-style: none;
+    align-items: center;
+    .page-active {
+      background-color: ${(props) => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.secondary};
+    }
+    .page-item {
+      margin: 0 5px;
+      border: 1px solid #808080;
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 22px;
+      cursor: pointer;
+      box-sizing: border-box;
+      &:hover {
+        background-color: ${(props) => props.theme.colors.primaryLight};
+        color: white;
+      }
+    }
+    .page-item-prev,
+    .page-item-next {
+      border: 1px solid #808080;
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      &:hover {
+        background-color: ${(props) => props.theme.colors.primaryLight};
+      }
+    }
+  }
+`;
 
 export {
   Image,
-  Content,
-  Card,
-  CardHeader,
-  Button,
   Sidebar,
   SidebarOptions,
   CheckBox,
   Options,
-  Container,
   ProductListingPageContainer,
   MainContainer,
   Option,
-  Star
+  Star,
+  PaginationContainer
 };

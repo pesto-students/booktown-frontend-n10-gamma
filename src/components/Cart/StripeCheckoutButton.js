@@ -6,7 +6,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import { deleteUserCart } from '../../config/redux/features/cart/cartSlice';
 import { useSession } from '../../hooks';
 
-const StripeCheckoutButton = ({ price }) => {
+const StripeCheckoutButton = ({ price, onCheckout = () => {} }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const session = useSession();
@@ -17,17 +17,18 @@ const StripeCheckoutButton = ({ price }) => {
 
   const onToken = (token) => {
     toast.success('Payment Succesful!');
+    const uid = session.user?.uid;
     const payload = {
-      uid: session.user?.uid
+      uid
     };
 
+    onCheckout(price);
     dispatch(deleteUserCart(payload));
     history.push('/product-listing');
   };
 
   return (
     <StripeCheckout
-      style={{ backgroundColor: 'red' }}
       label="Pay Now"
       name="The Book Town"
       billingAddress

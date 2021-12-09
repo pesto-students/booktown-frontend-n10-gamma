@@ -4,6 +4,11 @@ export const HomeContainer = styled.div`
   height: 100vh;
   display: flex;
   position: relative;
+  background-image: url('https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=100');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   img {
     object-fit: fill;
     height: 100%;
@@ -20,15 +25,15 @@ export const HomeBannerOverlapper = styled.div`
   left: 5%;
   .banner-overlapper-title {
     ${(props) => ({ ...props.theme.fonts.h1 })}
-    color: ${(props) => props.theme.colors.secondary};
+    color:white;
   }
   .banner-overlapper-slogan {
-    color: ${(props) => props.theme.colors.secondary};
+    color: white;
     ${(props) => ({ ...props.theme.fonts.h5 })}
   }
   .banner-overlapper-text {
-    color: black;
-    ${(props) => ({ ...props.theme.fonts.body1 })}
+    color: rgba(255, 255, 255, 0.8);
+    ${(props) => ({ ...props.theme.fonts.body1 })};
   }
   .overlapper-btn-container {
     display: flex;
@@ -43,7 +48,6 @@ export const HomeBannerOverlapper = styled.div`
     color: ${(props) => props.theme.colors.secondary};
     &:hover {
       background: transparent;
-      color: ${(props) => props.theme.colors.primary};
       border: 1px solid ${(props) => props.theme.colors.secondary};
     }
   }

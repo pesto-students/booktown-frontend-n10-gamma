@@ -30,3 +30,9 @@ export const getProductById = gql`
     }
   }
 `;
+
+export const getBooksCount = gql`
+  query getBooksCount {
+    getBooksCount
+  }
+`;

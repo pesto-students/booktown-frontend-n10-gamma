@@ -1,4 +1,4 @@
 import useSession from './useSession';
 import useErrorContext from './useErrorContext';
-
-export { useSession, useErrorContext };
+import useUserService from './userService';
+export { useSession, useErrorContext, useUserService };

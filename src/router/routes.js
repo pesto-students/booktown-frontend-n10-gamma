@@ -6,6 +6,7 @@ import {
   ABOUT,
   CART,
   HOME,
+  ORDER_HISTORY,
   PRODUCT_DETAILS,
   PRODUCT_LISTING,
   PRODUCT_SELL,
@@ -16,6 +17,7 @@ import Error from '../components/common/Error';
 import ProductSelling from '../components/productSelling';
 import ProductDetails from '../components/productDetails';
 import About from '../components/about';
+import OrderHistoryComponent from '../components/orderHistory';
 const routes = [
   {
     path: HOME,
@@ -80,6 +82,14 @@ const routes = [
     meta: { authorizedRoles: [] },
     name: 'product-details',
     key: 'product-details',
+    isProtectedRoute: true
+  },
+  {
+    path: ORDER_HISTORY,
+    component: OrderHistoryComponent,
+    meta: { authorizedRoles: [] },
+    name: 'order-history',
+    key: 'order-history',
     isProtectedRoute: true
   },
   {
