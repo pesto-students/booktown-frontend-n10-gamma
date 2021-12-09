@@ -51,7 +51,7 @@ const OrderHistoryComponent = (props) => {
                   <p>paid on : {order.orderDate}</p>
                 </Div>
                 {order.orderItems.map((item) => (
-                  <OrderDetails>
+                  <OrderDetails key={item._id}>
                     <OrderItemContainer>
                       <OrderImageAndDetials>
                         <OrderImageContainer

@@ -51,15 +51,21 @@ export default ShoppingCard;
 
 export const ShoppingCardContainer = styled.div`
   background: #fff;
-  width: 250px;
+  width: 300px;
   padding: 5px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin: 10px 0;
+  margin: 10px 20px;
   border-radius: ${(props) => props.theme.size.xsm};
+  & {
+    @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+      margin: 10px 0 !important;
+      width: 250px;
+    }
+  }
 `;
 
 export const CardImgContainer = styled.div`

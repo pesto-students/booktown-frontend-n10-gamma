@@ -66,7 +66,9 @@ const Header = ({ isSearchBarHide = false, onChangeSearch }) => {
           {user ? (
             `Hello, ${user?.displayName?.split(' ')[0]}`
           ) : (
-            <Link to={SIGN_IN}>Login</Link>
+            <Link className="link" to={SIGN_IN}>
+              Login
+            </Link>
           )}
         </MenuItem>
         <MenuItem>
