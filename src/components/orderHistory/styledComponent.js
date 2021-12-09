@@ -65,6 +65,11 @@ export const OrderHistoryHeader = styled.div`
   background: ${(props) => props.theme.colors.primaryLight};
   color: ${(props) => props.theme.colors.secondary};
   border: 1px solid;
+  & {
+    @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+      justify-content: space-evenly !important;
+    }
+  }
 `;
 export const OrderDetails = styled.div`
   display: flex;

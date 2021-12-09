@@ -88,6 +88,22 @@ const PaginationContainer = styled.div`
     justify-content: center;
     list-style: none;
     align-items: center;
+    a {
+      text-decoration: none;
+      font-weight: bold;
+
+      height: 25px;
+      width: 25px;
+      line-height: 22px;
+      cursor: pointer;
+      box-sizing: border-box;
+      outline: none;
+      &:hover {
+        background-color: ${(props) => props.theme.colors.primaryLight};
+        color: white;
+        outline: none;
+      }
+    }
     .page-active {
       background-color: ${(props) => props.theme.colors.primary};
       color: ${(props) => props.theme.colors.secondary};
@@ -102,6 +118,8 @@ const PaginationContainer = styled.div`
       line-height: 22px;
       cursor: pointer;
       box-sizing: border-box;
+      outline: none;
+
       &:hover {
         background-color: ${(props) => props.theme.colors.primaryLight};
         color: white;

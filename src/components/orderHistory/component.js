@@ -72,7 +72,7 @@ const OrderHistoryComponent = (props) => {
                       <Button
                         round={10}
                         className={'buy-btn'}
-                        text={'buy again'}
+                        text={'Buy again'}
                       />
                     </BtnContainer>
                   </OrderDetails>
