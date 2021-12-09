@@ -26,7 +26,7 @@ const CartItems = () => {
   };
 
   const handleItemQtyChange = (itemId, qty) => {
-    const payload = { itemId, qty, uid: session.user?.uid };
+    const payload = { itemId, qty: +qty, uid: session.user?.uid };
 
     dispatch(updateQuantity(payload));
   };

@@ -8,14 +8,19 @@ import {
   login,
   logout as logoutUser
 } from '../config/redux/features/auth/authSlice';
+import { useUserService } from '.';
+import { useApolloClient } from '@apollo/client';
 
 const useSession = () => {
+  const apolloClient = useApolloClient();
   const history = useHistory();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const userService = useUserService();
+
   /**
    *
    * @param {String} redirectUrl
@@ -27,6 +32,7 @@ const useSession = () => {
       .then(() => {
         dispatch(logoutUser());
         toast.success('Logged out successfully');
+        apolloClient.resetStore();
         setTimeout(() => {
           if (redirectUrl) history.push(redirectUrl);
         }, 2000);
@@ -62,7 +68,10 @@ const useSession = () => {
     logout,
     loading,
     user: authState.user || user,
-    token: authState.token || token
+    token: authState.token || token,
+    service: {
+      ...userService
+    }
   };
 };
 
