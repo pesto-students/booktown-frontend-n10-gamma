@@ -80,7 +80,7 @@ const Component = (props) => {
               {productInfo?.price ? (
                 <>
                   <span>M.R.P</span>
-                  <span className="product-price">$ {productInfo?.price}</span>)
+                  <span className="product-price">$ {productInfo?.price}</span>
                 </>
               ) : (
                 <GenreicSkeleton
