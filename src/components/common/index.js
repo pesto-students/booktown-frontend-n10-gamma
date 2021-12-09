@@ -10,6 +10,7 @@ import Select from './select';
 import * as CommonStyled from './styledComponents';
 import Skeleton from './skeleton';
 import NotFound from './notFound';
+import Loader from './loader';
 export {
   Select,
   Footer,
@@ -22,5 +23,6 @@ export {
   Radio,
   InputError,
   Skeleton,
-  NotFound
+  NotFound,
+  Loader
 };

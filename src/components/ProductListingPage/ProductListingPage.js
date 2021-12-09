@@ -1,27 +1,35 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import React, { useEffect, useState } from 'react';
-import ReactPaginate from 'react-paginate';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { addItem } from '../../config/redux/features/cart/cartSlice';
 import { GET_BOOKS_DATA } from '../../graphql/queries/product-listing';
 import { useSession } from '../../hooks';
-import { Footer, Skeleton } from '../common';
+import { Footer, Loader, Skeleton } from '../common';
 import Header from '../common/header';
 import Card from './Card';
 import SideBar from './SideBar';
-import { MainContainer, ProductListingPageContainer } from './styledComponents';
+import {
+  MainContainer,
+  ProductListingPageContainer,
+  PaginationContainer
+} from './styledComponents';
+import ReactPaginate from 'react-paginate';
+import { getBooksCount } from '../../graphql/queries/product';
 
+const totalItemsPerPage = 8;
 function ProductListingPage() {
   const [books, setBooks] = useState([]);
-  const [searchInputText, setSearchInputText] = useState('');
-  const [booksFilter, setBooksFilter] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loader, setLoader] = useState(true);
   const session = useSession();
   const dispatch = useDispatch();
   const history = useHistory();
-  const booksData = useQuery(GET_BOOKS_DATA);
-
+  const [booksQuery, res] = useLazyQuery(GET_BOOKS_DATA, {
+    fetchPolicy: 'no-cache'
+  });
+  const getBooksCntQuery = useQuery(getBooksCount, { fetchPolicy: 'no-cache' });
   const onAddToCart = (item, e) => {
     const itemClone = { ...item };
     delete itemClone.__typename;
@@ -33,40 +41,43 @@ function ProductListingPage() {
     };
     dispatch(addItem(payload));
   };
-
-  useEffect(() => {
-    const { error, loading, data } = booksData;
-    if (error) console.log(error.message);
-    if (!loading && data) {
-      setBooks(data.books);
-    }
-  }, [booksData]);
-
-  useEffect(() => {
-    const filteredBooks = books.filter((d) =>
-      (d.title.toLowerCase() || d.author.toLowerCase()).includes(
-        searchInputText.toLocaleLowerCase()
-      )
-    );
-    setBooksFilter(filteredBooks);
-  }, [books, searchInputText]);
-
-  const onChangeSearch = (e) => {
-    setSearchInputText(e.target.value);
+  const callBooksQuery = (page) => {
+    booksQuery({
+      variables: {
+        page: page,
+        limit: totalItemsPerPage
+      }
+    });
   };
 
-  const booksPerPage = 12;
-  const pagesVisited = pageNumber * booksPerPage;
+  useEffect(() => {
+    callBooksQuery(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (getBooksCntQuery.data?.getBooksCount && !getBooksCntQuery.loading) {
+      setTotalPages(
+        Math.ceil(getBooksCntQuery.data.getBooksCount / totalItemsPerPage)
+      );
+      setLoader(() => false);
+    } else if (getBooksCntQuery.error && !getBooksCntQuery.loading) {
+      toast.error('Something went wrong');
+      setLoader(() => false);
+    }
+  }, [getBooksCntQuery]);
+  useEffect(() => {
+    if (res.data && !res.loading) {
+      setBooks(() => res.data.books);
+    } else if (res.error && !res.loading) {
+      toast.error('Something went wrong');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [res.loading]);
 
-  const displayBooks = booksFilter.slice(
-    pagesVisited,
-    pagesVisited + booksPerPage
-  );
-
-  const pageCount = Math.ceil(booksFilter.length / booksPerPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
+  const handlePageClick = (data) => {
+    setBooks(() => []);
+    const selected = data.selected;
+    callBooksQuery(selected + 1);
   };
 
   const onCardClick = (item) => {
@@ -75,12 +86,12 @@ function ProductListingPage() {
 
   return (
     <>
-      <Header onChangeSearch={onChangeSearch} />
+      <Header />
       <MainContainer>
         <SideBar />
         <ProductListingPageContainer>
-          {displayBooks?.length > 0
-            ? displayBooks.map((item) => {
+          {books?.length > 0
+            ? books.map((item) => {
                 return (
                   <Card
                     onClick={onCardClick}
@@ -100,20 +111,28 @@ function ProductListingPage() {
             : [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((item) => (
                 <Skeleton key={item} />
               ))}
-
-          <ReactPaginate
-            previousLabel={'<<'}
-            nextLabel={'>>'}
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName={'paginationBttns'}
-            previousLinkClassName={'previousBttn'}
-            nextLinkClassName={'nextBttn'}
-            disabledClassName={'paginationDisabled'}
-            activeClassName={'paginationActive'}
-          />
         </ProductListingPageContainer>
       </MainContainer>
+      {loader ? (
+        <div style={{ textAlign: 'center' }}>Loading...</div>
+      ) : (
+        <PaginationContainer>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={totalPages}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName={'paginate-container'}
+            pageClassName={'page-item'}
+            activeClassName={'page-active'}
+            previousClassName={'page-item-prev'}
+            nextClassName={'page-item-next'}
+          />
+        </PaginationContainer>
+      )}
       <Footer />
     </>
   );
