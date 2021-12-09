@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Footer, Header } from '../common';
+import { Button, Footer, Header, NotFound } from '../common';
 import { GenreicSkeleton } from '../common/skeleton';
 import useOrderHistoryContainer from './container';
 import {
@@ -108,6 +108,7 @@ const OrderHistoryComponent = (props) => {
                 </div>
               </OrderHistoryCard>
             ))}
+        {!orderLoading && orderData.length === 0 && <NotFound />}
       </OrderHistoryContainer>
       <Footer />
     </>

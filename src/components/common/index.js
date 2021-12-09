@@ -9,6 +9,7 @@ import SearchBar from './search';
 import Select from './select';
 import * as CommonStyled from './styledComponents';
 import Skeleton from './skeleton';
+import NotFound from './notFound';
 export {
   Select,
   Footer,
@@ -20,5 +21,6 @@ export {
   CheckBox,
   Radio,
   InputError,
-  Skeleton
+  Skeleton,
+  NotFound
 };

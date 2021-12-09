@@ -3,10 +3,11 @@ import styled from 'styled-components';
 export const OrderHistoryContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: ${(props) => props.theme.colors.secondary};
   width: 100vw;
+  min-height: 100vh;
   .order-payment-status {
     padding: 10px 0 0 10px;
   }

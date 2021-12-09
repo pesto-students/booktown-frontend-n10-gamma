@@ -9,8 +9,10 @@ import {
   logout as logoutUser
 } from '../config/redux/features/auth/authSlice';
 import { useUserService } from '.';
+import { useApolloClient } from '@apollo/client';
 
 const useSession = () => {
+  const apolloClient = useApolloClient();
   const history = useHistory();
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
@@ -30,6 +32,7 @@ const useSession = () => {
       .then(() => {
         dispatch(logoutUser());
         toast.success('Logged out successfully');
+        apolloClient.resetStore();
         setTimeout(() => {
           if (redirectUrl) history.push(redirectUrl);
         }, 2000);
