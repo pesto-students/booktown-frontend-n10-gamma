@@ -14,7 +14,9 @@ import { useHistory } from 'react-router';
  */
 const useOrderHistoryContainer = () => {
   const history = useHistory();
-  const getUserHistoryQuery = useQuery(getUserHistory);
+  const getUserHistoryQuery = useQuery(getUserHistory, {
+    fetchPolicy: 'no-cache'
+  });
   const [userHistory, setUserHistory] = useState({
     data: [],
     error: null,

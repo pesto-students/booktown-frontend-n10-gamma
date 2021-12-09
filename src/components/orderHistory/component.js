@@ -40,7 +40,7 @@ const OrderHistoryComponent = (props) => {
                   </HeaderMenue>
                   <HeaderMenue>
                     <Text>SHIP TO</Text>
-                    <Text>Tejas Patil</Text>
+                    <Text>Pesto</Text>
                   </HeaderMenue>
                   <HeaderMenue>
                     <Text>ORDER # {order.orderId}</Text>
