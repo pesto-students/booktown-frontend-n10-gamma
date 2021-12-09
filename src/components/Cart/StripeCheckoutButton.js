@@ -29,7 +29,6 @@ const StripeCheckoutButton = ({ price, onCheckout = () => {} }) => {
 
   return (
     <StripeCheckout
-      style={{ backgroundColor: 'red' }}
       label="Pay Now"
       name="The Book Town"
       billingAddress
