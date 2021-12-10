@@ -38,7 +38,7 @@ const CartItems = () => {
 
   return (
     <Items>
-      <h1>Shopping Cart</h1>
+      <h3>Shopping Cart</h3>
       <hr />
       <div>
         {Object.keys(userSpecificItem)?.map((key, index) => (

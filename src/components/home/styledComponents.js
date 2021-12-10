@@ -48,7 +48,7 @@ export const HomeBannerOverlapper = styled.div`
     color: ${(props) => props.theme.colors.secondary};
     &:hover {
       background: transparent;
-      border: 1px solid ${(props) => props.theme.colors.secondary};
+      border: 1px solid white;
     }
   }
   .overlapper-btn-sell {

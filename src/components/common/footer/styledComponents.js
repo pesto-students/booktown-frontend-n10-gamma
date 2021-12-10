@@ -39,10 +39,10 @@ export const FooterCards = styled.div`
   }
   .footer-card-text {
     ${(props) => ({ ...props.theme.fonts.text1 })};
-    opacity: 0.6;
+    font-weight: 500;
     cursor: pointer;
     &:hover {
-      opacity: 1;
+      text-decoration: underline;
       transition: width 0.5s ease-in-out;
     }
   }

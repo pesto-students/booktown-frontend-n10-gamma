@@ -21,6 +21,10 @@ const Item = styled.div`
   }
 
   .Price {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
     font-size: 18px;
     font-weight: 700;
     margin-left: 16px;
@@ -38,6 +42,15 @@ const ItemInfo = styled.div`
   .infoTitle {
     margin-left: 16px;
     max-width: 250px;
+    h4 {
+      margin: 0;
+    }
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   }
   .infoStock {
     margin-top: 4px;
@@ -76,6 +89,11 @@ const ItemActions = styled.div`
   .itemDelete {
     color: black;
     cursor: pointer;
+  }
+  i {
+    &:hover {
+      color: red !important;
+    }
   }
 `;
 
@@ -159,12 +177,12 @@ const Address = styled.div`
 `;
 
 export {
+  Address,
   CartMain,
   Item,
   ItemInfo,
   ItemActions,
   ItemImage,
   Items,
-  ItemTotal,
-  Address
+  ItemTotal
 };

@@ -10,7 +10,7 @@ const ProductListingPageContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   padding: 0;
   margin: 0;
@@ -33,12 +33,24 @@ const Image = styled.img`
 const Sidebar = styled.div`
   background: ${(props) => props.theme.colors.secondary};
   display: flex;
-  flex: 25%;
+  flex: 300px;
   color: #40394d;
   flex-direction: column;
   align-items: center;
   padding-left: 10px;
-  margin-top: 10px;
+  padding-top: 10px;
+  background-color: white;
+  .side-bar-filter__btn {
+    height: 30px;
+    width: 100%;
+    padding: 0;
+    margin: 10px;
+    background-color: black;
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
 `;
 
 const SidebarOptions = styled.div`
@@ -88,6 +100,22 @@ const PaginationContainer = styled.div`
     justify-content: center;
     list-style: none;
     align-items: center;
+    a {
+      text-decoration: none;
+      font-weight: bold;
+
+      height: 25px;
+      width: 25px;
+      line-height: 22px;
+      cursor: pointer;
+      box-sizing: border-box;
+      outline: none;
+      &:hover {
+        background-color: ${(props) => props.theme.colors.primaryLight};
+        color: white;
+        outline: none;
+      }
+    }
     .page-active {
       background-color: ${(props) => props.theme.colors.primary};
       color: ${(props) => props.theme.colors.secondary};
@@ -102,6 +130,8 @@ const PaginationContainer = styled.div`
       line-height: 22px;
       cursor: pointer;
       box-sizing: border-box;
+      outline: none;
+
       &:hover {
         background-color: ${(props) => props.theme.colors.primaryLight};
         color: white;

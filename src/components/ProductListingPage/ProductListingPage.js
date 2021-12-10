@@ -17,9 +17,13 @@ import {
   PaginationContainer,
   ProductListingPageContainer
 } from './styledComponents';
+import { debouncing } from '../../utility/applicationUtility';
+import { filterBooks } from '../../graphql/queries/product';
+import { useLocation } from 'react-router-dom';
 
 const totalItemsPerPage = 8;
-function ProductListingPage() {
+function ProductListingPage(props) {
+  const params = useLocation();
   const [books, setBooks] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [loader, setLoader] = useState(true);
@@ -30,6 +34,17 @@ function ProductListingPage() {
     fetchPolicy: 'no-cache'
   });
   const getBooksCntQuery = useQuery(getBooksCount, { fetchPolicy: 'no-cache' });
+  const [filterBooksQuery] = useLazyQuery(filterBooks, {
+    fetchPolicy: 'no-cache',
+    onCompleted: (data) => {
+      if (data.filterBooks.length > 0) {
+        setBooks(data.filterBooks);
+      } else {
+        toast.error('No Books Found');
+        setTimeout(() => history.goBack(), 2000);
+      }
+    }
+  });
   const onAddToCart = (item, e) => {
     const itemClone = { ...item };
     delete itemClone.__typename;
@@ -49,9 +64,11 @@ function ProductListingPage() {
       }
     });
   };
-
+  const handleSearch = (data) => {
+    console.log(data);
+  };
   useEffect(() => {
-    callBooksQuery(1);
+    if (!params.search) callBooksQuery(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
@@ -74,6 +91,33 @@ function ProductListingPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res.loading]);
 
+  useEffect(() => {
+    let isSearchQuery = false;
+    const payload = {
+      language: '',
+      format: '',
+      condition: ''
+    };
+    if (params.search) {
+      params.search.split('&').forEach((item) => {
+        isSearchQuery = true;
+        let [key, value] = item.split('=');
+        key = key.replace('?', '');
+        value = value.split(',');
+        payload[key] = value[0];
+      });
+    }
+    if (isSearchQuery) {
+      setBooks(() => []);
+      filterBooksQuery({
+        variables: {
+          payload
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.search]);
+
   const handlePageClick = (data) => {
     setBooks(() => []);
     const selected = data.selected;
@@ -86,9 +130,13 @@ function ProductListingPage() {
 
   return (
     <>
-      <Header />
+      <Header
+        onChangeSearch={({ target: { value } }) =>
+          debouncing(1000)(handleSearch, [value])
+        }
+      />
       <MainContainer>
-        <SideBar />
+        <SideBar {...props} />
         <ProductListingPageContainer>
           {books?.length > 0
             ? books.map((item) => {

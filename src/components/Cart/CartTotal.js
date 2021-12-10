@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumberFormat from 'react-number-format';
 import { useSelector } from 'react-redux';
 import { useSession } from '../../hooks';
@@ -9,7 +9,7 @@ import { ItemTotal } from './styledComponents';
 const CartTotal = () => {
   const cartState = useSelector((state) => state.cart);
   const session = useSession();
-  const [show, setShow] = useState(false);
+
   const getTotalPrice = () => {
     let totalPrice = 0;
     const items = Object.values(cartState.cartItems[session.user?.uid] || {});
@@ -24,10 +24,6 @@ const CartTotal = () => {
       totalTtems += parseInt(item.quantity);
     });
     return totalTtems;
-  };
-
-  const onHide = () => {
-    setShow(false);
   };
 
   const handleUserOrderHistory = (totalAmount) => {
@@ -53,7 +49,7 @@ const CartTotal = () => {
 
   return (
     <>
-      <AddressModal show={show} onHide={onHide} />
+      <AddressModal />
       <ItemTotal>
         <h4>
           Subtotal({getTotalItems()} items):

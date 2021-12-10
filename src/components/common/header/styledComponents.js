@@ -4,7 +4,7 @@ export const MenuContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 40%;
+  width: 30%;
 
   & {
     @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
