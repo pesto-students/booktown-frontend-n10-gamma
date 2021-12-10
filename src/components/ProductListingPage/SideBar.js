@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { filterOptions1, filterOptions2 } from '../../DummyData/FilterOptions';
-import StarRating from '../common/StarRating/StarRating';
+import { useHistory } from 'react-router-dom';
+import { filterOptions1 } from '../../config/appConfig';
+import { PRODUCT_LISTING } from '../../router/types';
+import { genrateQueryString } from '../../utility/applicationUtility';
+import { Button } from '../common';
 import {
   CheckBox,
   Option,
@@ -9,9 +12,55 @@ import {
   SidebarOptions
 } from './styledComponents';
 
-function SideBar(props) {
-  const [rating, setRating] = useState(0);
+function SideBar() {
+  const history = useHistory();
 
+  const [filterState, setFilterState] = useState({
+    language: { English: false, Hindi: false, Marathi: false, Tamil: false },
+    price: {
+      min: 0,
+      max: 0
+    },
+    format: { Audio: false, Book: false, 'E-Book': false },
+    condition: { Old: false, New: false }
+  });
+
+  const handleOnChange = (e, stateProp) => {
+    const { name, checked } = e.target;
+    setFilterState((prevState) => ({
+      ...prevState,
+      [stateProp]: {
+        ...prevState[stateProp],
+        [name]: checked
+      }
+    }));
+  };
+
+  const handleFilter = () => {
+    const payload = {
+      condition: __getFilterValue(filterState.condition),
+      language: __getFilterValue(filterState.language),
+      format: __getFilterValue(filterState.format)
+    };
+    const query = genrateQueryString(payload);
+    console.log(payload);
+    history.push({
+      pathname: PRODUCT_LISTING,
+      search: `${query ? '?' + query : ''}`,
+      state: {
+        update: true
+      }
+    });
+  };
+  const __getFilterValue = (obj) => {
+    let value = '';
+    Object.keys(obj).forEach((key) => {
+      if (obj[key]) {
+        value += key + ',';
+      }
+    });
+    return value;
+  };
   return (
     <Sidebar>
       <Option>
@@ -20,7 +69,13 @@ function SideBar(props) {
             <div className="filter-option-title">{options.header}</div>
             {options.options.map((d, index) => (
               <CheckBox key={index}>
-                <input type="checkbox"></input>
+                <input
+                  name={d.text}
+                  onClick={(e) =>
+                    handleOnChange(e, options.header.toString().toLowerCase())
+                  }
+                  type="checkbox"
+                />
                 <span>
                   <Options>{d.text}</Options>
                 </span>
@@ -28,23 +83,16 @@ function SideBar(props) {
             ))}
           </SidebarOptions>
         ))}
-
-        <SidebarOptions>
-          <div className="filter-option-title">Customer Review</div>
-          <StarRating rating={rating} onRating={(rate) => setRating(rate)} />
-        </SidebarOptions>
-
-        {filterOptions2.map((options, index) => (
-          <SidebarOptions key={index}>
-            <div className="filter-option-title">{options.header}</div>
-            {options.options.map((d, index) => (
-              <Options key={index}>{d.text}</Options>
-            ))}
-          </SidebarOptions>
-        ))}
       </Option>
+      <Button
+        title="Apply Filter"
+        className="side-bar-filter__btn"
+        text="Apply Filter"
+        icon="filter"
+        round={1}
+        onClick={handleFilter}
+      />
     </Sidebar>
   );
 }
-
 export default SideBar;

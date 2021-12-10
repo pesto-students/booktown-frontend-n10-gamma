@@ -36,3 +36,35 @@ export const getBooksCount = gql`
     getBooksCount
   }
 `;
+
+export const searchBooks = gql`
+  query searchBooks($query: String) {
+    searchBooks(query: $query) {
+      title
+    }
+  }
+`;
+
+export const filterBooks = gql`
+  query filterBooks($payload: FilterOptions!) {
+    filterBooks(payload: $payload) {
+      id
+      title
+      subTitle
+      author
+      published
+      publisher
+      pages
+      description
+      files
+      condition
+      language
+      price
+      originalPrice
+      status
+      format
+      subcategory
+      category
+    }
+  }
+`;

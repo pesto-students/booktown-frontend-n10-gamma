@@ -24,7 +24,7 @@ export const MyButton = styled.button`
   &:disabled {
     background-color: rgba(200, 200, 200, 0.5);
     cursor: not-allowed;
-    color: gray;
+    color: black;
   }
   &:hover {
     background-color: ${(props) => props.theme.colors.secondary};
