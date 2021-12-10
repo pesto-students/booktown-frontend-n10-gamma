@@ -21,10 +21,18 @@ const CartItem = ({
 
       <ItemInfo>
         <div className="infoTitle">
-          <h2>{title}</h2>
+          <h4>{title}</h4>
           <p>{description}</p>
         </div>
-
+      </ItemInfo>
+      <div className="Price">
+        <NumberFormat
+          value={price}
+          displayType={'text'}
+          thousandSeparator={true}
+          prefix={'$'}
+          decimalScale={2}
+        />
         <ItemActions>
           <div className="itemQuantity">
             <Input
@@ -40,15 +48,6 @@ const CartItem = ({
             className="fa-solid fa-trash itemDelete"
             onClick={(e) => onDeleteCartItem(itemId, e)}></i>
         </ItemActions>
-      </ItemInfo>
-      <div className="Price">
-        <NumberFormat
-          value={price}
-          displayType={'text'}
-          thousandSeparator={true}
-          prefix={'$'}
-          decimalScale={2}
-        />
       </div>
     </Item>
   );

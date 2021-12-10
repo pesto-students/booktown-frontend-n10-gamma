@@ -85,6 +85,7 @@ const SignupComponent = (props) => {
           </InputContainer>
         </form>
         <Button
+          className="signup-form-button"
           onClick={handleCreateAccount}
           disabled={recaptcha}
           style={{ margin: '10px 0', width: '320px' }}
