@@ -24,54 +24,75 @@ const useSignupContainer = (props) => {
     errors: {}
   });
 
+  const onSignUpSuccess = (user) => {
+    user.user.updateProfile({
+      displayName: `${signupForm.firstName} ${signupForm.lastName}`
+    });
+    const userData = {
+      firstName: signupForm.firstName,
+      lastName: signupForm.lastName,
+      email: signupForm.email,
+      id: user.user.uid,
+      password: signupForm.password
+    };
+    toast.promise(
+      createUserMutation({
+        variables: {
+          payload: userData
+        }
+      }),
+      {
+        loading: 'Setting User profile...',
+        success: (res) => {
+          if (res.errors) {
+            toast.error('Setting user profile failed');
+            return;
+          } else if (
+            res.data.createUser?.status === 500 ||
+            res.data.createUser?.status === 400
+          ) {
+            toast.error(res.data.createUser?.message);
+            return;
+          }
+          setTimeout(() => {
+            history.push(HOME);
+          }, 2000);
+
+          return 'User profile set successfully';
+        },
+        error: (err) => {
+          user.user.delete();
+          return 'User profile set failed';
+        }
+      }
+    );
+  };
   const handleCreateAccount = async () => {
     __validate(signupForm).then((validationResult) => {
       if (!validationResult.isError) {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(signupForm.email, signupForm.password)
-          .then((user) => {
-            user.user.updateProfile({
-              displayName: `${signupForm.firstName} ${signupForm.lastName}`
-            });
-            const userData = {
-              firstName: signupForm.firstName,
-              lastName: signupForm.lastName,
-              email: signupForm.email,
-              id: user.user.uid,
-              password: signupForm.password
-            };
-            createUserMutation({
-              variables: {
-                payload: userData
-              }
-            })
-              .then((res) => {
-                console.log(res);
-                if (res.errors) {
-                  toast.error('Account creation failed');
-                } else if (
-                  res.data.createUser?.status === 500 ||
-                  res.data.createUser?.status === 400
-                ) {
-                  toast.error(res.data.createUser?.message);
-                } else {
-                  toast.success('Account created successfully');
-                  history.push(HOME);
-                }
-              })
-              .catch((err) => {
-                user.user.delete();
-                toast.error('Account creation failed');
+        toast.promise(
+          firebase
+            .auth()
+            .createUserWithEmailAndPassword(
+              signupForm.email,
+              signupForm.password
+            ),
+          {
+            loading: 'Signing up...',
+            success: (user) => {
+              onSignUpSuccess(user);
+              return 'Account successfully created';
+            },
+            error: (error) => {
+              toast.error(error.message);
+              setErrors({
+                isError: true,
+                errors: {}
               });
-          })
-          .catch((error) => {
-            toast.error(error.message);
-            setErrors({
-              isError: true,
-              errors: {}
-            });
-          });
+              return 'Error creating account!';
+            }
+          }
+        );
       } else {
         setErrors(() => ({
           isError: true,
@@ -88,17 +109,17 @@ const useSignupContainer = (props) => {
 
   const __validate = async (data) => {
     const schema = yup.object().shape({
-      email: yup.string().email('Invalid email').required('Required'),
+      email: yup.string().email('Invalid email').required('Email required'),
       password: yup
         .string()
         .min(6, 'Password must be at least 6 characters')
-        .required('Required'),
+        .required('Password required'),
       confirmPassword: yup
         .string()
         .oneOf([yup.ref('password'), null], 'Passwords must match')
-        .required('Required'),
-      firstName: yup.string().required('Required'),
-      lastName: yup.string().required('Required')
+        .required('Confirm password required'),
+      firstName: yup.string().required('First name required'),
+      lastName: yup.string().required('Last name required')
     });
 
     return schema
