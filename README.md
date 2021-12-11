@@ -27,8 +27,8 @@ Once uploaded you can see the books in the product listing page.
 
 
 ## Authors
-Tejas Patil
-Gagan Saluja
+1.Tejas Patil
+2.Gagan Kumar Saluja
 
 
 
