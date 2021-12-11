@@ -86,11 +86,13 @@ export const HeaderContainer = styled.div`
 export const SearchBarContainer = styled.div`
   flex: 0.6;
   margin-right: 10%;
+  height: 100%;
 `;
 export const HeaderLeftContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
   width: 60%;
   & {
     @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
