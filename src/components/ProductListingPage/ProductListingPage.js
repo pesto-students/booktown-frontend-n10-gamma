@@ -4,10 +4,11 @@ import toast from 'react-hot-toast';
 import ReactPaginate from 'react-paginate';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { addItem } from '../../config/redux/features/cart/cartSlice';
-import { getBooksCount } from '../../graphql/queries/product';
+import { filterBooks, getBooksCount } from '../../graphql/queries/product';
 import { GET_BOOKS_DATA } from '../../graphql/queries/product-listing';
-import { useSession } from '../../hooks';
+import { useSearch, useSession } from '../../hooks';
 import { Footer, Skeleton } from '../common';
 import Header from '../common/header';
 import Card from './Card';
@@ -17,9 +18,6 @@ import {
   PaginationContainer,
   ProductListingPageContainer
 } from './styledComponents';
-import { debouncing } from '../../utility/applicationUtility';
-import { filterBooks } from '../../graphql/queries/product';
-import { useLocation } from 'react-router-dom';
 
 const totalItemsPerPage = 8;
 function ProductListingPage(props) {
@@ -30,10 +28,14 @@ function ProductListingPage(props) {
   const session = useSession();
   const dispatch = useDispatch();
   const history = useHistory();
+  const searchHook = useSearch();
   const [booksQuery, res] = useLazyQuery(GET_BOOKS_DATA, {
     fetchPolicy: 'no-cache'
   });
   const getBooksCntQuery = useQuery(getBooksCount, { fetchPolicy: 'no-cache' });
+  /**
+   * @description: get books count
+   */
   const [filterBooksQuery] = useLazyQuery(filterBooks, {
     fetchPolicy: 'no-cache',
     onCompleted: (data) => {
@@ -45,6 +47,12 @@ function ProductListingPage(props) {
       }
     }
   });
+
+  /**
+   *
+   * @param {Object} item
+   * @param {Event} e
+   */
   const onAddToCart = (item, e) => {
     const itemClone = { ...item };
     delete itemClone.__typename;
@@ -56,6 +64,11 @@ function ProductListingPage(props) {
     };
     dispatch(addItem(payload));
   };
+
+  /**
+   *
+   * @param {Number} page
+   */
   const callBooksQuery = (page) => {
     booksQuery({
       variables: {
@@ -64,13 +77,19 @@ function ProductListingPage(props) {
       }
     });
   };
-  const handleSearch = (data) => {
-    console.log(data);
-  };
+
+  /**
+   *  one time setup
+   */
   useEffect(() => {
     if (!params.search) callBooksQuery(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /**
+   * @description get the books count from the server
+   *
+   */
   useEffect(() => {
     if (getBooksCntQuery.data?.getBooksCount && !getBooksCntQuery.loading) {
       setTotalPages(
@@ -82,6 +101,10 @@ function ProductListingPage(props) {
       setLoader(() => false);
     }
   }, [getBooksCntQuery]);
+
+  /**
+   * @description get the books from the server
+   */
   useEffect(() => {
     if (res.data && !res.loading) {
       setBooks(() => res.data.books);
@@ -91,6 +114,10 @@ function ProductListingPage(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res.loading]);
 
+  /**
+   * @description handle the search query
+   * this code will read url params and search the books
+   */
   useEffect(() => {
     let isSearchQuery = false;
     const payload = {
@@ -118,23 +145,26 @@ function ProductListingPage(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.search]);
 
+  /**
+   *
+   * @param {Object} data
+   */
   const handlePageClick = (data) => {
     setBooks(() => []);
     const selected = data.selected;
     callBooksQuery(selected + 1);
   };
-
+  /**
+   *
+   * @param {String} item
+   */
   const onCardClick = (item) => {
     history.push(`/product-details/${item.id}`);
   };
 
   return (
     <>
-      <Header
-        onChangeSearch={({ target: { value } }) =>
-          debouncing(1000)(handleSearch, [value])
-        }
-      />
+      <Header {...searchHook} />
       <MainContainer>
         <SideBar {...props} />
         <ProductListingPageContainer>

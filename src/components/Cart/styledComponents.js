@@ -118,7 +118,7 @@ const Items = styled.div`
   padding: 20px;
   min-width: 80vw;
   max-width: 80vw;
-
+  min-height: 100vh;
   @media (min-width: 992px) {
     min-width: auto;
   }

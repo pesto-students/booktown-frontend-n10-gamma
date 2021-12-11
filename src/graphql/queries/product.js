@@ -40,6 +40,7 @@ export const getBooksCount = gql`
 export const searchBooks = gql`
   query searchBooks($query: String) {
     searchBooks(query: $query) {
+      id
       title
     }
   }

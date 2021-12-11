@@ -21,7 +21,13 @@ import {
 } from './styledComponents';
 import { Link } from 'react-router-dom';
 
-const Header = ({ isSearchBarHide = false, onChangeSearch }) => {
+const Header = ({
+  isSearchBarHide = false,
+  onChangeSearch = () => {},
+  searchResult = [],
+  onSearchItemSelect = () => {},
+  searchLoader = false
+}) => {
   const session = useSession();
   const { user } = session;
   const cartState = useSelector((state) => state.cart);
@@ -41,7 +47,12 @@ const Header = ({ isSearchBarHide = false, onChangeSearch }) => {
         </Link>
         {!isSearchBarHide && (
           <SearchBarContainer>
-            <SearchBar onChangeSearch={onChangeSearch} />
+            <SearchBar
+              searchData={searchResult}
+              onSearchItemSelect={onSearchItemSelect}
+              onChange={onChangeSearch}
+              searchLoader={searchLoader}
+            />
           </SearchBarContainer>
         )}
       </HeaderLeftContainer>

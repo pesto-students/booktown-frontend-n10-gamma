@@ -1,7 +1,10 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { useEffect, useState } from 'react';
-import { googleAuthProvider } from '../../../config/firebase/authProviders';
+import {
+  googleAuthProvider,
+  facebookAuthProvider
+} from '../../../config/firebase/authProviders';
 import useErrorContext from '../../../hooks/useErrorContext';
 import { useHistory } from 'react-router-dom';
 import { HOME } from '../../../router/types';
@@ -73,6 +76,17 @@ const useSigninContainer = (props) => {
           error: err
         });
       }
+    } else if (providerName === 'facebook') {
+      try {
+        const userCred = await firebase
+          .auth()
+          .signInWithPopup(facebookAuthProvider);
+        if (userCred) {
+          history.push(HOME);
+        } else {
+          toast.error('Error signing in');
+        }
+      } catch (error) {}
     }
   };
 

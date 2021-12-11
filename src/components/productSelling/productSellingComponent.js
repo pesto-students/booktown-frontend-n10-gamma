@@ -2,6 +2,7 @@ import FeatherIcon from 'feather-icons-react';
 import 'firebase/compat/auth';
 import React from 'react';
 import { categoryAndSubCategory, language } from '../../config/appConfig';
+import { useSearch } from '../../hooks';
 import {
   Button,
   Footer,
@@ -32,10 +33,10 @@ const ProductSellingComponent = (props) => {
     errors,
     disabledSubmit
   } = useProductSellingContainer();
-
+  const searchHook = useSearch();
   return (
     <>
-      <Header />
+      <Header {...searchHook} />
       <ProductContainer>
         <ProductFieldWrapper>
           <ProductFieldTitle>Book Detail</ProductFieldTitle>
