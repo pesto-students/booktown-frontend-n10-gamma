@@ -1,34 +1,41 @@
 import styled from 'styled-components';
 
 export const SearchContainer = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  height: 100%;
 `;
-
-export const SearchInputContainer = styled.div`
-  position: relative;
+export const SearchInput = styled.input`
   width: 100%;
+  padding: 5px;
   box-sizing: border-box;
-  input {
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 0;
-    padding-left: 30px;
-    font-size: 1.2rem;
-    outline: none;
-  }
-  .search-icon {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-  }
+  border-radius: 5px;
+  border: none;
+  outline: none;
 `;
-
 export const SearchResultsContainer = styled.div`
   width: 100%;
+  max-height: 300px;
+  overflow-y: scroll;
+  background-color: #4f5b62;
+  padding-left: 10px;
+  position: relative;
+  z-index: 1;
+  .search-loader {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+export const SearchItem = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;

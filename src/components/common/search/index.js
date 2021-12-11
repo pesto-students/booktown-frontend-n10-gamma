@@ -1,25 +1,46 @@
-import FeatherIcon from 'feather-icons-react';
-import React from 'react';
+import { LoaderIcon } from 'react-hot-toast';
 import {
   SearchContainer,
-  SearchInputContainer,
-  SearchResultsContainer
+  SearchItem,
+  SearchResultsContainer,
+  SearchInput
 } from './styledComponents';
-
-function SearchBar({ onChangeSearch }) {
+function SearchBar({
+  onChange = () => {},
+  onSearchItemSelect = () => {},
+  searchData = [],
+  placeholder = 'Search Books',
+  searchContainerClass = '',
+  searchBoxClass = '',
+  searchLoader = false
+}) {
   return (
-    <SearchContainer>
-      <SearchInputContainer>
-        <input onChange={onChangeSearch} type="text" placeholder="Search" />
-        <FeatherIcon
-          className="search-icon"
-          style={{ color: 'black' }}
-          icon="search"
-          size="20"
+    <>
+      <SearchContainer className={`${searchContainerClass}`}>
+        <SearchInput
+          onChange={onChange}
+          className={`${searchBoxClass}`}
+          type={'search'}
+          placeholder={placeholder}
         />
-      </SearchInputContainer>
-      <SearchResultsContainer></SearchResultsContainer>
-    </SearchContainer>
+      </SearchContainer>
+      <SearchResultsContainer>
+        {searchLoader ? (
+          <div className="search-loader">
+            <LoaderIcon
+              style={{ height: '30px', width: '30px', padding: '10px' }}
+            />{' '}
+            Loading...
+          </div>
+        ) : (
+          searchData.map((item, index) => (
+            <SearchItem key={item.id} onClick={() => onSearchItemSelect(item)}>
+              {item.title}
+            </SearchItem>
+          ))
+        )}
+      </SearchResultsContainer>
+    </>
   );
 }
 
