@@ -15,7 +15,7 @@ const SignIn = (props) => {
       <SignInContainer>
         <SignInFormContainer>
           <h2>Login</h2>
-          <form className="login-form">
+          <div className="login-form">
             <div className="login-inputs">
               <Input
                 width="100%"
@@ -70,11 +70,14 @@ const SignIn = (props) => {
               />
               <FeatherIcon
                 className="login-social-icon-facebook"
+                onClick={(e) => {
+                  handleSignin('facebook', e);
+                }}
                 icon="facebook"
                 size="30"
               />
             </div>
-          </form>
+          </div>
           <div>
             <span>
               {`don't have account? `}

@@ -47,7 +47,7 @@ export const SignInFormContainer = styled.div`
   .login-inputs {
     margin: 10px 0px;
   }
-  form {
+  .login-form {
     box-sizing: border-box;
     width: 100%;
     padding-left: 10px;
