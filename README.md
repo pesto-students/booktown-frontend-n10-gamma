@@ -4,7 +4,7 @@ The Booktown
 
 ## Installation
 
-Type the commant "yarn" or ""yarn install " : this will install all the necessary node modules in your machine
+Type the commant **yarn** or **yarn install**  : this will install all the necessary node modules in your machine
 Type the command "yarn start" to run the appliation server.
 
 ## Usage
