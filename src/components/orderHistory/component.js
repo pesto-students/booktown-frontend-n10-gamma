@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSession } from '../../hooks';
 import { Button, Footer, Header, NotFound } from '../common';
 import { GenreicSkeleton } from '../common/skeleton';
 import useOrderHistoryContainer from './container';
@@ -20,7 +21,8 @@ const OrderHistoryComponent = (props) => {
   const { userHistory, handleRedirectToProductDetails } =
     useOrderHistoryContainer();
   const { loading: orderLoading, data: orderData } = userHistory;
-  console.log('orderData', userHistory);
+  const session = useSession();
+  const { user } = session;
   return (
     <>
       <Header />
@@ -40,7 +42,7 @@ const OrderHistoryComponent = (props) => {
                   </HeaderMenue>
                   <HeaderMenue>
                     <Text>SHIP TO</Text>
-                    <Text>Pesto</Text>
+                    <Text>{user?.displayName}</Text>
                   </HeaderMenue>
                   <HeaderMenue>
                     <Text>ORDER # {order.orderId}</Text>
@@ -61,9 +63,7 @@ const OrderHistoryComponent = (props) => {
                           <img src={item?.files?.[0]} alt="product" />
                         </OrderImageContainer>
                         <OrderInfoContainer>
-                          <Text>
-                            <h5>{item.title}</h5>
-                          </Text>
+                          <Text bold>{item.title}</Text>
                           <Text numberOfLines={5}>{item.description}</Text>
                         </OrderInfoContainer>
                       </OrderImageAndDetials>

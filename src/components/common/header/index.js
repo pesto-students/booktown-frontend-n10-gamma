@@ -5,6 +5,7 @@ import {
   ABOUT,
   CART,
   HOME,
+  ORDER_HISTORY,
   PRODUCT_LISTING,
   SIGN_IN
 } from '../../../router/types';
@@ -85,6 +86,11 @@ const Header = ({
         <MenuItem>
           <Link className="link" to={PRODUCT_LISTING}>
             Product
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link className="link" to={ORDER_HISTORY}>
+            Your Orders
           </Link>
         </MenuItem>
         <MenuItem>
