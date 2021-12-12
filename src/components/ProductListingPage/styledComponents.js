@@ -47,7 +47,7 @@ const Sidebar = styled.div`
     margin: 10px;
     background-color: black;
     &:hover {
-      background-color: black;
+      background-color: ${(props) => props.theme.colors.primaryLight};
       color: white;
     }
   }

@@ -43,7 +43,6 @@ function SideBar() {
       format: __getFilterValue(filterState.format)
     };
     const query = genrateQueryString(payload);
-    console.log(payload);
     history.push({
       pathname: PRODUCT_LISTING,
       search: `${query ? '?' + query : ''}`,

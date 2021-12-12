@@ -1,9 +1,8 @@
-import { LoaderIcon } from 'react-hot-toast';
 import {
   SearchContainer,
+  SearchInput,
   SearchItem,
-  SearchResultsContainer,
-  SearchInput
+  SearchResultsContainer
 } from './styledComponents';
 function SearchBar({
   onChange = () => {},
@@ -26,12 +25,7 @@ function SearchBar({
       </SearchContainer>
       <SearchResultsContainer>
         {searchLoader ? (
-          <div className="search-loader">
-            <LoaderIcon
-              style={{ height: '30px', width: '30px', padding: '10px' }}
-            />{' '}
-            Loading...
-          </div>
+          <div className="search-loader">Loading...</div>
         ) : (
           searchData.map((item, index) => (
             <SearchItem key={item.id} onClick={() => onSearchItemSelect(item)}>

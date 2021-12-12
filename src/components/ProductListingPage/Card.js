@@ -27,6 +27,7 @@ const ShoppingCard = ({
             text={'Add to cart'}
           />
         </div>
+        <div className="card-tag">{item.condition}</div>
       </CardImgContainer>
       <CardBody>
         <h6 className="card-body-title">{title}</h6>
@@ -96,6 +97,16 @@ export const CardImgContainer = styled.div`
       width: 100%;
       border-radius: 0;
     }
+  }
+  .card-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: ${(props) => props.theme.colors.primary};
+    padding: 5px 10px;
+    border-radius: ${(props) => props.theme.size.xsm};
+    font-weight: bold;
+    color: #fff;
   }
   &:hover .img-overlay {
     display: flex;
