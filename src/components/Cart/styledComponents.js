@@ -16,6 +16,7 @@ const Item = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
   flex-direction: column;
+
   @media (min-width: 992px) {
     flex-direction: row;
   }
@@ -108,6 +109,7 @@ const ItemImage = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
+    cursor: pointer;
   }
 `;
 

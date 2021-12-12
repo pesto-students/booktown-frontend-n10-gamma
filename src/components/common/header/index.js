@@ -43,7 +43,15 @@ const Header = ({
     <HeaderContainer>
       <HeaderLeftContainer>
         <Link to={HOME} className="link">
-          <BrandName>The</BrandName>
+          <BrandName>
+            The
+            <FeatherIcon
+              className="brand-name-icon"
+              onClick={() => setHamburgClicked(true)}
+              icon="book-open"
+              size="30"
+            />
+          </BrandName>
           <BrandName>Booktown</BrandName>
         </Link>
         {!isSearchBarHide && (

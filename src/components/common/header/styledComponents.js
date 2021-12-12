@@ -4,7 +4,7 @@ export const MenuContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 30%;
+  width: 40%;
 
   & {
     @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -45,6 +45,9 @@ export const HeaderContainer = styled.div`
     &:hover {
       opacity: 1;
     }
+  }
+  .brand-name-icon {
+    margin-left: 10px;
   }
   & {
     @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
