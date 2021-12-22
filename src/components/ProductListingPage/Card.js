@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../common';
-import demoImg from './demoImg.png';
 
 const ShoppingCard = ({
   item,
@@ -11,7 +10,7 @@ const ShoppingCard = ({
   description,
   onClick,
   onAddToCart,
-  productPics = [demoImg, demoImg, demoImg, demoImg, demoImg],
+  productPics = [],
   category,
   subCategory
 }) => {
@@ -33,9 +32,9 @@ const ShoppingCard = ({
         <h6 className="card-body-title">{title}</h6>
         <Text lines={1}>{description || 'Product description'}</Text>
         <span className="price">
-          <span style={{ fontWeight: 'bold' }}>Rs. {price || 'Rs. 100'}</span>
+          <span style={{ fontWeight: 'bold' }}>$. {price || '$. 100'}</span>
           <span style={{ textDecoration: 'line-through', margin: '0 10px' }}>
-            Rs. {originalPrice || 'Rs. 10000'}
+            $. {originalPrice || '$. 10000'}
           </span>
         </span>
         <span>
