@@ -7,8 +7,12 @@ import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom';
 
 const SignIn = (props) => {
-  const { handleStateChange, componentState, handleSignin, handleGuestSignin } =
-    useSigninContainer();
+  const {
+    handleStateChange,
+    componentState,
+    handleSigning,
+    handleGuestSigning
+  } = useSigninContainer();
   return (
     <>
       <Header isSearchBarHide />
@@ -50,14 +54,14 @@ const SignIn = (props) => {
             </div>
             <Button
               onClick={(e) => {
-                handleSignin('self', e);
+                handleSigning('self', e);
               }}
               style={{ width: '100%', margin: '10px 0' }}
               text="Login"
             />
             <Button
               onClick={(e) => {
-                handleSignin('google', e);
+                handleSigning('google', e);
               }}
               style={{ width: '100%', margin: '10px 0' }}
               text="Google Login"
@@ -71,7 +75,7 @@ const SignIn = (props) => {
               <FeatherIcon
                 className="login-social-icon-facebook"
                 onClick={(e) => {
-                  handleSignin('facebook', e);
+                  handleSigning('facebook', e);
                 }}
                 icon="facebook"
                 size="30"
@@ -84,7 +88,16 @@ const SignIn = (props) => {
               <Link to="/SignUp">SignUp</Link>
               <span>
                 {' '}
-                or login as <span onClick={handleGuestSignin}>Guest</span>
+                or login as{' '}
+                <span
+                  style={{
+                    color: 'blue',
+                    cursor: 'pointer',
+                    textDecoration: 'underline'
+                  }}
+                  onClick={handleGuestSigning}>
+                  Guest
+                </span>
               </span>
             </span>
           </div>

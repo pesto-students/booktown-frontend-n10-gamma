@@ -35,16 +35,11 @@ const useSigninContainer = (props) => {
     });
   };
 
-  const handleGuestSignin = () => {
-    setComponentState({
-      ...componentState,
-      email: 'pesto@booktown.com',
-      password: 'Pesto@123'
-    });
-    handleSignin('self');
+  const handleGuestSigning = () => {
+    __selfLogin('pestotech@booktown.com', 'Pesto@123');
   };
 
-  const handleSignin = async (providerName, event) => {
+  const handleSigning = async (providerName, event) => {
     event?.preventDefault();
     setComponentState({ ...componentState, isLoading: true });
     if (providerName === 'google') {
@@ -59,32 +54,7 @@ const useSigninContainer = (props) => {
         }
       } catch (error) {}
     } else if (providerName === 'self') {
-      try {
-        const userCred = await firebase
-          .auth()
-          .signInWithEmailAndPassword(
-            componentState.email,
-            componentState.password
-          );
-        if (userCred) {
-          history.push(HOME);
-        }
-        setComponentState({
-          ...componentState,
-          isLoading: false,
-          isSuccess: true,
-          isError: false
-        });
-      } catch (err) {
-        errorContext.showError(err.code);
-        setComponentState({
-          ...componentState,
-          isLoading: false,
-          isSuccess: false,
-          isError: true,
-          error: err
-        });
-      }
+      __selfLogin(componentState.email, componentState.password);
     } else if (providerName === 'facebook') {
       try {
         const userCred = await firebase
@@ -98,12 +68,37 @@ const useSigninContainer = (props) => {
       } catch (error) {}
     }
   };
+  const __selfLogin = async (id, pass) => {
+    try {
+      const userCred = await firebase
+        .auth()
+        .signInWithEmailAndPassword(id, pass);
+      if (userCred) {
+        history.push(HOME);
+      }
+      setComponentState({
+        ...componentState,
+        isLoading: false,
+        isSuccess: true,
+        isError: false
+      });
+    } catch (err) {
+      errorContext.showError(err.code);
+      setComponentState({
+        ...componentState,
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+        error: err
+      });
+    }
+  };
 
   return {
     componentState,
     handleStateChange,
-    handleSignin,
-    handleGuestSignin
+    handleSigning,
+    handleGuestSigning
   };
 };
 
