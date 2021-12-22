@@ -7,7 +7,7 @@ import FeatherIcon from 'feather-icons-react';
 import { Link } from 'react-router-dom';
 
 const SignIn = (props) => {
-  const { handleStateChange, componentState, handleSignin } =
+  const { handleStateChange, componentState, handleSignin, handleGuestSignin } =
     useSigninContainer();
   return (
     <>
@@ -82,6 +82,10 @@ const SignIn = (props) => {
             <span>
               {`don't have account? `}
               <Link to="/SignUp">SignUp</Link>
+              <span>
+                {' '}
+                or login as <span onClick={handleGuestSignin}>Guest</span>
+              </span>
             </span>
           </div>
         </SignInFormContainer>

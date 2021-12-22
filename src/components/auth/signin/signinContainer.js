@@ -35,6 +35,15 @@ const useSigninContainer = (props) => {
     });
   };
 
+  const handleGuestSignin = () => {
+    setComponentState({
+      ...componentState,
+      email: 'pesto@booktown.com',
+      password: 'Pesto@123'
+    });
+    handleSignin('self');
+  };
+
   const handleSignin = async (providerName, event) => {
     event?.preventDefault();
     setComponentState({ ...componentState, isLoading: true });
@@ -93,7 +102,8 @@ const useSigninContainer = (props) => {
   return {
     componentState,
     handleStateChange,
-    handleSignin
+    handleSignin,
+    handleGuestSignin
   };
 };
 

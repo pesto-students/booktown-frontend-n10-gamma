@@ -31,7 +31,6 @@ const Image = styled.img`
 `;
 
 const Sidebar = styled.div`
-  background: ${(props) => props.theme.colors.secondary};
   display: flex;
   flex: 300px;
   color: #40394d;
@@ -39,16 +38,13 @@ const Sidebar = styled.div`
   align-items: center;
   padding-left: 10px;
   padding-top: 10px;
-  background-color: white;
+  background: ${(props) => props.theme.colors.primaryLight};
+  color: white;
   .side-bar-filter__btn {
-    height: 30px;
-    width: 100%;
-    padding: 0;
-    margin: 10px;
-    background-color: black;
+    background: ${(props) => props.theme.colors.primary};
     &:hover {
-      background-color: ${(props) => props.theme.colors.primaryLight};
-      color: white;
+      color: tomato;
+      border: 1px solid tomato;
     }
   }
 `;
@@ -83,9 +79,10 @@ const Options = styled.p`
   position: relative;
   bottom: -7px;
   right: -2px;
-
+  color: white;
+  opacity: 0.6;
   &:hover {
-    color: #242526;
+    opacity: 1;
   }
 `;
 const PaginationContainer = styled.div`
