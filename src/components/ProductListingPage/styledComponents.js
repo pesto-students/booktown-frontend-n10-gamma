@@ -68,7 +68,6 @@ const Option = styled.div`
 const CheckBox = styled.div`
   display: flex;
   align-items: center;
-
   flex-direction: row;
 `;
 
@@ -99,7 +98,6 @@ const PaginationContainer = styled.div`
     a {
       text-decoration: none;
       font-weight: bold;
-
       height: 25px;
       width: 25px;
       line-height: 22px;
@@ -127,7 +125,6 @@ const PaginationContainer = styled.div`
       cursor: pointer;
       box-sizing: border-box;
       outline: none;
-
       &:hover {
         background-color: ${(props) => props.theme.colors.primaryLight};
         color: white;
@@ -135,6 +132,12 @@ const PaginationContainer = styled.div`
     }
     .page-item-prev,
     .page-item-next {
+      a {
+        color: ${(props) => props.theme.colors.primary};
+        &:hover {
+          color: white;
+        }
+      }
       border: 1px solid #808080;
       height: 25px;
       width: 25px;
