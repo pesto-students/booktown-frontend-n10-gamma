@@ -52,7 +52,7 @@ export const HeaderContainer = styled.div`
         left: 0;
         flex-direction: column;
         height: 100vh;
-        width: 50vw;
+        width: 50vw !important;
         z-index: 100;
         font-size: 20px;
         background-color: ${(props) => props.theme.colors.primaryLight};
