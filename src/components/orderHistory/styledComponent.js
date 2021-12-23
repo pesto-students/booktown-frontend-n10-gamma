@@ -17,18 +17,6 @@ export const OrderHistoryContainer = styled.div`
   }
 `;
 
-export const BtnContainer = styled.div`
-  display: flex;
-  flex: 0.2;
-  justify-content: center;
-  align-items: center;
-  .buy-btn {
-    width: 100%;
-    background-color: ${(props) => props.theme.colors.secondary};
-    color: ${(props) => props.theme.colors.primary};
-  }
-`;
-
 export const OrderHistoryCard = styled.div`
   display: flex;
   width: 50%;
@@ -48,7 +36,7 @@ export const OrderHistoryCard = styled.div`
   }
 `;
 
-export const HeaderMenue = styled.div``;
+export const HeaderMenu = styled.div``;
 export const Text = styled.p`
   margin: 0;
   padding: 0;
@@ -79,13 +67,6 @@ export const OrderDetails = styled.div`
   padding: 10px;
   box-sizing: border-box;
   margin: 10px 0;
-  & {
-    @media (max-width: 600px) {
-      ${BtnContainer} {
-        width: 100% !important;
-      }
-    }
-  }
 `;
 export const OrderItemContainer = styled.div`
   display: flex;
@@ -108,7 +89,7 @@ export const OrderInfoContainer = styled.div`
   margin: 0 10px;
   flex: 0.8;
 `;
-export const OrderImageAndDetials = styled.div`
+export const OrderImageAndDetails = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
