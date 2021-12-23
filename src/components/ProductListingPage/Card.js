@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import FeatherIcon from 'feather-icons-react';
 const ShoppingCard = ({
   item,
   title,
@@ -47,11 +46,7 @@ const ShoppingCard = ({
             title="add to cart"
             onClick={(e) => onAddToCart(item, e)}
             className="overly-cart-btn">
-            <FeatherIcon
-              className="search-icon header-right-content"
-              icon="shopping-cart"
-              size="15"
-            />
+            +
           </button>
         </div>
       </CardBody>
