@@ -1,14 +1,22 @@
 import React from 'react';
 import { About, AboutContainer } from './styledComponent';
 import { Footer, Header } from '../common';
-
+import FeatherIcon from 'feather-icons-react';
 const index = (props) => {
   return (
     <>
       <Header isSearchBarHide />
       <AboutContainer>
         <About>
-          <div className={'about-title'}>The Booktown</div>
+          <div>
+            {' '}
+            <FeatherIcon
+              className="brand-name-icon"
+              icon="book-open"
+              size="60"
+            />
+          </div>
+          <div className={'about-title'}>The BookTown</div>
           <div className={'about-subtitle'}>
             {' '}
             Read more, Gain more, Win more
