@@ -41,6 +41,9 @@ const useOrderHistoryContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getUserHistoryQuery.loading]);
 
+  useEffect(() => {
+    getUserHistoryQuery.refetch();
+  }, []);
   const handleRedirectToProductDetails = (productId) => {
     history.push(`/product-details/${productId}`);
   };

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import StripeCheckout from 'react-stripe-checkout';
 import { deleteUserCart } from '../../config/redux/features/cart/cartSlice';
 import { useSession } from '../../hooks';
+import { ORDER_HISTORY } from '../../router/types';
 
 const StripeCheckoutButton = ({ price, onCheckout = () => {} }) => {
   const history = useHistory();
@@ -16,15 +17,14 @@ const StripeCheckoutButton = ({ price, onCheckout = () => {} }) => {
     'pk_test_51HgPkdItMNgOLBqdPoJCGKUdHfpXgpTJn2c8mSiY24VzX94k5EuzEhLYNjtGHrnFkqSgCpsfuKYfcqsmsly2DbtL00hmLhSQ7U';
 
   const onToken = (token) => {
-    toast.success('Payment Succesful!');
+    toast.success('Payment Successful!');
     const uid = session.user?.uid;
     const payload = {
       uid
     };
-
     onCheckout(price);
     dispatch(deleteUserCart(payload));
-    history.push('/product-listing');
+    history.push(ORDER_HISTORY);
   };
 
   return (

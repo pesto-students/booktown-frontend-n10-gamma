@@ -1,25 +1,20 @@
-import FeatherIcon from 'feather-icons-react';
 import React, { useState } from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import StripeCheckoutButton from '../Cart/StripeCheckoutButton';
 import { Footer, Header, Input } from '../common';
 import { GenreicSkeleton } from '../common/skeleton';
 import useProductDetailsContainer from './container';
-import demoImg from './demoImg.png';
 import {
   ProductDetailsCheckoutContainer,
   ProductDetailsInfoContainer,
   ProductDetailsRow,
   ProductDetialsContainer,
   ProductImagePreviewContainer,
-  ProductInsightContainer,
-  RecommendedProductsContainer,
-  RecommendedProductWrapper
+  ProductInsightContainer
 } from './styledComponents';
 
 const Component = (props) => {
-  const { refs, handleCarouselAction, productInfo } =
-    useProductDetailsContainer();
+  const { productInfo, handleUserOrderHistory } = useProductDetailsContainer();
   const [currentPicIndex, setCurrentPicIndex] = useState(0);
   const [currentQty, setCurrentQty] = useState(1);
   const [prevImageLoad, setPrevImageLoad] = useState(false);
@@ -110,8 +105,8 @@ const Component = (props) => {
           </ProductDetailsInfoContainer>
           <ProductDetailsCheckoutContainer>
             <div>
-              <span className="product-checkout-price">
-                M.R.P $ {productInfo?.price * currentQty}
+              <span className="product-price">
+                M.R.P $ {productInfo?.price && productInfo?.price * currentQty}
               </span>
             </div>
             <div className="product-checkout-qty-container">
@@ -128,7 +123,10 @@ const Component = (props) => {
             </div>
             <div className="product-checkout-btn-container">
               {/* <Button className="product-checkout-buy-btn" text="Buy Now" /> */}
-              <StripeCheckoutButton price={productInfo?.price * currentQty} />
+              <StripeCheckoutButton
+                onCheckout={handleUserOrderHistory}
+                price={productInfo?.price * currentQty}
+              />
             </div>
           </ProductDetailsCheckoutContainer>
         </ProductDetailsRow>

@@ -89,8 +89,8 @@ export const ProductDetailsInfoContainer = styled(CommonStyled.Container)`
     margin: 10px 0;
     align-self: flex-start;
     .product-price {
-      color: tomato;
       margin: 0 0 0 10px;
+      font-weight: bold;
     }
   }
   .product-details-rating {
@@ -123,9 +123,6 @@ export const ProductDetailsCheckoutContainer = styled(CommonStyled.Container)`
   align-self: flex-start;
   justify-content: center;
   align-items: center;
-  .product-checkout-price {
-    color: tomato;
-  }
   .product-checkout-qty-container {
     display: flex;
     margin: 10px 0;
@@ -170,82 +167,6 @@ export const ProductDetailsCheckoutContainer = styled(CommonStyled.Container)`
     align-self: center;
     width: 90%;
     margin: 10px 0;
-  }
-`;
-
-export const RecommendedProductsContainer = styled.div`
-  margin-top: 100px;
-  width: 100%;
-  position: relative;
-  .recommended-title {
-    ${(props) => ({ ...props.theme.fonts.h4 })}
-  }
-  .recommended-carousel {
-    display: flex;
-    width: 100%;
-    border: 1px solid ${(props) => props.theme.colors.primaryLight};
-    padding: 10px;
-    box-sizing: border-box;
-    overflow-x: auto;
-    overflow-y: hidden;
-    flex-wrap: nowrap;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    &::-webkit-scrollbar {
-      height: 5px;
-    }
-  }
-
-  .left-carousel-button,
-  .right-carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 1;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: ${(props) => props.theme.colors.primaryLight};
-    border: 1px solid ${(props) => props.theme.colors.primaryLight};
-    color: ${(props) => props.theme.colors.secondary};
-
-    &:hover {
-      background-color: ${(props) => props.theme.colors.primary};
-      border: 1px solid ${(props) => props.theme.colors.primary};
-      color: ${(props) => props.theme.colors.secondary};
-    }
-  }
-  .left-carousel-button {
-    left: 0;
-  }
-  .right-carousel-button {
-    right: 0;
-  }
-`;
-export const RecommendedProductWrapper = styled.div`
-  margin: 0 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  scroll-snap-type: start;
-  width: 250px;
-  height: auto;
-  img {
-    height: 300px;
-    width: 250px;
-  }
-  .recommended-product-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-size: 20px;
-    font-weight: bold;
-    color: #4b7696;
-  }
-  .recommended-product-price {
-    font-weight: bold;
   }
 `;
 
