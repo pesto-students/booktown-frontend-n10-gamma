@@ -4,13 +4,7 @@ export const MenuContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 40%;
-
-  & {
-    @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
-      width: 100%;
-    }
-  }
+  width: 30%;
   .close-icon {
     display: none;
   }
@@ -82,6 +76,11 @@ export const HeaderContainer = styled.div`
       }
       .hamburg-menu {
         display: block;
+      }
+    }
+    @media (max-width: ${(props) => props.theme.breakpoints.desktop}) {
+      ${MenuContainer} {
+        width: 40%;
       }
     }
   }
