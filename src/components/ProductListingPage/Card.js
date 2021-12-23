@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '../common';
-
+import FeatherIcon from 'feather-icons-react';
 const ShoppingCard = ({
   item,
   title,
@@ -18,31 +17,43 @@ const ShoppingCard = ({
     <ShoppingCardContainer onClick={() => onClick(item)}>
       <CardImgContainer>
         <img src={productPics[0]} alt="img" />
-        <div className="img-overlay">
-          <div>o o o o o </div>
-          <Button
-            onClick={(e) => onAddToCart(item, e)}
-            className="overly-cart-btn"
-            text={'Add to cart'}
-          />
-        </div>
         <div className="card-tag">{item.condition}</div>
       </CardImgContainer>
       <CardBody>
         <h6 className="card-body-title">{title}</h6>
         <Text lines={1}>{description || 'Product description'}</Text>
         <span className="price">
-          <span style={{ fontWeight: 'bold' }}>$. {price || '$. 100'}</span>
-          <span style={{ textDecoration: 'line-through', margin: '0 10px' }}>
-            $. {originalPrice || '$. 10000'}
+          <span style={{ fontWeight: 'bold' }}>${price || '$100'}</span>
+          <span
+            style={{
+              textDecoration: 'line-through',
+              fontSize: '13px',
+              margin: '0 10px 0 5px'
+            }}>
+            ${originalPrice || '$10000'}
+          </span>
+          <span className="saving-amount">
+            ({Number(100 - (price / originalPrice) * 100).toFixed()}% off)
           </span>
         </span>
-        <span>
-          <span>{category || 'category'} | </span>
-          <span style={{ margin: '0 10px' }}>
-            {subCategory || 'subcategory'}
+        <div className="cart-body-footer">
+          <span>
+            <span>{category || 'category'} | </span>
+            <span style={{ margin: '0 10px' }}>
+              {subCategory || 'subcategory'}
+            </span>
           </span>
-        </span>
+          <button
+            title="add to cart"
+            onClick={(e) => onAddToCart(item, e)}
+            className="overly-cart-btn">
+            <FeatherIcon
+              className="search-icon header-right-content"
+              icon="shopping-cart"
+              size="15"
+            />
+          </button>
+        </div>
       </CardBody>
     </ShoppingCardContainer>
   );
@@ -79,24 +90,6 @@ export const CardImgContainer = styled.div`
     height: 100%;
     width: 100%;
   }
-  .img-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 0;
-    background-color: #fff;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    transition: all 1s ease;
-    align-items: center;
-    .overly-cart-btn {
-      padding: 0;
-      margin: 0;
-      width: 100%;
-      border-radius: 0;
-    }
-  }
   .card-tag {
     position: absolute;
     top: 0;
@@ -107,19 +100,36 @@ export const CardImgContainer = styled.div`
     font-weight: bold;
     color: #fff;
   }
-  &:hover .img-overlay {
-    display: flex;
-    height: 50px;
-  }
 `;
 export const CardBody = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   .card-body-title {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+  .cart-body-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .overly-cart-btn {
+      border-radius: 50%;
+      background: ${(props) => props.theme.colors.primary};
+      font-weight: bold;
+      border: none;
+      color: white;
+      font-size: 15px;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+    }
+  }
+  .saving-amount {
+    font-weight: bold;
   }
 `;
 export const Text = styled.span`

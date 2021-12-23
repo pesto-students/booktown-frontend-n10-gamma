@@ -32,7 +32,7 @@ export const HomeBannerOverlapper = styled.div`
     ${(props) => ({ ...props.theme.fonts.h5 })}
   }
   .banner-overlapper-text {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255);
     ${(props) => ({ ...props.theme.fonts.body1 })};
   }
   .overlapper-btn-container {
@@ -57,7 +57,7 @@ export const HomeBannerOverlapper = styled.div`
     &:hover {
       background: transparent;
       color: ${(props) => props.theme.colors.secondary};
-      border: 1px solid ${(props) => props.theme.colors.primary};
+      border: 1px solid ${(props) => props.theme.colors.secondary};
     }
   }
   & {
