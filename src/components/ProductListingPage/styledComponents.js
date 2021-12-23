@@ -43,8 +43,7 @@ const Sidebar = styled.div`
   .side-bar-filter__btn {
     background: ${(props) => props.theme.colors.primary};
     &:hover {
-      color: tomato;
-      border: 1px solid tomato;
+      color: white;
     }
   }
 `;

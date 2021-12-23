@@ -120,18 +120,15 @@ function ProductListingPage(props) {
    */
   useEffect(() => {
     let isSearchQuery = false;
-    const payload = {
-      language: '',
-      format: '',
-      condition: ''
-    };
+    const payload = {};
     if (params.search) {
       params.search.split('&').forEach((item) => {
         isSearchQuery = true;
         let [key, value] = item.split('=');
         key = key.replace('?', '');
         value = value.split(',');
-        payload[key] = value[0];
+        value = value.filter((item) => item !== '');
+        payload[key] = value;
       });
     }
     if (isSearchQuery) {

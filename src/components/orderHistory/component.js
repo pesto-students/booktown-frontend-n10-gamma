@@ -1,22 +1,22 @@
 import React from 'react';
 import { useSession } from '../../hooks';
-import { Button, Footer, Header, NotFound } from '../common';
+import { Footer, Header, NotFound } from '../common';
 import { GenreicSkeleton } from '../common/skeleton';
 import useOrderHistoryContainer from './container';
 import {
-  HeaderMenue,
+  Div,
+  HeaderMenu,
   OrderDetails,
   OrderHistoryCard,
-  OrderImageContainer,
-  OrderItemContainer,
   OrderHistoryContainer,
   OrderHistoryHeader,
-  Text,
-  Div,
-  OrderImageAndDetials,
+  OrderImageAndDetails,
+  OrderImageContainer,
   OrderInfoContainer,
-  BtnContainer
+  OrderItemContainer,
+  Text
 } from './styledComponent';
+
 const OrderHistoryComponent = (props) => {
   const { userHistory, handleRedirectToProductDetails } =
     useOrderHistoryContainer();
@@ -32,21 +32,21 @@ const OrderHistoryComponent = (props) => {
           ? orderData.map((order) => (
               <OrderHistoryCard key={order._id}>
                 <OrderHistoryHeader>
-                  <HeaderMenue>
+                  <HeaderMenu>
                     <Text>ORDER PLACED</Text>
                     <Text>{order.orderDate}</Text>
-                  </HeaderMenue>
-                  <HeaderMenue>
+                  </HeaderMenu>
+                  <HeaderMenu>
                     <Text>TOTAL</Text>
                     <Text>$ {order.orderAmount}</Text>
-                  </HeaderMenue>
-                  <HeaderMenue>
+                  </HeaderMenu>
+                  <HeaderMenu>
                     <Text>SHIP TO</Text>
                     <Text>{user?.displayName}</Text>
-                  </HeaderMenue>
-                  <HeaderMenue>
+                  </HeaderMenu>
+                  <HeaderMenu>
                     <Text>ORDER # {order.orderId}</Text>
-                  </HeaderMenue>
+                  </HeaderMenu>
                 </OrderHistoryHeader>
                 <Div className={'order-payment-status'}>
                   <h3>{order.orderStatus}</h3>
@@ -55,7 +55,7 @@ const OrderHistoryComponent = (props) => {
                 {order.orderItems.map((item) => (
                   <OrderDetails key={item._id}>
                     <OrderItemContainer>
-                      <OrderImageAndDetials>
+                      <OrderImageAndDetails>
                         <OrderImageContainer
                           onClick={() =>
                             handleRedirectToProductDetails(item.id)
@@ -66,15 +66,8 @@ const OrderHistoryComponent = (props) => {
                           <Text bold>{item.title}</Text>
                           <Text numberOfLines={5}>{item.description}</Text>
                         </OrderInfoContainer>
-                      </OrderImageAndDetials>
+                      </OrderImageAndDetails>
                     </OrderItemContainer>
-                    <BtnContainer>
-                      <Button
-                        round={10}
-                        className={'buy-btn'}
-                        text={'Buy again'}
-                      />
-                    </BtnContainer>
                   </OrderDetails>
                 ))}
               </OrderHistoryCard>
