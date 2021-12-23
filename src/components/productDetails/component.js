@@ -1,25 +1,20 @@
-import FeatherIcon from 'feather-icons-react';
 import React, { useState } from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import StripeCheckoutButton from '../Cart/StripeCheckoutButton';
 import { Footer, Header, Input } from '../common';
 import { GenreicSkeleton } from '../common/skeleton';
 import useProductDetailsContainer from './container';
-import demoImg from './demoImg.png';
 import {
   ProductDetailsCheckoutContainer,
   ProductDetailsInfoContainer,
   ProductDetailsRow,
   ProductDetialsContainer,
   ProductImagePreviewContainer,
-  ProductInsightContainer,
-  RecommendedProductsContainer,
-  RecommendedProductWrapper
+  ProductInsightContainer
 } from './styledComponents';
 
 const Component = (props) => {
-  const { refs, handleCarouselAction, productInfo } =
-    useProductDetailsContainer();
+  const { productInfo, handleUserOrderHistory } = useProductDetailsContainer();
   const [currentPicIndex, setCurrentPicIndex] = useState(0);
   const [currentQty, setCurrentQty] = useState(1);
   const [prevImageLoad, setPrevImageLoad] = useState(false);
@@ -110,8 +105,8 @@ const Component = (props) => {
           </ProductDetailsInfoContainer>
           <ProductDetailsCheckoutContainer>
             <div>
-              <span className="product-checkout-price">
-                M.R.P $ {productInfo?.price * currentQty}
+              <span className="product-price">
+                M.R.P $ {productInfo?.price && productInfo?.price * currentQty}
               </span>
             </div>
             <div className="product-checkout-qty-container">
@@ -128,7 +123,10 @@ const Component = (props) => {
             </div>
             <div className="product-checkout-btn-container">
               {/* <Button className="product-checkout-buy-btn" text="Buy Now" /> */}
-              <StripeCheckoutButton price={productInfo?.price * currentQty} />
+              <StripeCheckoutButton
+                onCheckout={handleUserOrderHistory}
+                price={productInfo?.price * currentQty}
+              />
             </div>
           </ProductDetailsCheckoutContainer>
         </ProductDetailsRow>
@@ -182,151 +180,6 @@ const Component = (props) => {
             </span>
           </div>
         </ProductInsightContainer>
-        <RecommendedProductsContainer>
-          <div className="recommended-title">Recommended for you</div>
-          <FeatherIcon
-            onClick={() => handleCarouselAction('left', 270)}
-            className="left-carousel-button"
-            icon="chevron-left"
-          />
-          <div ref={refs.carouselRef} className="recommended-carousel">
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-            <RecommendedProductWrapper>
-              <img alt={'preview'} src={demoImg} />
-              <span className="recommended-product-title">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-              </span>
-              <span>
-                <StarRatingComponent name={'Star'} value={4} starCount={5} />
-              </span>
-              <span className="recommended-product-price">$ 100</span>
-            </RecommendedProductWrapper>
-          </div>
-          <FeatherIcon
-            onClick={() => handleCarouselAction('right', 270)}
-            className="right-carousel-button"
-            icon="chevron-right"
-          />
-        </RecommendedProductsContainer>
       </ProductDetialsContainer>
       <Footer />
     </>

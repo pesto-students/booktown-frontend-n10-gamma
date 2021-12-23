@@ -66,6 +66,11 @@ const SignIn = (props) => {
               style={{ width: '100%', margin: '10px 0' }}
               text="Google Login"
             />
+            <Button
+              onClick={handleGuestSigning}
+              style={{ width: '100%', margin: '10px 0' }}
+              text="Guest Login"
+            />
             <div className="login-social-container">
               <FeatherIcon
                 className="login-social-icon-github"
@@ -86,19 +91,6 @@ const SignIn = (props) => {
             <span>
               {`don't have account? `}
               <Link to="/SignUp">SignUp</Link>
-              <span>
-                {' '}
-                or login as{' '}
-                <span
-                  style={{
-                    color: 'blue',
-                    cursor: 'pointer',
-                    textDecoration: 'underline'
-                  }}
-                  onClick={handleGuestSigning}>
-                  Guest
-                </span>
-              </span>
             </span>
           </div>
         </SignInFormContainer>

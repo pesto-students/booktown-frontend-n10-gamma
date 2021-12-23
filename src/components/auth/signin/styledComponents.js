@@ -6,7 +6,7 @@ export const SignInContainer = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1561657819-51c0511e35ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=100');
+  background-image: url('https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=100');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -46,6 +46,8 @@ export const SignInFormContainer = styled.div`
   }
   .login-inputs {
     margin: 10px 0px;
+    color: ${(props) => props.theme.colors.secondary};
+    font-weight: bold;
   }
   .login-form {
     box-sizing: border-box;
