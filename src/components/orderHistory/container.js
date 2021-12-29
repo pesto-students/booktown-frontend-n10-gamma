@@ -43,7 +43,7 @@ const useOrderHistoryContainer = () => {
 
   useEffect(() => {
     getUserHistoryQuery.refetch();
-  }, []);
+  }, [getUserHistoryQuery]);
   const handleRedirectToProductDetails = (productId) => {
     history.push(`/product-details/${productId}`);
   };
