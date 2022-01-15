@@ -9,10 +9,11 @@ import { ItemTotal } from './styledComponents';
 const CartTotal = () => {
   const cartState = useSelector((state) => state.cart);
   const session = useSession();
+  const items = Object.values(cartState.cartItems[session.user?.uid] || {});
 
   const getTotalPrice = () => {
     let totalPrice = 0;
-    const items = Object.values(cartState.cartItems[session.user?.uid] || {});
+
     items?.map((item) => (totalPrice += item.price * item.quantity));
     return totalPrice;
   };
@@ -50,24 +51,27 @@ const CartTotal = () => {
   return (
     <>
       <AddressModal />
-      <ItemTotal>
-        <h4>
-          Subtotal({getTotalItems()} items):
-          <span className="itemTotal-price">
-            <NumberFormat
-              value={getTotalPrice()}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={'$'}
-              decimalScale={2}
-            />
-          </span>
-        </h4>
-        <StripeCheckoutButton
-          onCheckout={handleUserOrderHistory}
-          price={getTotalPrice()}
-        />
-      </ItemTotal>
+      {items.length > 0 && (
+        <ItemTotal>
+          <h4>
+            Subtotal({getTotalItems()} items):
+            <span className="itemTotal-price">
+              <NumberFormat
+                value={getTotalPrice()}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'$'}
+                decimalScale={2}
+              />
+            </span>
+          </h4>
+
+          <StripeCheckoutButton
+            onCheckout={handleUserOrderHistory}
+            price={getTotalPrice()}
+          />
+        </ItemTotal>
+      )}
     </>
   );
 };
