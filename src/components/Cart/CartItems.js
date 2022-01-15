@@ -35,11 +35,15 @@ const CartItems = () => {
     e.stopPropagation();
     history.push(`/product-details/${itemId}`);
   };
-
+  console.log(userSpecificItem);
   return (
     <Items>
       <h3>Shopping Cart</h3>
       <hr />
+      {Object.values(userSpecificItem).length === 0 && (
+        <h4>You have no items in your cart</h4>
+      )}
+
       <div>
         {Object.keys(userSpecificItem)?.map((key, index) => (
           <CartItem
