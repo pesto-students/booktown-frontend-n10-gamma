@@ -166,10 +166,6 @@ export const filterOptions1 = [
   },
   {
     header: 'Format',
-    options: [
-      { text: 'Audio', id: 7 },
-      { text: 'Hard Copy', id: 8 },
-      { text: 'E-Book', id: 9 }
-    ]
+    options: [{ text: 'Audio', id: 7 }]
   }
 ];

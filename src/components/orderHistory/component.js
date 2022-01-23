@@ -25,7 +25,7 @@ const OrderHistoryComponent = (props) => {
   const { user } = session;
   return (
     <>
-      <Header />
+      <Header isSearchBarHide />
       <OrderHistoryContainer>
         <h3 className={'order-history-title'}>Your Orders</h3>
         {!orderLoading

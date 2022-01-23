@@ -36,7 +36,7 @@ const ProductSellingComponent = (props) => {
   const searchHook = useSearch();
   return (
     <>
-      <Header {...searchHook} />
+      <Header isSearchBarHide {...searchHook} />
       <ProductContainer>
         <ProductFieldWrapper>
           <ProductFieldTitle>Book Detail</ProductFieldTitle>
