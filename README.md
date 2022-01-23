@@ -51,8 +51,9 @@ We have used all the modern technology stack in this project , which includes Gr
 
 
 <br/>
+
 # License
-MIT
+  MIT
 
 
 
