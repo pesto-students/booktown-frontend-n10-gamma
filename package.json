@@ -6,8 +6,8 @@
     "node": "14.17.6"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.17",
-    "@apollo/react-hooks": "^4.0.0",
+    "@apollo/client": "3.6.9",
+    "@apollo/react-hooks": "4.0.0",
     "@babel/core": "7.15.8",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-flow": "^7.16.0",
